@@ -1,0 +1,118 @@
+@charset "UTF-8";
+#wpbody-content{
+  #field-settings{
+    width: 820px;
+    table-layout: fixed;
+    // table-layout: auto;
+    tbody{
+      tr{
+        th{
+          padding-left: 20px;
+        }
+        td{
+          padding-left: 0;
+          padding-right: 0;
+        }
+        &:first-child{
+          th{
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+  .link-doc{
+    margin-top: 20px;
+    a{
+      display: inline-block;
+      text-decoration: none;
+      dl{
+        width: 100%;
+        display: table;
+        margin: 0;
+        dt, dd{
+          display: table-cell;
+          vertical-align: middle;
+        }
+        dt{
+          width: 18px;
+          img{
+            display: block;
+          }
+        }
+        dd{
+          padding-left: 8px;
+        }
+      }
+    }
+  }
+  section#list {
+    margin-top: 70px;
+  }
+  .acorddion {
+    dt {
+      background: #fff;
+      box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+      cursor: pointer;
+      width: 100%;
+      display: table;
+      span {
+        display: table-cell;
+        vertical-align: top;
+        padding: 10px;
+        &.ss2db_id {
+          width: 40px;
+          text-align: center;
+          color: #999;
+          border-right: 1px solid #eee;
+        }
+        &.ss2db_date {
+          padding: 0;
+          .inner {
+            padding: 10px 10px 10px 20px;
+            position: relative;
+            &:after{
+            	content: "";
+            	display: block;
+            	width: 10px;
+            	height: 10px;
+            	border-top: 1px solid #999;
+            	border-right: 1px solid #999;
+            	transform: rotate(135deg);
+            	position: absolute;
+            	right: 18px;
+            	top: 50%;
+            	margin-top: -7px;
+              transition: all .3s linear;
+            }
+          }
+        }
+      }
+    }
+    dd {
+      display: none;
+      margin: 0;
+      padding: 1em;
+      font-size: 10px;
+    }
+
+    &.opened {
+      dt {
+        span {
+          &.ss2db_date {
+            .inner {
+              &:after{
+                transform: rotate(-45deg);
+                top: 65%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.select2 {
+  font-size: 11px;
+}

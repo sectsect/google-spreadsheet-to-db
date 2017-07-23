@@ -1,0 +1,94 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Spreadsheet to DB\n"
+"POT-Creation-Date: 2017-07-23 22:14+0900\n"
+"PO-Revision-Date: 2017-07-23 22:15+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: google-spreadsheet-to-db.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/index.php:43
+msgid "The absolute path to <code>client_secret.json</code>"
+msgstr ""
+
+#: admin/index.php:51
+msgid "Spreadsheet name"
+msgstr ""
+
+#: admin/index.php:59
+msgid "Single Sheet name"
+msgstr ""
+
+#: admin/index.php:73
+msgid "Data format to be stored in database"
+msgstr ""
+
+#: admin/index.php:109
+msgid "Spreadsheet saved"
+msgstr ""
+
+#: admin/index.php:114
+msgid "Saving the spreadsheet failed"
+msgstr ""
+
+#: admin/index.php:120 admin/index.php:124
+msgid "Data import from Google Spreadsheet"
+msgstr ""
+
+#: admin/index.php:121
+msgid "This process may takes a few minutes."
+msgstr ""
+
+#: admin/index.php:137
+msgid "Data List"
+msgstr ""
+
+#: google-spreadsheet-to-db.php:28
+msgid ""
+"Error: plugin \"Google Spreadsheet to DB\" requires a newer version of PHP "
+"to be running."
+msgstr ""
+
+#: google-spreadsheet-to-db.php:29
+msgid "Minimal version of PHP required: "
+msgstr ""
+
+#: google-spreadsheet-to-db.php:30
+msgid "Your server's PHP version: "
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Google Spreadsheet to DB"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/sectsect/google-spreadsheet-to-db"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Pulls Google Spreadsheet data via Google’s API and saves it in your "
+"WordPress database"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "SECT INTERACTIVE AGENCY"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://www.ilovesect.com/"
+msgstr ""

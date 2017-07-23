@@ -1,0 +1,16 @@
+{
+  "name": "sectsect/google-spreadsheet-to-db",
+  "description": "Pulls Google Spreadsheet data via Google’s API and saves it in your wordpress database.",
+  "keywords": ["github", "wordpress", "plugin", "google", "spreadsheet", "array"],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.5"
+  },
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+      "name": "SECT WEB INTERACTIVE",
+      "homepage": "https://www.ilovesect.com/"
+    }
+  ]
+}
