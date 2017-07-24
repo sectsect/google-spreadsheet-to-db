@@ -59,19 +59,135 @@ class Google_Spreadsheet_To_DB_Query {
 	 */
 	public function getrow() {
 		global $wpdb;
-		$sql = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME;
-		if ( isset( $this->data->where->key ) && isset( $this->data->where->value ) ) {
-			$sql .= ' where ' . $this->data->where->key . ' = ' . intval( $this->data->where->value );
+		$table = GOOGLE_SS2DB_TABLE_NAME;
+		if ( isset( $this->data->where->key )) {
+			$wherekey = $this->data->where->key;
 		}
-		$sql .= ' ORDER BY ' . $this->data->orderby . ' ' . $this->data->order;
-		if ( $this->data->limit ) {
-			$sql .= ' LIMIT ' . intval( $this->data->limit );
+		if ( isset( $this->data->where->value )) {
+			$whereval = intval( $this->data->where->value );
 		}
-		if ( $this->data->offset ) {
-			$sql .= ' OFFSET ' . intval( $this->data->offset );
+		if ( isset( $this->data->orderby )) {
+			$orderby = $this->data->orderby;
+		} else {
+			$orderby = 'date';
 		}
-		$sql = $wpdb->prepare( $sql );
-		$myrows = $wpdb->get_results( $sql );
+		if ( isset( $this->data->order )) {
+			$order = $this->data->order;
+		} else {
+			$order = 'DESC';
+		}
+		if ( isset( $this->data->limit )) {
+			$limit = intval( $this->data->limit );
+		}
+		if ( isset( $this->data->offset )) {
+			$offset = intval( $this->data->offset );
+		}
+
+		if ( isset( $wherekey ) && isset( $this->data->where->value ) ) {
+			if ( $this->data->limit && $this->data->offset ) {
+				$myrows = $wpdb->get_results( $wpdb->prepare(
+					"
+						SELECT * FROM {$table}
+						where %s = %d
+						ORDER BY %s %s
+						LIMIT %d
+						OFFSET %d
+					",
+					$wherekey,
+					$whereval,
+					$orderby,
+					$order,
+					$limit,
+					$offset
+				) );
+			} elseif ( $this->data->limit && ! $this->data->offset ) {
+				$myrows = $wpdb->get_results( $wpdb->prepare(
+					"
+						SELECT * FROM {$table}
+						where %s = %d
+						ORDER BY %s %s
+						LIMIT %d
+					",
+					$wherekey,
+					$whereval,
+					$orderby,
+					$order,
+					$limit
+				) );
+			} elseif ( ! $this->data->limit && $this->data->offset ) {
+				$myrows = $wpdb->get_results( $wpdb->prepare(
+					"
+						SELECT * FROM {$table}
+						where %s = %d
+						ORDER BY %s %s
+						OFFSET %d
+					",
+					$wherekey,
+					$whereval,
+					$orderby,
+					$order,
+					$offset
+				) );
+			} else {
+				$myrows = $wpdb->get_results( $wpdb->prepare(
+					"
+						SELECT * FROM {$table}
+						where %s = %d
+						ORDER BY %s %s
+					",
+					$wherekey,
+					$whereval,
+					$orderby,
+					$order
+				) );
+			}
+		} else {
+			if ( $this->data->limit && $this->data->offset ) {
+				$myrows = $wpdb->get_results( $wpdb->prepare(
+					"
+						SELECT * FROM {$table}
+						ORDER BY %s %s
+						LIMIT %d
+						OFFSET %d
+					",
+					$orderby,
+					$order,
+					$limit,
+					$offset
+				) );
+			} elseif ( $this->data->limit && ! $this->data->offset ) {
+				$myrows = $wpdb->get_results( $wpdb->prepare(
+					"
+						SELECT * FROM {$table}
+						ORDER BY %s %s
+						LIMIT %d
+					",
+					$orderby,
+					$order,
+					$limit
+				) );
+			} elseif ( ! $this->data->limit && $this->data->offset ) {
+				$myrows = $wpdb->get_results( $wpdb->prepare(
+					"
+						SELECT * FROM {$table}
+						ORDER BY %s %s
+						OFFSET %d
+					",
+					$orderby,
+					$order,
+					$offset
+				) );
+			} else {
+				$myrows = $wpdb->get_results( $wpdb->prepare(
+					"
+						SELECT * FROM {$table}
+						ORDER BY %s %s
+					",
+					$orderby,
+					$order
+				) );
+			}
+		}
 
 		return $myrows;
 	}
