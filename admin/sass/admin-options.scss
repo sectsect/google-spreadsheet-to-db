@@ -60,16 +60,31 @@
         display: table-cell;
         vertical-align: top;
         padding: 10px;
+        &.ss2db_logo {
+          width: 25px;
+          border-right: 1px solid #eee;
+          background: url(../images/ss_logo.png) no-repeat center center;
+          background-size: 20px;
+        }
         &.ss2db_id {
-          width: 40px;
+          width: 30px;
           text-align: center;
           color: #999;
+          border-right: 1px solid #eee;
+        }
+        &.ss2db_title {
+          width: 70%;
           border-right: 1px solid #eee;
         }
         &.ss2db_date {
           padding: 0;
           .inner {
             padding: 10px 10px 10px 20px;
+            @media only screen and (max-width: 782px) {
+              padding-left: 10px;
+            }
+            color: #999;
+            font-size: 10px;
             position: relative;
             &:after{
             	content: "";
@@ -84,6 +99,9 @@
             	top: 50%;
             	margin-top: -7px;
               transition: all .3s linear;
+              @media only screen and (max-width: 782px) {
+                display: none;
+              }
             }
           }
         }
