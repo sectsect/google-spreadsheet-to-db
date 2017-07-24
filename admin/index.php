@@ -118,6 +118,18 @@
 		<form method="post" action="<?php echo plugin_dir_url(dirname(__FILE__)) . 'includes/save.php' ?>">
 			<hr />
 			<h3><?php _e('Data import from Google Spreadsheet', 'google_ss2db'); ?></h3>
+			<table class="form-table">
+				<tbody>
+					<tr>
+						<th scope="row">
+							<label for="datatitle"><?php _e('Data Title', 'google_ss2db'); ?> <span style="color: #999; font-size: 10px; font-weight: normal;">(Optional)</span></label>
+						</th>
+						<td>
+							<input type="text" id="datatitle" class="regular-text" name="datatitle" style="width: 330px;">
+						</td>
+					</tr>
+				</tbody>
+			</table>
 			<p><?php _e('This process may takes a few minutes.', 'google_ss2db'); ?></p>
 			<?php wp_nonce_field('google_ss2db', 'nonce'); ?>
 			<?php
@@ -138,7 +150,17 @@
 		<?php foreach ( $myrows as $row ) : ?>
 		<dl class="acorddion">
 			<dt>
+				<span class="ss2db_logo"></span>
 				<span class="ss2db_id"><?php echo $row->id; ?></span>
+				<span class="ss2db_title">
+					<?php
+					if ($row->title) {
+						echo $row->title;
+					} else {
+						echo "(no title)";
+					}
+					?>
+				</span>
 				<span class="ss2db_date">
 					<div class="inner">
 						<?php

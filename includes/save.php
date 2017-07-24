@@ -81,6 +81,7 @@ function save_spreadsheet() {
 	$today = new DateTime();
 	$today->setTimeZone( new DateTimeZone( get_option( 'timezone_string' ) ) );
 	$date = $today->format( 'Y-m-d H:i:s' );
+	$title = wp_unslash( $_POST['datatitle'] );
 	$value = get_value_google_spreadsheet();
 	if ( get_option( 'google_ss2db_dataformat' ) == 'json-unescp' ) {
 		$value = json_encode( $value, JSON_UNESCAPED_UNICODE );
@@ -91,9 +92,11 @@ function save_spreadsheet() {
 		GOOGLE_SS2DB_TABLE_NAME,
 		array(
 			'date' => $date,
+			'title' => $title,
 			'value' => $value,
 		),
 		array(
+			'%s',
 			'%s',
 			'%s',
 		)

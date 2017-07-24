@@ -35,6 +35,7 @@ class Google_Spreadsheet_To_DB_Activator {
 			$sql = 'CREATE TABLE ' . GOOGLE_SS2DB_TABLE_NAME . " (
 	              id bigint(20) NOT NULL AUTO_INCREMENT,
 				  date datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+				  title text NOT NULL,
 				  value LONGTEXT NOT NULL,
 	              PRIMARY KEY  (id)
 	            ) $charset_collate;";
