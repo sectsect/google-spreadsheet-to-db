@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Google Spreadsheet to DB\n"
-"POT-Creation-Date: 2017-07-23 22:14+0900\n"
-"PO-Revision-Date: 2017-07-23 22:15+0900\n"
+"POT-Creation-Date: 2017-07-24 19:30+0900\n"
+"PO-Revision-Date: 2017-07-24 19:31+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -45,15 +45,19 @@ msgstr ""
 msgid "Saving the spreadsheet failed"
 msgstr ""
 
-#: admin/index.php:120 admin/index.php:124
+#: admin/index.php:120 admin/index.php:136
 msgid "Data import from Google Spreadsheet"
 msgstr ""
 
-#: admin/index.php:121
+#: admin/index.php:125
+msgid "Data Title"
+msgstr ""
+
+#: admin/index.php:133
 msgid "This process may takes a few minutes."
 msgstr ""
 
-#: admin/index.php:137
+#: admin/index.php:149
 msgid "Data List"
 msgstr ""
 
