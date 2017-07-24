@@ -62,7 +62,7 @@ You can edit the array got from Google API with `add_filter('google_ss2db_before
 
 ```php
 <?php
-function formatting_array_before_save($array) {
+function formatting_array_before_save( $array ) {
 	// Do something...
 
 	return $return;
@@ -71,18 +71,73 @@ add_filter( 'google_ss2db_before_save','formatting_array_before_save' );
 ?>
 ```
 
-## Usage Example
-
-### Get the values
+## functions
 
 ```php
+new Google_Spreadsheet_To_DB_Query();
+```
+
+#### Parameters
+
+| Parameter |      | type | Notes  | Default Value |
+| -------- | ----- | ------- | ------ | ------ |
+| where    |       | array  | `id` or `date`  | `array()` |
+|          | key   | string | `id` or `date`  |  `false` |
+|          | value | int    | e.g. `3` / `2017-07-24 18:46:23` |  `false` |
+| orderby  |       | string | `date` or `id`  | `date` |
+| order    |       | string | `DESC` or `ASC` | `DESC` |
+| limit    |       | int    | number of sheet to get  | `false` |
+| offset   |       | int    | number of sheet to displace or pass over | `false` |
+
+## Usage Example
+
+#### Get all sheet data
+```php
 <?php
-global $wpdb;
-$sql = "SELECT * FROM " . GOOGLE_SS2DB_TABLE_NAME . " ORDER BY date DESC LIMIT 1";
-$myrows = $wpdb->get_results( $sql );
-foreach ( $myrows as $row ) {
+$sheets = new Google_Spreadsheet_To_DB_Query();
+$rows = $sheets->getrow();
+foreach ( $rows as $row ) {
+	$id = $row->value;
+	$date = $row->date;
 	$val = json_decode( $row->value );
-	var_dump($val);
+}
+?>
+```
+
+#### Get 3 sheets data from the 4th in ascending order by ID
+```php
+<?php
+$args = array(
+	'orderby' => 'id',
+	'order'   => 'ASC',
+	'limit'   => 3,
+	'offset'  => 3,
+);
+$sheets = new Google_Spreadsheet_To_DB_Query( $args );
+$rows = $sheets->getrow();
+foreach ( $rows as $row ) {
+	$id = $row->value;
+	$date = $row->date;
+	$val = json_decode( $row->value );
+}
+?>
+```
+
+#### Get the sheet data with specified ID
+```php
+<?php
+$args = array(
+	'where' => array(
+		'key'   => 'id',
+		'value' => 3
+	),
+);
+$sheets = new Google_Spreadsheet_To_DB_Query( $args );
+$rows = $sheets->getrow();
+foreach ( $rows as $row ) {
+	$id = $row->value;
+	$date = $row->date;
+	$val = json_decode( $row->value );
 }
 ?>
 ```

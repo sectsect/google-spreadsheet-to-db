@@ -87,5 +87,6 @@ add_filter( 'plugin_row_meta', 'google_ss2db_row_meta', 10, 4 );
 if ( google_ss2db_phpversioncheck() ) {
 	require_once plugin_dir_path( __FILE__ ) . 'functions/functions.php';
 	require_once plugin_dir_path( __FILE__ ) . 'includes/index.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-spreadsheet-to-db-query.php';
 	require_once plugin_dir_path( __FILE__ ) . 'includes/admin.php';
 }
