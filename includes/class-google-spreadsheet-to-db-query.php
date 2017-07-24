@@ -29,7 +29,7 @@ class Google_Spreadsheet_To_DB_Query {
 	 * @param  array $args "description".
 	 * @return void "description".
 	 */
-    public function __construct( $args = array() ) {
+	public function __construct( $args = array() ) {
 		$defaults = array(
 			'where'   => array(),
 			'orderby' => 'date',
@@ -38,9 +38,8 @@ class Google_Spreadsheet_To_DB_Query {
 			'offset'  => false,
 		);
 		$d = wp_parse_args( $args, $defaults );
-		extract( $d, EXTR_SKIP );
 		$this->setobject( $d );
-    }
+	}
 
 	/**
 	 * Push the object.
@@ -50,8 +49,8 @@ class Google_Spreadsheet_To_DB_Query {
 	 * @return void "description".
 	 */
 	public function setobject( $d ) {
-		$this->data = json_decode(json_encode( $d ));
-    }
+		$this->data = json_decode( json_encode( $d ) );
+	}
 
 	/**
 	 * Get the rows.
@@ -60,19 +59,20 @@ class Google_Spreadsheet_To_DB_Query {
 	 */
 	public function getrow() {
 		global $wpdb;
-		$sql = "SELECT * FROM " . GOOGLE_SS2DB_TABLE_NAME;
+		$sql = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME;
 		if ( isset( $this->data->where->key ) && isset( $this->data->where->value ) ) {
-			$sql .= " where " . $this->data->where->key . " = " . intval($this->data->where->value);
+			$sql .= ' where ' . $this->data->where->key . ' = ' . intval( $this->data->where->value );
 		}
-		$sql .= " ORDER BY " . $this->data->orderby . " " . $this->data->order;
+		$sql .= ' ORDER BY ' . $this->data->orderby . ' ' . $this->data->order;
 		if ( $this->data->limit ) {
-			$sql .= " LIMIT " . intval($this->data->limit);
+			$sql .= ' LIMIT ' . intval( $this->data->limit );
 		}
 		if ( $this->data->offset ) {
-			$sql .= " OFFSET " . intval($this->data->offset);
+			$sql .= ' OFFSET ' . intval( $this->data->offset );
 		}
+		$sql = $wpdb->prepare( $sql );
 		$myrows = $wpdb->get_results( $sql );
 
-        return $myrows;
-    }
+		return $myrows;
+	}
 }
