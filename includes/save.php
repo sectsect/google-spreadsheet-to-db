@@ -113,6 +113,8 @@ if ( $return ) {
 	$bool = false;
 }
 
-$url = admin_url( 'options-general.php?page=google_ss2db_menu&ss2dbupdated=' . $bool );
-wp_redirect( $url );
+$referer = wp_unslash( $_POST['_wp_http_referer'] );
+$referer = str_replace("&settings-updated=true", "", $referer);
+$referer = $referer . "&ss2dbupdated=" . $bool;
+wp_redirect( $referer );
 exit;
