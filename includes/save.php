@@ -114,7 +114,7 @@ if ( $return ) {
 }
 
 $referer = wp_unslash( $_POST['_wp_http_referer'] );
-$referer = str_replace("&settings-updated=true", "", $referer);
-$referer = $referer . "&ss2dbupdated=" . $bool;
+$referer = str_replace( '&settings-updated=true', '', $referer );
+$referer = $referer . '&ss2dbupdated=' . $bool;
 wp_redirect( $referer );
 exit;
