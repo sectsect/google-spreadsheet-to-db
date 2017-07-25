@@ -61,14 +61,12 @@ Hit send. That’s it! :ok_hand:
 You can edit the array got from Google API with `add_filter('google_ss2db_before_save', $function_to_add)` in your functions.php before saving to database.
 
 ```php
-<?php
 function formatting_array_before_save( $array ) {
 	// Do something...
 
 	return $return;
 }
 add_filter( 'google_ss2db_before_save','formatting_array_before_save' );
-?>
 ```
 
 ## functions
@@ -93,20 +91,17 @@ new Google_Spreadsheet_To_DB_Query();
 
 #### Get all sheet data
 ```php
-<?php
 $sheets = new Google_Spreadsheet_To_DB_Query();
 $rows = $sheets->getrow();
 foreach ( $rows as $row ) {
-	$id = $row->value;
+	$id = $row->id;
 	$date = $row->date;
 	$val = json_decode( $row->value );
 }
-?>
 ```
 
 #### Get 3 sheets data from the 4th in ascending order by ID
 ```php
-<?php
 $args = array(
 	'orderby' => 'id',
 	'order'   => 'ASC',
@@ -116,16 +111,14 @@ $args = array(
 $sheets = new Google_Spreadsheet_To_DB_Query( $args );
 $rows = $sheets->getrow();
 foreach ( $rows as $row ) {
-	$id = $row->value;
+	$id = $row->id;
 	$date = $row->date;
 	$val = json_decode( $row->value );
 }
-?>
 ```
 
 #### Get the sheet data with specified ID
 ```php
-<?php
 $args = array(
 	'where' => array(
 		'key'   => 'id',
@@ -135,11 +128,10 @@ $args = array(
 $sheets = new Google_Spreadsheet_To_DB_Query( $args );
 $rows = $sheets->getrow();
 foreach ( $rows as $row ) {
-	$id = $row->value;
+	$id = $row->id;
 	$date = $row->date;
 	$val = json_decode( $row->value );
 }
-?>
 ```
 
 ## Notes
@@ -148,6 +140,7 @@ foreach ( $rows as $row ) {
 
 ## Notes for Developer
 
+* This plugin saves Spreadsheet's data to the global area, not to each post. If you want to have Spredsheet data for individual posts, you can link data `ID` with custom fields.
 * The data is added and stored in the `wp_google_ss2db` table as a JSON-encoded array.
 
   <table>
@@ -155,6 +148,7 @@ foreach ( $rows as $row ) {
   <tr>
   <th>id</th>
   <th>date</th>
+  <th>title</th>
   <th>value</th>
   </tr>
   </thead>
@@ -162,6 +156,7 @@ foreach ( $rows as $row ) {
   <tr>
   <td>1</td>
   <td>2017-12-31 00:00:00</td>
+  <td>My Spreadsheet</td>
   <td><code style="word-break: break-all;">{"area":{"a":["brooklyn","bronx","Queens","Manhattan"],"b":["brooklyn","bronx","Queens","Manhattan"]}}</code></td>
   </tr></tbody></table>
 
