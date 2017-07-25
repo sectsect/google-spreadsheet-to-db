@@ -58,15 +58,14 @@ Hit send. That’s it! :ok_hand:
 
 ## Filtering the Array
 
-You can edit the array got from Google API with `add_filter('google_ss2db_before_save', $function_to_add)` in your functions.php before saving to database.
+You can edit the array got from Google API with `add_filter( 'google_ss2db_before_save', $function_to_add )` in your functions.php before saving to database.
 
 ```php
-function formatting_array_before_save( $array ) {
+add_filter( 'google_ss2db_before_save', function ( $array ) {
 	// Do something...
 
 	return $return;
-}
-add_filter( 'google_ss2db_before_save','formatting_array_before_save' );
+} );
 ```
 
 ## functions
