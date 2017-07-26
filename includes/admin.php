@@ -47,6 +47,7 @@ function google_ss2db_menu() {
  */
 function google_ss2db_admin_styles() {
 	wp_enqueue_style( 'select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css', array() );
+	wp_enqueue_style( 'sweetalert2', '//cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.min.css', array() );
 	wp_enqueue_style( 'admin-options', plugin_dir_url( dirname( __FILE__ ) ) . 'admin/css/admin-options.css', array() );
 }
 
@@ -57,7 +58,12 @@ function google_ss2db_admin_styles() {
  */
 function google_ss2db_admin_scripts() {
 	wp_enqueue_script( 'select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js', array( 'jquery' ) );
-	wp_enqueue_script( 'script', plugin_dir_url( dirname( __FILE__ ) ) . 'admin/js/script.js', array( 'select2' ) );
+	wp_enqueue_script( 'sweetalert2', '//cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.min.js', array( 'jquery' ) );
+	wp_enqueue_script( 'google-ss2db-script', plugin_dir_url( dirname( __FILE__ ) ) . 'admin/js/script.js', array( 'select2' ) );
+	wp_localize_script( 'google-ss2db-script', 'google_ss2db_data', array(
+		'nonce'          => wp_create_nonce( 'google_ss2db' ),
+		'plugin_dir_url' => plugin_dir_url( dirname( __FILE__ ) )
+	));
 }
 
 /**
