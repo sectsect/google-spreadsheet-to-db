@@ -83,8 +83,8 @@ new Google_Spreadsheet_To_DB_Query();
 |          | value | int    | e.g. `3` / `2017-07-24 18:46:23` |  `false` |
 | orderby  |       | string | `date` or `id`  | `date` |
 | order    |       | string | `DESC` or `ASC` | `DESC` |
-| limit    |       | int    | number of sheet to get  | `false` |
-| offset   |       | int    | number of sheet to displace or pass over | `false` |
+| limit    |       | int    | number of sheet to get  | All Data<br>:memo: You can also use `-1` to get all data. |
+| offset   |       | int    | number of sheet to displace or pass over | `0` |
 
 ## Usage Example
 

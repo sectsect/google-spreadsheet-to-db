@@ -60,6 +60,7 @@ class Google_Spreadsheet_To_DB_Query {
 	public function getrow() {
 		global $wpdb;
 		$table = GOOGLE_SS2DB_TABLE_NAME;
+
 		if ( isset( $this->data->where->key ) ) {
 			$wherekey = $this->data->where->key;
 		} else {
@@ -67,7 +68,7 @@ class Google_Spreadsheet_To_DB_Query {
 		}
 
 		if ( isset( $this->data->where->value ) ) {
-			$whereval = intval( $this->data->where->value );
+			$whereval = $this->data->where->value;
 		} else {
 			$whereval = false;
 		}
@@ -77,40 +78,36 @@ class Google_Spreadsheet_To_DB_Query {
 		} else {
 			$orderby = 'date';
 		}
+
 		if ( isset( $this->data->order ) ) {
 			$order = $this->data->order;
 		} else {
 			$order = 'DESC';
 		}
 
-		if ( $this->data->limit ) {
+		if ( $this->data->limit && intval( $this->data->limit ) !== -1 ) {
 			$limit = intval( $this->data->limit );
 		} else {
-			$limit = false;
+			$limit = '18446744073709551615';
 		}
+
 		if ( $this->data->offset ) {
 			$offset = intval( $this->data->offset );
 		} else {
-			$offset = false;
+			$offset = 0;
 		}
 
+		$sql = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME;
 		if ( $wherekey && $whereval ) {
-			if ( $limit && $offset ) {
-				$myrows = $wpdb->get_results( "SELECT * FROM {$table} where {$wherekey} = {$whereval} ORDER BY {$orderby} {$order} LIMIT {$limit} OFFSET {$offset};" ); // WPCS: unprepared SQL ok.
-			} elseif ( $limit && ! $offset ) {
-				$myrows = $wpdb->get_results( "SELECT * FROM {$table} where {$wherekey} = {$whereval} ORDER BY {$orderby} {$order} LIMIT {$limit};" ); // WPCS: unprepared SQL ok.
-			} else {
-				$myrows = $wpdb->get_results( "SELECT * FROM {$table} where {$wherekey} = {$whereval} ORDER BY {$orderby} {$order};" ); // WPCS: unprepared SQL ok.
-			}
-		} else {
-			if ( $limit && $offset ) {
-				$myrows = $wpdb->get_results( "SELECT * FROM {$table} ORDER BY {$orderby} {$order} LIMIT {$limit} OFFSET {$offset};" ); // WPCS: unprepared SQL ok.
-			} elseif ( $limit && ! $offset ) {
-				$myrows = $wpdb->get_results( "SELECT * FROM {$table} ORDER BY {$orderby} {$order} LIMIT {$limit};" ); // WPCS: unprepared SQL ok.
-			} else {
-				$myrows = $wpdb->get_results( "SELECT * FROM {$table} ORDER BY {$orderby} {$order};" ); // WPCS: unprepared SQL ok.
-			}
+			$sql .= ' WHERE ' . $wherekey . ' = ' . $whereval;
 		}
+		$sql .= ' ORDER BY ' . $orderby . ' ' . $order;
+		$sql .= ' LIMIT ' . $limit;
+		if ( $limit ) {
+			$sql .= ' OFFSET ' . intval( $offset );
+		}
+
+		$myrows = $wpdb->get_results( $sql ); // WPCS: unprepared SQL ok.
 
 		return $myrows;
 	}
