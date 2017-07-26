@@ -62,7 +62,7 @@ function google_ss2db_admin_scripts() {
 	wp_enqueue_script( 'google-ss2db-script', plugin_dir_url( dirname( __FILE__ ) ) . 'admin/js/script.js', array( 'select2' ) );
 	wp_localize_script( 'google-ss2db-script', 'google_ss2db_data', array(
 		'nonce'          => wp_create_nonce( 'google_ss2db' ),
-		'plugin_dir_url' => plugin_dir_url( dirname( __FILE__ ) )
+		'plugin_dir_url' => plugin_dir_url( dirname( __FILE__ ) ),
 	));
 }
 

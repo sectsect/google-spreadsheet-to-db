@@ -33,11 +33,14 @@ if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'google_s
 }
 
 $theid = wp_unslash( $_POST['id'] );
-$res = $wpdb->delete( GOOGLE_SS2DB_TABLE_NAME, array( 'id' => $theid ) );
+$array = array(
+	'id' => $theid,
+);
+$res = $wpdb->delete( GOOGLE_SS2DB_TABLE_NAME, $array );
 
 $return = array(
-	"res"    => $res,
-	"id"     => wp_unslash( $_POST['id'] ),
+	'res'    => $res,
+	'id'     => wp_unslash( $_POST['id'] ),
 );
 
 echo json_encode( $return );
