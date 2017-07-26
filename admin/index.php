@@ -148,7 +148,7 @@
 		<hr />
 		<h3><?php _e('Data List', 'google_ss2db'); ?></h3>
 		<?php foreach ( $myrows as $row ) : ?>
-		<dl class="acorddion">
+		<dl class="acorddion" data-id="<?php echo $row->id; ?>">
 			<dt>
 				<span class="ss2db_logo"></span>
 				<span class="ss2db_id"><?php echo $row->id; ?></span>
@@ -169,6 +169,7 @@
 						?>
 					</div>
 				</span>
+				<span class="ss2db_delete"></span>
 			</dt>
 			<dd>
 				<?php echo $row->value; ?>

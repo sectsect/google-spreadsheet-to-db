@@ -50,12 +50,33 @@
     margin-top: 70px;
   }
   .acorddion {
+    overflow: hidden;
+    margin: 10px 0 0;
+    transition: all 0.3s linear;
     dt {
       background: #fff;
       box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
       cursor: pointer;
       width: 100%;
       display: table;
+      table-layout: fixed;
+      padding-right: 46px;
+      box-sizing: border-box;
+      position: relative;
+      &:after{
+        content: "";
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-top: 1px solid #999;
+        border-right: 1px solid #999;
+        transform: rotate(135deg);
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        margin-top: -7px;
+        transition: all .3s linear;
+      }
       span {
         display: table-cell;
         vertical-align: top;
@@ -73,11 +94,13 @@
           border-right: 1px solid #eee;
         }
         &.ss2db_title {
-          width: 70%;
+          width: 100%;
           border-right: 1px solid #eee;
         }
         &.ss2db_date {
+          width: 145px;
           padding: 0;
+          border-right: 1px solid #eee;
           .inner {
             padding: 10px 10px 10px 20px;
             @media only screen and (max-width: 782px) {
@@ -85,26 +108,27 @@
             }
             color: #999;
             font-size: 10px;
-            position: relative;
-            &:after{
-            	content: "";
-            	display: block;
-            	width: 10px;
-            	height: 10px;
-            	border-top: 1px solid #999;
-            	border-right: 1px solid #999;
-            	transform: rotate(135deg);
-            	position: absolute;
-            	right: 18px;
-            	top: 50%;
-            	margin-top: -7px;
-              transition: all .3s linear;
-              @media only screen and (max-width: 782px) {
-                display: none;
-              }
-            }
           }
         }
+				&.ss2db_delete {
+          width: 30px;
+          border-right: 1px solid #eee;
+          text-align: center;
+          &:after {
+          	content: "";
+          	display: inline-block;
+            vertical-align: middle;
+            width: 15px;
+            height: 15px;
+            background: url(../images/trash.svg) no-repeat center center;
+            background-size: 15px;
+          }
+          &.disable {
+            &:after {
+              opacity: 0.3;
+            }
+          }
+				}
       }
     }
     dd {
@@ -116,17 +140,16 @@
 
     &.opened {
       dt {
-        span {
-          &.ss2db_date {
-            .inner {
-              &:after{
-                transform: rotate(-45deg);
-                top: 65%;
-              }
-            }
-          }
+        &:after{
+          transform: rotate(-45deg);
+          top: 65%;
         }
       }
+    }
+
+    &.hidden {
+      height: 0;
+      margin: 0;
     }
   }
 }
