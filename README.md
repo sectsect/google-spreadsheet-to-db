@@ -56,7 +56,9 @@ Hit send. That’s it! :ok_hand:
 	- json_encode (JSON_UNESCAPED_UNICODE)
 3. Click the `Data import from Google Spreadsheet` button. :tada:
 
-## Filtering the Array
+## Filters
+
+### Filtering the Array
 
 You can edit the array got from Google API with `add_filter( 'google_ss2db_before_save', $function_to_add )` in your functions.php before saving to database.
 
@@ -68,27 +70,28 @@ add_filter( 'google_ss2db_before_save', function ( $array ) {
 } );
 ```
 
-## functions
+## Functions
 
+### Get the rows
 ```php
 new Google_Spreadsheet_To_DB_Query();
 ```
 
 #### Parameters
 
-| Parameter |      | type | Notes  | Default Value |
+| Parameter |      | Type | Notes  | Default Value |
 | -------- | ----- | ------- | ------ | ------ |
 | where    |       | array  | `id` or `date`  | `array()` |
 |          | key   | string | `id` or `date`  |  `false` |
 |          | value | int    | e.g. `3` / `2017-07-24 18:46:23` |  `false` |
 | orderby  |       | string | `date` or `id`  | `date` |
 | order    |       | string | `DESC` or `ASC` | `DESC` |
-| limit    |       | int    | number of sheet to get  | All Data<br>:memo: You can also use `-1` to get all data. |
-| offset   |       | int    | number of sheet to displace or pass over | `0` |
+| limit    |       | int    | number of row to get  | All Data<br>:memo: You can also use `-1` to get all data. |
+| offset   |       | int    | number of row to displace or pass over | `0` |
 
 ## Usage Example
 
-#### Get all sheet data
+#### Get all rows
 ```php
 $sheets = new Google_Spreadsheet_To_DB_Query();
 $rows = $sheets->getrow();
@@ -99,7 +102,7 @@ foreach ( $rows as $row ) {
 }
 ```
 
-#### Get 3 sheets data from the 4th in ascending order by ID
+#### Get 3 rows from the 4th in ascending order by ID
 ```php
 $args = array(
 	'orderby' => 'id',
@@ -116,7 +119,7 @@ foreach ( $rows as $row ) {
 }
 ```
 
-#### Get the sheet data with specified ID
+#### Get the row with specified ID
 ```php
 $args = array(
 	'where' => array(
