@@ -139,6 +139,45 @@
 		</form>
 	</section>
 	<?php
+	/**
+	 * Generate Recursive Table.
+	 *
+	 * @since      1.0.3
+	 * @package    Google_Spreadsheet_to_DB
+	 * @subpackage Google_Spreadsheet_to_DB/admin
+	 */
+	class RecursiveTable {
+		public static function jsonToDebug($jsonText = '')
+		{
+			$arr = json_decode($jsonText, true);
+			$html = "";
+			if ($arr && is_array($arr)) {
+				$html .= self::_arrayToHtmlTableRecursive($arr);
+			}
+			return $html;
+		}
+
+		private static function _arrayToHtmlTableRecursive($arr) {
+			$str = "<table><tbody>";
+			foreach ($arr as $key => $val) {
+				$str .= "<tr>";
+				$str .= "<th><span>$key</span></th>";
+				$str .= "<td>";
+				if (is_array($val)) {
+					if (!empty($val)) {
+						$str .= self::_arrayToHtmlTableRecursive($val);
+					}
+				} else {
+					$str .= "<span>$val</span>";
+				}
+				$str .= "</td></tr>";
+			}
+			$str .= "</tbody></table>";
+
+			return $str;
+		}
+	}
+
 	global $wpdb;
 	$sql = "SELECT * FROM " . GOOGLE_SS2DB_TABLE_NAME . " ORDER BY date DESC";
 	$myrows = $wpdb->get_results( $sql );
@@ -172,7 +211,10 @@
 				<span class="ss2db_delete"></span>
 			</dt>
 			<dd>
-				<?php echo $row->value; ?>
+				<?php
+					$json = $row->value;
+					echo RecursiveTable::jsonToDebug($json);
+				?>
 			</dd>
 		</dl>
 		<?php endforeach; ?>

@@ -134,8 +134,61 @@
     dd {
       display: none;
       margin: 0;
-      padding: 1em;
+      padding: 1em 0;
       font-size: 10px;
+
+			table {
+				table-layout:fixed;
+				width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        background: #fff;
+  			th,
+  			tr,
+  			td {
+          border-collapse: collapse;
+          border-spacing: 0;
+  				vertical-align: middle;
+          margin: 0;
+          padding: 0;
+          border: 1px solid #eee;
+  			}
+  			th, td {
+  				span {
+            display: table-cell;
+            padding: 5px 10px;
+          }
+  			}
+        th {
+  				text-align: center;
+          width: 8.5%;
+          span {
+            display: inline;
+          }
+  			}
+        table {
+          border: none;
+          th, tr, td {
+            border-top: none;
+            border-left: none;
+          }
+          tr {
+            border-right: none;
+            td {
+              &:last-child {
+                border-right: none;
+                border-bottom: none;
+              }
+            }
+            &:last-child {
+              border-bottom: none;
+              th {
+                border-bottom: none;
+              }
+            }
+          }
+        }
+			}
     }
 
     &.opened {
