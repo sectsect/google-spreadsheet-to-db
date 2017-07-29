@@ -110,13 +110,13 @@
             font-size: 10px;
           }
         }
-				&.ss2db_delete {
+        &.ss2db_delete {
           width: 30px;
           border-right: 1px solid #eee;
           text-align: center;
           &:after {
-          	content: "";
-          	display: inline-block;
+            content: "";
+            display: inline-block;
             vertical-align: middle;
             width: 15px;
             height: 15px;
@@ -128,7 +128,7 @@
               opacity: 0.3;
             }
           }
-				}
+        }
       }
     }
     dd {
@@ -137,35 +137,35 @@
       padding: 1em 0;
       font-size: 10px;
 
-			table {
-				table-layout:fixed;
-				width: 100%;
+      table {
+        table-layout:fixed;
+        width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
         background: #fff;
-  			th,
-  			tr,
-  			td {
+        th,
+        tr,
+        td {
           border-collapse: collapse;
           border-spacing: 0;
-  				vertical-align: middle;
+          vertical-align: middle;
           margin: 0;
           padding: 0;
           border: 1px solid #eee;
-  			}
-  			th, td {
-  				span {
+        }
+        th, td {
+          span {
             display: table-cell;
             padding: 5px 10px;
           }
-  			}
+        }
         th {
-  				text-align: center;
+          text-align: center;
           width: 8.5%;
           span {
             display: inline;
           }
-  			}
+        }
         table {
           border: none;
           th, tr, td {
@@ -188,7 +188,7 @@
             }
           }
         }
-			}
+      }
     }
 
     &.opened {

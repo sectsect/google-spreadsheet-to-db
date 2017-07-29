@@ -149,9 +149,9 @@
 	class RecursiveTable {
 		public static function jsonToDebug($jsonText = '')
 		{
-			$arr = json_decode($jsonText, true);
+			$arr = json_decode( $jsonText, true );
 			$html = "";
-			if ($arr && is_array($arr)) {
+			if ( $arr && is_array( $arr ) ) {
 				$html .= self::_arrayToHtmlTableRecursive($arr);
 			}
 			return $html;
@@ -159,13 +159,13 @@
 
 		private static function _arrayToHtmlTableRecursive($arr) {
 			$str = "<table><tbody>";
-			foreach ($arr as $key => $val) {
+			foreach ( $arr as $key => $val ) {
 				$str .= "<tr>";
 				$str .= "<th><span>$key</span></th>";
 				$str .= "<td>";
-				if (is_array($val)) {
-					if (!empty($val)) {
-						$str .= self::_arrayToHtmlTableRecursive($val);
+				if ( is_array( $val ) ) {
+					if ( ! empty( $val ) ) {
+						$str .= self::_arrayToHtmlTableRecursive( $val );
 					}
 				} else {
 					$str .= "<span>$val</span>";
