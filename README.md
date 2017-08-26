@@ -6,7 +6,7 @@
 ## Requirements
 
 - PHP 5.5+
-- Composer
+- [Composer](https://getcomposer.org/)
 
 ## Installation
 
@@ -167,6 +167,16 @@ foreach ( $rows as $row ) {
 ## Change log  
 
 See [CHANGELOG](https://github.com/sectsect/google-spreadsheet-to-db/blob/master/CHANGELOG.md) file.
+
+## Contributing
+
+1. Create an issue and describe your idea
+2. [Fork it](https://github.com/sectsect/google-spreadsheet-to-db/fork)
+3. Create your feature branch (`git checkout -b my-new-feature`)
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Publish the branch (`git push origin my-new-feature`)
+6. Create a new Pull Request
+7. Profit! :white_check_mark:
 
 ## License
 
