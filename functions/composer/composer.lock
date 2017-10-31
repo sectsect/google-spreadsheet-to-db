@@ -53,20 +53,23 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v4.0.0",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "dccf163dc8ed7ed6a00afc06c51ee5186a428d35"
+                "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/dccf163dc8ed7ed6a00afc06c51ee5186a428d35",
-                "reference": "dccf163dc8ed7ed6a00afc06c51ee5186a428d35",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
+                "reference": "9984a4d3a32ae7673d6971ea00bae9d0a1abba0e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": " 4.8.35"
             },
             "type": "library",
             "autoload": {
@@ -92,7 +95,7 @@
             ],
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
-            "time": "2016-07-18T04:51:16+00:00"
+            "time": "2017-06-27T22:17:23+00:00"
         },
         {
             "name": "google/apiclient",
@@ -155,16 +158,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.15",
+            "version": "v0.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/google/google-api-php-client-services.git",
-                "reference": "9eaaa1062fa2a7cd2d16d3b5ab39efc0bc02a37e"
+                "reference": "297db7f5557dc8beba00a4e824abcaa595382269"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/9eaaa1062fa2a7cd2d16d3b5ab39efc0bc02a37e",
-                "reference": "9eaaa1062fa2a7cd2d16d3b5ab39efc0bc02a37e",
+                "url": "https://api.github.com/repos/google/google-api-php-client-services/zipball/297db7f5557dc8beba00a4e824abcaa595382269",
+                "reference": "297db7f5557dc8beba00a4e824abcaa595382269",
                 "shasum": ""
             },
             "require": {
@@ -188,24 +191,24 @@
             "keywords": [
                 "google"
             ],
-            "time": "2017-07-13T19:18:11+00:00"
+            "time": "2017-10-28T00:23:44+00:00"
         },
         {
             "name": "google/auth",
-            "version": "v1.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/google/google-auth-library-php.git",
-                "reference": "db77bd2de0bcc40bf50ebe851e9eed332aeaa4df"
+                "reference": "548d27d670f0236dc5258fa4cdde6e7b63464cfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-auth-library-php/zipball/db77bd2de0bcc40bf50ebe851e9eed332aeaa4df",
-                "reference": "db77bd2de0bcc40bf50ebe851e9eed332aeaa4df",
+                "url": "https://api.github.com/repos/google/google-auth-library-php/zipball/548d27d670f0236dc5258fa4cdde6e7b63464cfd",
+                "reference": "548d27d670f0236dc5258fa4cdde6e7b63464cfd",
                 "shasum": ""
             },
             "require": {
-                "firebase/php-jwt": "~2.0|~3.0|~4.0",
+                "firebase/php-jwt": "~2.0|~3.0|~4.0|~5.0",
                 "guzzlehttp/guzzle": "~5.3.1|~6.0",
                 "guzzlehttp/psr7": "~1.2",
                 "php": ">=5.4",
@@ -218,9 +221,6 @@
             },
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "src/"
-                ],
                 "psr-4": {
                     "Google\\Auth\\": "src"
                 }
@@ -236,7 +236,7 @@
                 "google",
                 "oauth2"
             ],
-            "time": "2017-06-13T18:00:07+00:00"
+            "time": "2017-10-10T17:01:45+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -499,16 +499,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "34a7699e6f31b1ef4035ee36444407cecf9f56aa"
+                "reference": "f4b6a522dfa1fd1e477c9cfe5909d5b31f098c0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/34a7699e6f31b1ef4035ee36444407cecf9f56aa",
-                "reference": "34a7699e6f31b1ef4035ee36444407cecf9f56aa",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/f4b6a522dfa1fd1e477c9cfe5909d5b31f098c0b",
+                "reference": "f4b6a522dfa1fd1e477c9cfe5909d5b31f098c0b",
                 "shasum": ""
             },
             "require": {
@@ -587,7 +587,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2017-06-05T06:31:10+00:00"
+            "time": "2017-10-23T05:04:54+00:00"
         },
         {
             "name": "psr/cache",
