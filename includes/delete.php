@@ -36,11 +36,11 @@ $theid = wp_unslash( $_POST['id'] );
 $array = array(
 	'id' => $theid,
 );
-$res = $wpdb->delete( GOOGLE_SS2DB_TABLE_NAME, $array );
+$res   = $wpdb->delete( GOOGLE_SS2DB_TABLE_NAME, $array );
 
 $return = array(
-	'res'    => $res,
-	'id'     => wp_unslash( $_POST['id'] ),
+	'res' => $res,
+	'id'  => wp_unslash( $_POST['id'] ),
 );
 
 echo json_encode( $return );

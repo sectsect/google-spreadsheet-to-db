@@ -37,7 +37,7 @@ class Google_Spreadsheet_To_DB_Query {
 			'limit'   => false,
 			'offset'  => false,
 		);
-		$d = wp_parse_args( $args, $defaults );
+		$d        = wp_parse_args( $args, $defaults );
 		$this->setobject( $d );
 	}
 

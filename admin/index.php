@@ -180,7 +180,7 @@
 
 	global $wpdb;
 	$paged         = isset($_GET['paged']) ? ( (int) $_GET['paged'] ) : 1;
-	$perpage       = 20;
+	$perpage       = 10;
 	$offset        = ( $paged - 1 ) * $perpage;
 	$countsql      = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC';
 	$allrows       = count( $wpdb->get_results( $countsql ) );
