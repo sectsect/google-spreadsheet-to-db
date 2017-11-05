@@ -54,12 +54,12 @@ function get_value_google_spreadsheet() {
 	ServiceRequestFactory::setInstance(
 		new DefaultServiceRequest( $accesstoken )
 	);
-	$spreadsheet = (new Google\Spreadsheet\SpreadsheetService)
+	$spreadsheet = ( new Google\Spreadsheet\SpreadsheetService )
 	->getSpreadsheetFeed()
 	->getByTitle( get_option( 'google_ss2db_worksheetname' ) );
 
 	$worksheet = $spreadsheet->getWorksheetFeed()->getByTitle( get_option( 'google_ss2db_sheetname' ) );
-	$listfeed = $worksheet->getListFeed();
+	$listfeed  = $worksheet->getListFeed();
 
 	$returnrows = array();
 	foreach ( $listfeed->getEntries() as $entry ) {
@@ -80,7 +80,7 @@ function save_spreadsheet() {
 	global $wpdb;
 	$today = new DateTime();
 	$today->setTimeZone( new DateTimeZone( get_option( 'timezone_string' ) ) );
-	$date = $today->format( 'Y-m-d H:i:s' );
+	$date  = $today->format( 'Y-m-d H:i:s' );
 	$title = wp_unslash( $_POST['datatitle'] );
 	$value = get_value_google_spreadsheet();
 	if ( get_option( 'google_ss2db_dataformat' ) == 'json-unescp' ) {
@@ -91,7 +91,7 @@ function save_spreadsheet() {
 	$result = $wpdb->insert(
 		GOOGLE_SS2DB_TABLE_NAME,
 		array(
-			'date' => $date,
+			'date'  => $date,
 			'title' => $title,
 			'value' => $value,
 		),
