@@ -179,9 +179,16 @@
 	}
 
 	global $wpdb;
-	$sql = "SELECT * FROM " . GOOGLE_SS2DB_TABLE_NAME . " ORDER BY date DESC";
-	$myrows = $wpdb->get_results( $sql );
-	if ( 0 < count( $myrows )) :
+	$paged         = isset($_GET['paged']) ? ( (int) $_GET['paged'] ) : 1;
+	$perpage       = 20;
+	$offset        = ( $paged - 1 ) * $perpage;
+	$countsql      = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC';
+	$allrows       = count( $wpdb->get_results( $countsql ) );
+	$max_num_pages = ceil( $allrows / $perpage );
+	$sql           = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC LIMIT ' . $offset . ', ' . $perpage;
+	$myrows        = $wpdb->get_results( $sql );
+	$count         = count( $myrows );
+	if ( 0 < $count ) :
 	?>
 	<section id="list">
 		<hr />
@@ -218,11 +225,16 @@
 			</dd>
 		</dl>
 		<?php endforeach; ?>
+		<?php
+		if ( function_exists( "google_ss2db_options_pagination" ) ) {
+			google_ss2db_options_pagination( $paged, $max_num_pages, 2 );
+		}
+		?>
 	</section>
 	<?php endif; ?>
 </div>
 
-<?php if (!get_option('google_ss2db_json_path') || !get_option('google_ss2db_worksheetname') || !get_option('google_ss2db_sheetname') || !get_option('google_ss2db_dataformat')): ?>
+<?php if ( ! get_option( 'google_ss2db_json_path' ) || ! get_option( 'google_ss2db_worksheetname' ) || ! get_option( 'google_ss2db_sheetname' ) || ! get_option( 'google_ss2db_dataformat' ) ): ?>
 <script>
 jQuery(function() {
 	jQuery('#save-spreadsheet').prop('disabled', true);

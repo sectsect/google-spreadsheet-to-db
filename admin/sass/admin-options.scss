@@ -49,6 +49,28 @@
   section#list {
     margin-top: 70px;
   }
+  .pagination {
+    display: flex;
+    li {
+      margin: 0;
+      background: #fff;
+    	flex: 0 1 40px;
+      flex-basis: 40px;               /*For bug on IE11 */
+    	border-left: 1px solid #eee;
+      text-align: center;
+      &:first-child {
+        border: none;
+      }
+      a, span {
+        display: block;
+        padding: 10px 0;
+        text-decoration: none;
+      }
+      span {
+        font-weight: bold;
+      }
+    }
+  }
   .acorddion {
     overflow: hidden;
     margin: 10px 0 0;
