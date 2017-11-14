@@ -34,7 +34,7 @@ add_action( 'admin_menu', 'google_ss2db_menu' );
  * @return void "description".
  */
 function google_ss2db_menu() {
-	$page_hook_suffix = add_options_page( 'Google Spreadsheet to DB', '<img src="' . plugins_url( 'admin/images/ss_logo.svg', dirname( __FILE__ ) ) . '" width="12" height="16" /> Google Spreadsheet to DB', 8, 'google_ss2db_menu', 'google_ss2db_options_page' );
+	$page_hook_suffix = add_options_page( 'Google Spreadsheet to DB', '<img src="' . plugins_url( 'admin/images/ss_logo.svg', dirname( __FILE__ ) ) . '" width="12" height="16" /> Google Spreadsheet to DB', 'manage_options', 'google_ss2db_menu', 'google_ss2db_options_page' );
 	add_action( 'admin_print_styles-' . $page_hook_suffix, 'google_ss2db_admin_styles' );
 	add_action( 'admin_print_scripts-' . $page_hook_suffix, 'google_ss2db_admin_scripts' );
 	add_action( 'admin_init', 'register_google_ss2db_settings' );
