@@ -1,5 +1,8 @@
 # Change Log
 
+## [v1.0.7](https://github.com/sectsect/google-spreadsheet-to-db/tree/v1.0.7) (2017-11-25)
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v1.0.6...v1.0.7)
+
 ## [v1.0.6](https://github.com/sectsect/google-spreadsheet-to-db/tree/v1.0.6) (2017-11-14)
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v1.0.5...v1.0.6)
 
