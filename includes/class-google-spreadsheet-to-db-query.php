@@ -107,7 +107,7 @@ class Google_Spreadsheet_To_DB_Query {
 			$sql .= ' OFFSET ' . intval( $offset );
 		}
 
-		$myrows = $wpdb->get_results( $sql ); // WPCS: unprepared SQL ok.
+		$myrows = $wpdb->get_results( $sql ); // phpcs:ignore
 
 		return $myrows;
 	}

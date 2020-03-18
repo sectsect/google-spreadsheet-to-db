@@ -76,7 +76,7 @@ add_action( 'plugins_loaded', 'google_ss2db_load_textdomain' );
  * @return statement           "description".
  */
 function google_ss2db_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
-	if ( plugin_basename( __FILE__ ) == $plugin_file ) {
+	if ( plugin_basename( __FILE__ ) === $plugin_file ) {
 		$plugin_meta[] = '<a href="https://github.com/sectsect/google-spreadsheet-to-db" target="_blank"><span class="dashicons dashicons-randomize"></span> GitHub</a>';
 		return $plugin_meta;
 	}

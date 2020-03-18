@@ -28,7 +28,7 @@
 
 require '../../../../wp-load.php';
 
-if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'google_ss2db' ) || 'POST' != $_SERVER['REQUEST_METHOD'] || ! isset( $_POST['id'] ) ) {
+if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'google_ss2db' ) || 'POST' !== $_SERVER['REQUEST_METHOD'] || ! isset( $_POST['id'] ) ) {
 	wp_die( 'Our Site is protected!!' );
 }
 
