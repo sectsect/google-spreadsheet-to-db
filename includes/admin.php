@@ -84,5 +84,5 @@ function register_google_ss2db_settings() {
  * @return void "description".
  */
 function google_ss2db_options_page() {
-	require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/index.php';
+	require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-recursivetable.php';
 }
