@@ -34,13 +34,11 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . 'composer/vendor/autoload.php' )
  * @return void "description".
  */
 function google_ss2db_options_pagination( $paged = 1, $pages = 1, $range = 2 ) {
+	$paged     = intval( $paged );
+	$pages     = intval( $pages );
+	$range     = intval( $range );
 	$showitems = ( $range * 2 ) + 1;
-	if ( ! $paged ) {
-		$paged = 1;
-	}
-	if ( ! $pages ) {
-		$pages = 1;
-	}
+
 	if ( 1 !== $pages ) {
 		echo '<ul class="pagination">';
 		if ( 2 < $paged && $paged > $range + 1 && $showitems < $pages ) {
