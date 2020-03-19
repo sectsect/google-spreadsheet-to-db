@@ -1,4 +1,4 @@
-jQuery(function(){
+jQuery(function() {
 	// Extend <select>
 	jQuery("#google_ss2db_dataformat").select2();
 
@@ -23,17 +23,15 @@ jQuery(function(){
 			preConfirm: function() {
 				return new Promise(function(resolve) {
 					jQuery.ajax( {
-						url          : google_ss2db_data.plugin_dir_url + "/includes/delete.php",
-						dataType     : "json",
-						data         : {id : theid, nonce : google_ss2db_data.nonce},
-						type         : "post",
-						beforeSend   : function(){
-
-						}
+						url        : google_ss2db_data.plugin_dir_url + 'includes/delete.php',
+						dataType   : "json",
+						data       : {id : theid, nonce : google_ss2db_data.nonce},
+						type       : "post",
+						beforeSend : function() {}
 					} ).done(function(data) {
 						swal('Deleted!', data.message, data.status);
 					} ).fail(function(XMLHttpRequest, textStatus, errorThrown) {
-						swal('Oops...', 'Something went wrong with ajax !', 'error');
+						swal('Oops...', 'Something went wrong with Ajax !', 'error');
 					} ).always(function(data) {
 						if (data.res == 1) {
 							var ele = jQuery(".acorddion[data-id='" + data.id + "']");
