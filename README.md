@@ -1,5 +1,5 @@
 # <img src="https://github-sect.s3-ap-northeast-1.amazonaws.com/logo.svg" width="28" height="auto"> Google Spreadsheet to DB
-[![Build Status](https://travis-ci.org/sectsect/google-spreadsheet-to-db.svg?branch=master)](https://travis-ci.org/sectsect/google-spreadsheet-to-db) [![PHP-Eye](https://php-eye.com/badge/sectsect/google-spreadsheet-to-db/tested.svg?style=flat)](https://php-eye.com/package/sectsect/google-spreadsheet-to-db) [![Latest Stable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v/stable)](https://packagist.org/packages/sectsect/google-spreadsheet-to-db)  [![License](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/license)](https://packagist.org/packages/sectsect/google-spreadsheet-to-db)
+[![Build Status](https://travis-ci.org/sectsect/google-spreadsheet-to-db.svg?branch=master)](https://travis-ci.org/sectsect/google-spreadsheet-to-db) [![Latest Stable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v/stable)](https://packagist.org/packages/sectsect/google-spreadsheet-to-db)  [![License](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/license)](https://packagist.org/packages/sectsect/google-spreadsheet-to-db)
 
 ### "Google Spreadsheet to DB" pulls Google Spreadsheet data via Google’s API and saves it in your wordpress database.
 
@@ -64,9 +64,9 @@ You can edit the array got from Google API with `add_filter( 'google_ss2db_befor
 
 ```php
 add_filter( 'google_ss2db_before_save', function ( $array ) {
-	// Do something...
+  // Do something...
 
-	return $return;
+  return $return;
 } );
 ```
 
@@ -96,43 +96,43 @@ new Google_Spreadsheet_To_DB_Query();
 $sheets = new Google_Spreadsheet_To_DB_Query();
 $rows = $sheets->getrow();
 foreach ( $rows as $row ) {
-	$id = $row->id;
-	$date = $row->date;
-	$val = json_decode( $row->value );
+  $id = $row->id;
+  $date = $row->date;
+  $val = json_decode( $row->value );
 }
 ```
 
 #### Get 3 rows from the 4th in ascending order by ID
 ```php
 $args = array(
-	'orderby' => 'id',
-	'order'   => 'ASC',
-	'limit'   => 3,
-	'offset'  => 3,
+  'orderby' => 'id',
+  'order'   => 'ASC',
+  'limit'   => 3,
+  'offset'  => 3,
 );
 $sheets = new Google_Spreadsheet_To_DB_Query( $args );
 $rows = $sheets->getrow();
 foreach ( $rows as $row ) {
-	$id = $row->id;
-	$date = $row->date;
-	$val = json_decode( $row->value );
+  $id = $row->id;
+  $date = $row->date;
+  $val = json_decode( $row->value );
 }
 ```
 
 #### Get the row with specified ID
 ```php
 $args = array(
-	'where' => array(
-		'key'   => 'id',
-		'value' => 3
-	),
+  'where' => array(
+    'key'   => 'id',
+    'value' => 3
+  ),
 );
 $sheets = new Google_Spreadsheet_To_DB_Query( $args );
 $rows = $sheets->getrow();
 foreach ( $rows as $row ) {
-	$id = $row->id;
-	$date = $row->date;
-	$val = json_decode( $row->value );
+  $id = $row->id;
+  $date = $row->date;
+  $val = json_decode( $row->value );
 }
 ```
 
@@ -167,16 +167,6 @@ foreach ( $rows as $row ) {
 ## Change log  
 
 See [CHANGELOG](https://github.com/sectsect/google-spreadsheet-to-db/blob/master/CHANGELOG.md) file.
-
-## Contributing
-
-1. Create an issue and describe your idea
-2. [Fork it](https://github.com/sectsect/google-spreadsheet-to-db/fork)
-3. Create your feature branch (`git checkout -b my-new-feature`)
-4. Commit your changes (`git commit -am 'Add some feature'`)
-5. Publish the branch (`git push origin my-new-feature`)
-6. Create a new Pull Request
-7. Profit! :white_check_mark:
 
 ## License
 

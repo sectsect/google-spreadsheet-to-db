@@ -68,7 +68,7 @@ class Google_Spreadsheet_To_DB_Query {
 		}
 
 		if ( isset( $this->data->where->value ) ) {
-			$whereval = $this->data->where->value;
+			$whereval = (string) $this->data->where->value;
 		} else {
 			$whereval = false;
 		}
@@ -88,7 +88,7 @@ class Google_Spreadsheet_To_DB_Query {
 		if ( $this->data->limit && intval( $this->data->limit ) !== -1 ) {
 			$limit = intval( $this->data->limit );
 		} else {
-			$limit = '18446744073709551615';
+			$limit = 2147483647;
 		}
 
 		if ( $this->data->offset ) {
@@ -97,17 +97,24 @@ class Google_Spreadsheet_To_DB_Query {
 			$offset = 0;
 		}
 
-		$sql = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME;
-		if ( $wherekey && $whereval ) {
-			$sql .= ' WHERE ' . $wherekey . ' = ' . $whereval;
-		}
-		$sql .= ' ORDER BY ' . $orderby . ' ' . $order;
-		$sql .= ' LIMIT ' . $limit;
-		if ( $limit ) {
-			$sql .= ' OFFSET ' . intval( $offset );
+		if ( ( 'id' === $wherekey || 'date' === $wherekey ) && $whereval ) {
+			$sql      = 'SELECT * FROM ' . $table . ' WHERE ' . $wherekey . ' = %s ORDER BY ' . $orderby . ' ' . $order . ' LIMIT %d OFFSET %d';
+			$prepared = $wpdb->prepare(
+				$sql, // phpcs:ignore
+				$whereval,
+				$limit,
+				$offset
+			);
+		} else {
+			$sql      = 'SELECT * FROM ' . $table . ' ORDER BY ' . $orderby . ' ' . $order . ' LIMIT %d OFFSET %d';
+			$prepared = $wpdb->prepare(
+				$sql, // phpcs:ignore
+				$limit,
+				$offset
+			);
 		}
 
-		$myrows = $wpdb->get_results( $sql ); // WPCS: unprepared SQL ok.
+		$myrows = $wpdb->get_results( $prepared ); // phpcs:ignore
 
 		return $myrows;
 	}

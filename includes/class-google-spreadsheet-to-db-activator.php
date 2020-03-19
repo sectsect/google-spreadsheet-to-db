@@ -31,7 +31,7 @@ class Google_Spreadsheet_To_DB_Activator {
 		$google_ss2db_db_version = '1.0.0';
 		$installed_ver           = get_option( 'google_ss2db_version' );
 		$charset_collate         = $wpdb->get_charset_collate();
-		if ( $installed_ver != $google_ss2db_db_version ) {
+		if ( $installed_ver !== $google_ss2db_db_version ) {
 			$sql = 'CREATE TABLE ' . GOOGLE_SS2DB_TABLE_NAME . " (
 	              id bigint(20) NOT NULL AUTO_INCREMENT,
 				  date datetime NOT NULL DEFAULT '0000-00-00 00:00:00',

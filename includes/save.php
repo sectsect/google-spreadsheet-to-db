@@ -28,7 +28,7 @@
 
 require '../../../../wp-load.php';
 
-if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'google_ss2db' ) || 'POST' != $_SERVER['REQUEST_METHOD'] ) {
+if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'google_ss2db' ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
 	wp_die( 'Our Site is protected!!' );
 }
 
@@ -45,7 +45,7 @@ function get_value_google_spreadsheet() {
 	$client = new Google_Client;
 	$client->useApplicationDefaultCredentials();
 	$client->setApplicationName( 'Something to do with my representatives' );
-	$client->setScopes( [ 'https://www.googleapis.com/auth/drive', 'https://spreadsheets.google.com/feeds' ] );
+	$client->setScopes( array( 'https://www.googleapis.com/auth/drive', 'https://spreadsheets.google.com/feeds' ) );
 	if ( $client->isAccessTokenExpired() ) {
 		$client->refreshTokenWithAssertion();
 	}
@@ -83,7 +83,7 @@ function save_spreadsheet() {
 	$date  = $today->format( 'Y-m-d H:i:s' );
 	$title = wp_unslash( $_POST['datatitle'] );
 	$value = get_value_google_spreadsheet();
-	if ( get_option( 'google_ss2db_dataformat' ) == 'json-unescp' ) {
+	if ( get_option( 'google_ss2db_dataformat' ) === 'json-unescp' ) {
 		$value = json_encode( $value, JSON_UNESCAPED_UNICODE );
 	} else {
 		$value = json_encode( $value );
