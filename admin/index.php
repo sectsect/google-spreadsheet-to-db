@@ -190,14 +190,22 @@
 	}
 
 	global $wpdb;
+	$table         = GOOGLE_SS2DB_TABLE_NAME;
 	$paged         = isset( $_GET['paged'] ) ? ( (int) $_GET['paged'] ) : 1;
-	$perpage       = 10;
-	$offset        = ( $paged - 1 ) * $perpage;
+	$limit         = 24;
+	$offset        = ( $paged - 1 ) * $limit;
 	$countsql      = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC';
-	$allrows       = count( $wpdb->get_results( $countsql ) );
-	$max_num_pages = ceil( $allrows / $perpage );
-	$sql           = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC LIMIT ' . $offset . ', ' . $perpage;
-	$myrows        = $wpdb->get_results( $sql );
+	$allrows       = count( $wpdb->get_results( $countsql ) ); // phpcs:ignore
+	$max_num_pages = ceil( $allrows / $limit );
+	// $sql           = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC LIMIT ' . $offset . ', ' . $limit;
+	$sql           = 'SELECT * FROM ' . $table . ' ORDER BY date DESC LIMIT %d OFFSET %d';
+	$prepared      = $wpdb->prepare(
+		$sql, // phpcs:ignore
+		$limit,
+		$offset
+	);
+
+	$myrows        = $wpdb->get_results( $prepared );
 	$count         = count( $myrows );
 	if ( 0 < $count ) :
 		?>
