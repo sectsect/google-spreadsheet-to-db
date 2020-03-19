@@ -81,7 +81,7 @@
 							?>
 							<select id="google_ss2db_dataformat" name="google_ss2db_dataformat" style="font-size: 11px; width: 330px;">
 								<?php foreach ( $types as $key => $type ) : ?>
-									<?php $selected = ( get_option( 'google_ss2db_dataformat' ) == $key ) ? 'selected' : ''; ?>
+									<?php $selected = ( get_option( 'google_ss2db_dataformat' ) === $key ) ? 'selected' : ''; ?>
 									<option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $type; ?></option>
 								<?php endforeach; ?>
 							</select>
@@ -104,12 +104,12 @@
 		</form>
 	</section>
 	<section>
-		<?php if ( isset( $_GET['ss2dbupdated'] ) && $_GET['ss2dbupdated'] == true ) : ?>
+		<?php if ( isset( $_GET['ss2dbupdated'] ) && true === $_GET['ss2dbupdated'] ) : ?>
 			<div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible">
 				<p><strong><?php _e( 'Spreadsheet saved', 'google_ss2db' ); ?></strong></p>
 				<button type="button" class="notice-dismiss"><span class="screen-reader-text"></span></button>
 			</div>
-		<?php elseif ( isset( $_GET['ss2dbupdated'] ) && $_GET['ss2dbupdated'] == false ) : ?>
+		<?php elseif ( isset( $_GET['ss2dbupdated'] ) && false === $_GET['ss2dbupdated'] ) : ?>
 			<div id="setting-error-settings_updated" class="error settings-error notice notice-error is-dismissible">
 				<p><strong><?php _e( 'Saving the spreadsheet failed', 'google_ss2db' ); ?></strong></p>
 				<button type="button" class="notice-dismiss"><span class="screen-reader-text"></span></button>
@@ -150,14 +150,14 @@
 		/**
 		 * Set the description.
 		 *
-		 * @param  array $jsonText "jsonText".
+		 * @param  array $json_text "jsonText".
 		 * @return string "description".
 		 */
-		public static function jsonToDebug( $jsonText = '' ) {
-			$arr  = json_decode( $jsonText, true );
+		public static function json_to_debug( $json_text = '' ) {
+			$arr  = json_decode( $json_text, true );
 			$html = '';
 			if ( $arr && is_array( $arr ) ) {
-				$html .= self::_arrayToHtmlTableRecursive( $arr );
+				$html .= self::array_to_html_table_recursive( $arr );
 			}
 			return $html;
 		}
@@ -168,7 +168,7 @@
 		 * @param  array $arr "array".
 		 * @return string "description".
 		 */
-		private static function _arrayToHtmlTableRecursive( $arr ) {
+		private static function array_to_html_table_recursive( $arr ) {
 			$str = '<table><tbody>';
 			foreach ( $arr as $key => $val ) {
 				$str .= '<tr>';
@@ -176,7 +176,7 @@
 				$str .= '<td>';
 				if ( is_array( $val ) ) {
 					if ( ! empty( $val ) ) {
-						$str .= self::_arrayToHtmlTableRecursive( $val );
+						$str .= self::array_to_html_table_recursive( $val );
 					}
 				} else {
 					$str .= "<span>$val</span>";
@@ -198,15 +198,15 @@
 	$allrows       = count( $wpdb->get_results( $countsql ) ); // phpcs:ignore
 	$max_num_pages = ceil( $allrows / $limit );
 	// $sql           = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC LIMIT ' . $offset . ', ' . $limit;
-	$sql           = 'SELECT * FROM ' . $table . ' ORDER BY date DESC LIMIT %d OFFSET %d';
-	$prepared      = $wpdb->prepare(
+	$sql      = 'SELECT * FROM ' . $table . ' ORDER BY date DESC LIMIT %d OFFSET %d';
+	$prepared = $wpdb->prepare(
 		$sql, // phpcs:ignore
 		$limit,
 		$offset
 	);
 
-	$myrows        = $wpdb->get_results( $prepared );
-	$count         = count( $myrows );
+	$myrows = $wpdb->get_results( $prepared ); // phpcs:ignore
+	$count  = count( $myrows );
 	if ( 0 < $count ) :
 		?>
 	<section id="list">
@@ -238,8 +238,8 @@
 			</dt>
 			<dd>
 				<?php
-					$json = $row->value;
-					echo RecursiveTable::jsonToDebug( $json );
+				$json = $row->value;
+				echo RecursiveTable::json_to_debug( $json );
 				?>
 			</dd>
 		</dl>
