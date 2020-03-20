@@ -1,0 +1,22 @@
+{
+  "extends": "@spotify/tsconfig",
+  "compilerOptions": {
+    // "allowJs": true,
+    // "allowSyntheticDefaultImports": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    // "noImplicitThis": false,
+    "target": "esnext",
+    "skipLibCheck": true,
+    // "types": [
+    //   "react-native"
+    // ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "assets",
+    "node_modules",
+    "**/*.spec.ts",
+  ]
+}

@@ -4,6 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
 // const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const { WebpackSweetEntry } = require('@sect/webpack-sweet-entry');
 const SizePlugin = require('size-plugin');
@@ -52,6 +54,17 @@ const getJSPlugins = env => {
     plugins.push(new SizePlugin());
   }
   if (isDev(env)) {
+    plugins.push(
+      new ForkTsCheckerWebpackPlugin({
+        eslint: true,
+      }),
+    );
+    plugins.push(
+      new ForkTsCheckerNotifierWebpackPlugin({
+        skipSuccessful: true,
+        title: 'TypeScript',
+      }),
+    );
     plugins.push(
       new BundleAnalyzerPlugin({
         // analyzerMode: 'static',
@@ -134,7 +147,7 @@ const getCSSPlugins = env => {
 
 module.exports = env => [
   {
-    entry: WebpackSweetEntry(path.resolve(sourcePath, 'assets/js/**/*.js*'), 'js', 'js'),
+    entry: WebpackSweetEntry(path.resolve(sourcePath, 'assets/ts/**/*.ts*'), 'ts', 'ts'),
     output: {
       path: path.resolve(buildPath, 'assets/js'),
       filename: '[name].js',
@@ -142,7 +155,7 @@ module.exports = env => [
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.(t|j)sx?$/,
           exclude: /node_modules/,
           // test: /\.(mjs|js)$/,
           // exclude: /node_modules\/(?!(rambda|quicklink)\/).*/,
@@ -153,7 +166,7 @@ module.exports = env => [
               options: {
                 fix: true,
                 failOnError: true,
-                cache: true,
+                cache: false,
               },
             },
           ],
@@ -175,6 +188,7 @@ module.exports = env => [
     },
     // Modernizr
     resolve: {
+      extensions: ['.tsx', '.ts', '.jsx', '.js'],
       modules: ['node_modules'],
       alias: {
         modernizr$: path.resolve(__dirname, '.modernizrrc'),
