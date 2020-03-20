@@ -14,7 +14,7 @@ interface GoogleSS2dbData {
 
 export const deleteData = () => {
   jQuery('.acorddion .ss2db_delete').on('click', (e: { currentTarget: HTMLElement }) => {
-    const theid = jQuery(e.currentTarget)
+    const theid: string = jQuery(e.currentTarget)
       .closest('dl')
       .attr('data-id');
     Swal.queue([
@@ -50,9 +50,9 @@ export const deleteData = () => {
                   title: 'Something went wrong!',
                 });
               })
-              .always((data: { res: number; id: string }) => {
-                if (data.res === 1) {
-                  const ele = jQuery(`.acorddion[data-id='${data.id}']`);
+              .always((data: { res: number | false; id: string }) => {
+                if (data.res) {
+                  const ele: JQuery = jQuery(`.acorddion[data-id='${data.id}']`);
                   jQuery
                     .when(
                       ele.stop(true, true).animate(
@@ -68,6 +68,11 @@ export const deleteData = () => {
                         ele.remove();
                       }, 600);
                     });
+                } else {
+                  Swal.insertQueueStep({
+                    icon: 'error',
+                    title: 'Something went wrong!',
+                  });
                 }
                 resolve();
               });
