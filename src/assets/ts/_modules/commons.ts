@@ -7,6 +7,4 @@
 // import 'lazysizes';
 import 'jquery.easing';
 // import viewportUnitsBuggyfill from 'viewport-units-buggyfill';
-import { detection as detect } from './detect';
-
-window.detect = detect();
+// import { detection as detect } from './detect';

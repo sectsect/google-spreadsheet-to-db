@@ -1,12 +1,14 @@
+declare let jQuery: any;
+
 export const accordion = () => {
   jQuery('dl.acorddion dt span')
     .not('.ss2db_delete')
-    .on('click', function() {
-      jQuery(this)
+    .on('click', (e: { currentTarget: HTMLElement }) => {
+      jQuery(e.currentTarget)
         .parent()
         .next()
         .slideToggle();
-      jQuery(this)
+      jQuery(e.currentTarget)
         .closest('dl')
         .toggleClass('opened');
     });

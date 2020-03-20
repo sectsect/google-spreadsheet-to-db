@@ -9,6 +9,7 @@ module.exports = api => {
         corejs: 3,
       },
     ],
+    '@babel/typescript',
   ];
   const plugins = [
     [
@@ -17,6 +18,8 @@ module.exports = api => {
         corejs: 3,
       },
     ],
+    '@babel/proposal-class-properties',
+    '@babel/proposal-object-rest-spread',
   ];
 
   return {

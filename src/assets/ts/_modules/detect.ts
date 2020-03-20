@@ -4,10 +4,48 @@ import Modernizr from 'modernizr';
 
 const browser = detect();
 
-export const detection = () => {
-  const bn = browser.name;
-  const bv = parseInt(browser.version, 10);
-  const detect = {
+type Versionable = number | boolean;
+
+interface Detection {
+  device: Device;
+  htmlcss: Htmlcss;
+  breakpoints: Breakpoints;
+}
+
+interface Breakpoints {
+  sm: number;
+  md: number;
+  lg: number;
+  xl: number;
+}
+
+interface Device {
+  desktop: boolean;
+  mobile: boolean;
+  phone: boolean;
+  tablet: boolean;
+  chrome: Versionable;
+  firefox: Versionable;
+  safari: Versionable;
+  msie: Versionable;
+  msedge: Versionable;
+  iPhone: boolean;
+  androidphone: boolean;
+  iOS: boolean;
+  androidOS: boolean;
+}
+
+interface Htmlcss {
+  cssgrid: boolean;
+  flexbox: boolean;
+  flexboxtweener: boolean;
+  objectfit: boolean;
+}
+
+export const detection = (): Detection => {
+  const bn: string = browser?.name || '';
+  const bv: number = parseInt(browser?.version || '0', 10);
+  const detect: Detection = {
     device: {
       desktop: !isMobile().any,
       mobile: isMobile().any,
