@@ -14,9 +14,7 @@ interface GoogleSS2dbData {
 
 export const deleteData = () => {
   jQuery('.acorddion .ss2db_delete').on('click', (e: { currentTarget: HTMLElement }) => {
-    const theid: string = jQuery(e.currentTarget)
-      .closest('dl')
-      .attr('data-id');
+    const theid: string = jQuery(e.currentTarget).closest('dl').attr('data-id');
     Swal.queue([
       {
         title: 'Are you sure?',
@@ -29,7 +27,7 @@ export const deleteData = () => {
         showLoaderOnConfirm: true,
         allowOutsideClick: false,
         preConfirm() {
-          return new Promise(resolve => {
+          return new Promise((resolve) => {
             jQuery
               .ajax({
                 url: `${window.google_ss2db_data.plugin_dir_url}includes/delete.php`,
