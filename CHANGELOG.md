@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.3](https://github.com/sectsect/google-spreadsheet-to-db/tree/v1.2.3) (2020-06-23)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v1.2.2...v1.2.3)
+
+## [v1.2.2](https://github.com/sectsect/google-spreadsheet-to-db/tree/v1.2.2) (2020-04-23)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v1.2.1...v1.2.2)
+
 ## [v1.2.1](https://github.com/sectsect/google-spreadsheet-to-db/tree/v1.2.1) (2020-04-03)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v1.2.0...v1.2.1)
