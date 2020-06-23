@@ -12,7 +12,7 @@ interface GoogleSS2dbData {
   plugin_dir_url: string;
 }
 
-export const deleteData = () => {
+export const deleteData = (): void => {
   jQuery('.acorddion .ss2db_delete').on('click', (e: { currentTarget: HTMLElement }) => {
     const theid: string = jQuery(e.currentTarget).closest('dl').attr('data-id');
     Swal.queue([
@@ -27,7 +27,7 @@ export const deleteData = () => {
         showLoaderOnConfirm: true,
         allowOutsideClick: false,
         preConfirm() {
-          return new Promise((resolve) => {
+          return new Promise(resolve => {
             jQuery
               .ajax({
                 url: `${window.google_ss2db_data.plugin_dir_url}includes/delete.php`,
