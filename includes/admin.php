@@ -72,7 +72,6 @@ function google_ss2db_admin_scripts() {
  * @return void "description".
  */
 function register_google_ss2db_settings() {
-	register_setting( 'google_ss2db-settings-group', 'google_ss2db_json_path' );
 	register_setting( 'google_ss2db-settings-group', 'google_ss2db_worksheetname' );
 	register_setting( 'google_ss2db-settings-group', 'google_ss2db_sheetname' );
 	register_setting( 'google_ss2db-settings-group', 'google_ss2db_dataformat' );

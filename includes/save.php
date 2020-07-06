@@ -41,7 +41,8 @@ use Google\Spreadsheet\ServiceRequestFactory;
  * @return array "description".
  */
 function get_value_google_spreadsheet() {
-	putenv( 'GOOGLE_APPLICATION_CREDENTIALS=' . get_option( 'google_ss2db_json_path' ) );
+	$client_secret = ( defined( 'GOOGLE_SS2DB_CLIENT_SECRET_PATH' ) ) ? GOOGLE_SS2DB_CLIENT_SECRET_PATH : '';
+	putenv( 'GOOGLE_APPLICATION_CREDENTIALS=' . $client_secret );
 	$client = new Google_Client;
 	$client->useApplicationDefaultCredentials();
 	$client->setApplicationName( 'Something to do with my representatives' );

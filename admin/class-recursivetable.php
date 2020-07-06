@@ -40,10 +40,19 @@
 				<tbody>
 					<tr>
 						<th scope="row">
-							<label for="google_ss2db_json_path"><?php _e( 'The absolute path to <code>client_secret.json</code>', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
+							<label for="google_ss2db_json_path"><?php _e( 'The absolute path to <code>client_secret.json</code>', 'google_ss2db' ); ?></label>
 						</th>
 						<td>
-							<input type="text" id="google_ss2db_json_path" class="regular-text" name="google_ss2db_json_path" value="<?php echo get_option( 'google_ss2db_json_path' ); ?>" style="width: 400px;">
+							<?php if ( defined( 'GOOGLE_SS2DB_CLIENT_SECRET_PATH' ) ) : ?>
+							<code>
+								<?php echo esc_html( GOOGLE_SS2DB_CLIENT_SECRET_PATH ); ?>
+							</code>
+							<?php else : ?>
+							<p>
+								<?php _e( 'Warning: You must define constants for client_secret.json in the <code>wp-config.php</code> file.', 'google_ss2db' ); ?><br>
+								e.g. <code>define('GOOGLE_SS2DB_CLIENT_SECRET_PATH', '/path/to/your/client_secret.json');</code>
+							</p>
+							<?php endif; ?>
 						</td>
 					</tr>
 					<tr>
@@ -252,7 +261,7 @@
 	<?php endif; ?>
 </div>
 
-<?php if ( ! get_option( 'google_ss2db_json_path' ) || ! get_option( 'google_ss2db_worksheetname' ) || ! get_option( 'google_ss2db_sheetname' ) || ! get_option( 'google_ss2db_dataformat' ) ) : ?>
+<?php if ( ! defined( 'GOOGLE_SS2DB_CLIENT_SECRET_PATH' ) || ! get_option( 'google_ss2db_worksheetname' ) || ! get_option( 'google_ss2db_sheetname' ) || ! get_option( 'google_ss2db_dataformat' ) ) : ?>
 <script>
 jQuery(function() {
 	jQuery('#save-spreadsheet').prop('disabled', true);
