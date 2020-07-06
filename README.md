@@ -50,15 +50,15 @@ Hit send. That’s it! :ok_hand:
   ```php
   define('GOOGLE_SS2DB_CLIENT_SECRET_PATH', '/path/to/your/client_secret.json');
   ```
-2. Go to `Settings` -> `Google Spreadsheet to DB` on your wordpress admin panel.
+2. Go to `Settings` -> `Google Spreadsheet to DB` on your WordPress Admin-Panel.
 3. Set the following values and save it once.
-  - The absolute path to `client_secret.json`
-  - Spreadsheet name
-  - Single Sheet name
   - Data format to be stored in database
     - json_encode
-	- json_encode (JSON_UNESCAPED_UNICODE)
-3. Click the `Data import from Google Spreadsheet` button. :tada:
+    - json_encode (JSON_UNESCAPED_UNICODE)
+  - Spreadsheet name
+  - Single Sheet name
+  - Title (Optional)
+4. Click the `Import from Google Spreadsheet` button. :tada:
 
 ## Filters
 

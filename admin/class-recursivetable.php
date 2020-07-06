@@ -57,29 +57,7 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="google_ss2db_worksheetname"><?php _e( 'Spreadsheet name', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
-						</th>
-						<td>
-							<input type="text" id="google_ss2db_worksheetname" class="regular-text" name="google_ss2db_worksheetname" value="<?php echo get_option( 'google_ss2db_worksheetname' ); ?>" style="width: 180px;">
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">
-							<label for="google_ss2db_sheetname"><?php _e( 'Single Sheet name', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
-						</th>
-						<td>
-							<input type="text" id="google_ss2db_sheetname" class="regular-text" name="google_ss2db_sheetname" value="<?php echo get_option( 'google_ss2db_sheetname' ); ?>" style="width: 180px;">
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<hr />
-			<h3>Data Settings</h3>
-			<table class="form-table">
-				<tbody>
-					<tr>
-						<th scope="row">
-							<label for="google_ss2db_dataformat"><?php _e( 'Data format to be stored in database', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
+							<label for="google_ss2db_dataformat"><?php _e( 'Data format', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
 						</th>
 						<td>
 							<?php
@@ -98,7 +76,6 @@
 					</tr>
 				</tbody>
 			</table>
-
 			<div class="link-doc">
 				<a href="https://github.com/sectsect/google-spreadsheet-to-db" target="_blank">
 					<dl>
@@ -129,6 +106,22 @@
 			<h3><?php _e( 'Import from Google Spreadsheet', 'google_ss2db' ); ?></h3>
 			<table class="form-table">
 				<tbody>
+					<tr>
+						<th scope="row">
+							<label for="worksheetname"><?php _e( 'Spreadsheet name', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
+						</th>
+						<td>
+							<input type="text" id="worksheetname" class="regular-text" name="worksheetname" style="width: 180px;" required>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="sheetname"><?php _e( 'Single Sheet name', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
+						</th>
+						<td>
+							<input type="text" id="sheetname" class="regular-text" name="sheetname" style="width: 180px;" required>
+						</td>
+					</tr>
 					<tr>
 						<th scope="row">
 							<label for="datatitle"><?php _e( 'Title', 'google_ss2db' ); ?> <span style="color: #999; font-size: 10px; font-weight: normal;">(Optional)</span></label>
@@ -261,7 +254,7 @@
 	<?php endif; ?>
 </div>
 
-<?php if ( ! defined( 'GOOGLE_SS2DB_CLIENT_SECRET_PATH' ) || ! get_option( 'google_ss2db_worksheetname' ) || ! get_option( 'google_ss2db_sheetname' ) || ! get_option( 'google_ss2db_dataformat' ) ) : ?>
+<?php if ( ! defined( 'GOOGLE_SS2DB_CLIENT_SECRET_PATH' ) || ! get_option( 'google_ss2db_dataformat' ) ) : ?>
 <script>
 jQuery(function() {
 	jQuery('#save-spreadsheet').prop('disabled', true);

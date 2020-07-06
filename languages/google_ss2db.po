@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Google Spreadsheet to DB\n"
-"POT-Creation-Date: 2020-07-07 04:15+0900\n"
-"PO-Revision-Date: 2020-07-07 04:15+0900\n"
+"POT-Creation-Date: 2020-07-07 05:01+0900\n"
+"PO-Revision-Date: 2020-07-07 05:01+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -32,34 +32,34 @@ msgid ""
 msgstr ""
 
 #: admin/class-recursivetable.php:60
-msgid "Spreadsheet name"
+msgid "Data format"
 msgstr ""
 
-#: admin/class-recursivetable.php:68
-msgid "Single Sheet name"
-msgstr ""
-
-#: admin/class-recursivetable.php:82
-msgid "Data format to be stored in database"
-msgstr ""
-
-#: admin/class-recursivetable.php:118
+#: admin/class-recursivetable.php:95
 msgid "Spreadsheet saved"
 msgstr ""
 
-#: admin/class-recursivetable.php:123
+#: admin/class-recursivetable.php:100
 msgid "Saving the spreadsheet failed"
 msgstr ""
 
-#: admin/class-recursivetable.php:129 admin/class-recursivetable.php:145
+#: admin/class-recursivetable.php:106 admin/class-recursivetable.php:138
 msgid "Import from Google Spreadsheet"
 msgstr ""
 
-#: admin/class-recursivetable.php:134
+#: admin/class-recursivetable.php:111
+msgid "Spreadsheet name"
+msgstr ""
+
+#: admin/class-recursivetable.php:119
+msgid "Single Sheet name"
+msgstr ""
+
+#: admin/class-recursivetable.php:127
 msgid "Title"
 msgstr ""
 
-#: admin/class-recursivetable.php:142
+#: admin/class-recursivetable.php:135
 msgid "This process may takes a few minutes."
 msgstr ""
 
