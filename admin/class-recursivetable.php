@@ -96,7 +96,7 @@
 						<dt>
 							<img src="https://github-sect.s3-ap-northeast-1.amazonaws.com/github.svg" width="22" height="auto">
 						</dt>
-						<dd> Document on Github</dd>
+						<dd> Document on GitHub</dd>
 					</dl>
 				</a>
 			</div>
@@ -117,12 +117,12 @@
 		<?php endif; ?>
 		<form method="post" action="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'includes/save.php'; ?>">
 			<hr />
-			<h3><?php _e( 'Data import from Google Spreadsheet', 'google_ss2db' ); ?></h3>
+			<h3><?php _e( 'Import from Google Spreadsheet', 'google_ss2db' ); ?></h3>
 			<table class="form-table">
 				<tbody>
 					<tr>
 						<th scope="row">
-							<label for="datatitle"><?php _e( 'Data Title', 'google_ss2db' ); ?> <span style="color: #999; font-size: 10px; font-weight: normal;">(Optional)</span></label>
+							<label for="datatitle"><?php _e( 'Title', 'google_ss2db' ); ?> <span style="color: #999; font-size: 10px; font-weight: normal;">(Optional)</span></label>
 						</th>
 						<td>
 							<input type="text" id="datatitle" class="regular-text" name="datatitle" style="width: 330px;">
@@ -133,7 +133,7 @@
 			<p><?php _e( 'This process may takes a few minutes.', 'google_ss2db' ); ?></p>
 			<?php wp_nonce_field( 'google_ss2db', 'nonce' ); ?>
 			<?php
-			$text = __( 'Data import from Google Spreadsheet', 'google_ss2db' );
+			$text = __( 'Import from Google Spreadsheet', 'google_ss2db' );
 			submit_button( $text, 'primary', 'save-spreadsheet', false );
 			?>
 		</form>
@@ -211,7 +211,6 @@
 		?>
 	<section id="list">
 		<hr />
-		<h3><?php _e( 'Data List', 'google_ss2db' ); ?></h3>
 		<?php foreach ( $myrows as $row ) : ?>
 		<dl class="acorddion" data-id="<?php echo $row->id; ?>">
 			<dt>
