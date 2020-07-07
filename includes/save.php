@@ -40,8 +40,9 @@ use Google\Spreadsheet\ServiceRequestFactory;
  *
  * @return array "description".
  */
-function get_value_google_spreadsheet() {
-	putenv( 'GOOGLE_APPLICATION_CREDENTIALS=' . get_option( 'google_ss2db_json_path' ) );
+function get_value_google_spreadsheet( $worksheetname, $sheetname ) {
+	$client_secret = ( defined( 'GOOGLE_SS2DB_CLIENT_SECRET_PATH' ) ) ? GOOGLE_SS2DB_CLIENT_SECRET_PATH : '';
+	putenv( 'GOOGLE_APPLICATION_CREDENTIALS=' . $client_secret );
 	$client = new Google_Client;
 	$client->useApplicationDefaultCredentials();
 	$client->setApplicationName( 'Something to do with my representatives' );
@@ -56,9 +57,9 @@ function get_value_google_spreadsheet() {
 	);
 	$spreadsheet = ( new Google\Spreadsheet\SpreadsheetService )
 	->getSpreadsheetFeed()
-	->getByTitle( get_option( 'google_ss2db_worksheetname' ) );
+	->getByTitle( $worksheetname );
 
-	$worksheet = $spreadsheet->getWorksheetFeed()->getByTitle( get_option( 'google_ss2db_sheetname' ) );
+	$worksheet = $spreadsheet->getWorksheetFeed()->getByTitle( $sheetname );
 	$listfeed  = $worksheet->getListFeed();
 
 	$returnrows = array();
@@ -78,11 +79,13 @@ function get_value_google_spreadsheet() {
  */
 function save_spreadsheet() {
 	global $wpdb;
-	$today = new DateTime();
+	$today         = new DateTime();
 	$today->setTimeZone( new DateTimeZone( get_option( 'timezone_string' ) ) );
-	$date  = $today->format( 'Y-m-d H:i:s' );
-	$title = wp_unslash( $_POST['datatitle'] );
-	$value = get_value_google_spreadsheet();
+	$date          = $today->format( 'Y-m-d H:i:s' );
+	$title         = wp_unslash( $_POST['datatitle'] );
+	$worksheetname = wp_unslash( $_POST['worksheetname'] );
+	$sheetname     = wp_unslash( $_POST['sheetname'] );
+	$value         = get_value_google_spreadsheet( $worksheetname, $sheetname );
 	if ( get_option( 'google_ss2db_dataformat' ) === 'json-unescp' ) {
 		$value = json_encode( $value, JSON_UNESCAPED_UNICODE );
 	} else {
@@ -101,18 +104,22 @@ function save_spreadsheet() {
 			'%s',
 		)
 	);
+	$rowid = $wpdb->insert_id;
 
-	return $result;
+	$return = array(
+		'id'     => $rowid,
+		'date'   => $date,
+		'title'  => $title,
+		'value'  => $value,
+		'result' => $result,
+	);
+
+	return $return;
 }
 
-$return = save_spreadsheet();
-
-if ( $return ) {
-	$bool = true;
-} else {
-	$bool = false;
-}
-
+$return  = save_spreadsheet();
+$rus     = apply_filters( 'google_ss2db_after_save', $return );
+$bool    = ( $return['result'] ) ? true : false;
 $referer = wp_unslash( $_POST['_wp_http_referer'] );
 $referer = str_replace( '&settings-updated=true', '', $referer );
 $referer = $referer . '&ss2dbupdated=' . $bool;

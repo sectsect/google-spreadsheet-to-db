@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Google Spreadsheet to DB\n"
-"POT-Creation-Date: 2020-07-06 23:02+0900\n"
-"PO-Revision-Date: 2020-07-06 23:03+0900\n"
+"POT-Creation-Date: 2020-07-07 05:01+0900\n"
+"PO-Revision-Date: 2020-07-07 05:01+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -25,35 +25,41 @@ msgstr ""
 msgid "The absolute path to <code>client_secret.json</code>"
 msgstr ""
 
-#: admin/class-recursivetable.php:51
-msgid "Spreadsheet name"
+#: admin/class-recursivetable.php:52
+msgid ""
+"Warning: You must define constants for client_secret.json in the <code>wp-"
+"config.php</code> file."
 msgstr ""
 
-#: admin/class-recursivetable.php:59
-msgid "Single Sheet name"
+#: admin/class-recursivetable.php:60
+msgid "Data format"
 msgstr ""
 
-#: admin/class-recursivetable.php:73
-msgid "Data format to be stored in database"
-msgstr ""
-
-#: admin/class-recursivetable.php:109
+#: admin/class-recursivetable.php:95
 msgid "Spreadsheet saved"
 msgstr ""
 
-#: admin/class-recursivetable.php:114
+#: admin/class-recursivetable.php:100
 msgid "Saving the spreadsheet failed"
 msgstr ""
 
-#: admin/class-recursivetable.php:120 admin/class-recursivetable.php:136
+#: admin/class-recursivetable.php:106 admin/class-recursivetable.php:138
 msgid "Import from Google Spreadsheet"
 msgstr ""
 
-#: admin/class-recursivetable.php:125
+#: admin/class-recursivetable.php:111
+msgid "Spreadsheet name"
+msgstr ""
+
+#: admin/class-recursivetable.php:119
+msgid "Single Sheet name"
+msgstr ""
+
+#: admin/class-recursivetable.php:127
 msgid "Title"
 msgstr ""
 
-#: admin/class-recursivetable.php:133
+#: admin/class-recursivetable.php:135
 msgid "This process may takes a few minutes."
 msgstr ""
 

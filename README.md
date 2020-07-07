@@ -46,15 +46,19 @@ We now have a big chunk of authentication information, including what Google cal
 Grab the value of `client_email` from your `client_secret.json`, and head back to your spreadsheet. Click the Share button in the top right, and paste the `client_email` value into the field to give it edit rights.  
 Hit send. That’s it! :ok_hand:
 
-1. Go to `Settings` -> `Google Spreadsheet to DB` on your wordpress admin panel.
-2. Set the following values and save it once.
-  - The absolute path to `client_secret.json`
-  - Spreadsheet name
-  - Single Sheet name
+1. Set the `define()` constants for client_secret.json in <code>wp-config.php</code>.
+  ```php
+  define('GOOGLE_SS2DB_CLIENT_SECRET_PATH', '/path/to/your/client_secret.json');
+  ```
+2. Go to `Settings` -> `Google Spreadsheet to DB` on your WordPress Admin-Panel.
+3. Set the following values and save it once.
   - Data format to be stored in database
     - json_encode
-	- json_encode (JSON_UNESCAPED_UNICODE)
-3. Click the `Data import from Google Spreadsheet` button. :tada:
+    - json_encode (JSON_UNESCAPED_UNICODE)
+  - Spreadsheet name
+  - Single Sheet name
+  - Title (Optional)
+4. Click the `Import from Google Spreadsheet` button. :tada:
 
 ## Filters
 
@@ -68,6 +72,21 @@ add_filter( 'google_ss2db_before_save', function ( $array ) {
 
   return $return;
 } );
+```
+
+And also use `add_filter('google_ss2db_after_save', $return_array )` to perform any processing with the return value.
+```php
+add_filter( 'google_ss2db_after_save', function ( $array ) {
+  $id     = $array['id'];
+  $date   = $array['date'];
+  $title  = $array['title'];
+  $value  = $array['value'];
+  $result = $array['result'];
+  // Do something...
+
+  return $array;
+} );
+
 ```
 
 ## Functions
