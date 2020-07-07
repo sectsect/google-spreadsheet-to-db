@@ -38,6 +38,8 @@ use Google\Spreadsheet\ServiceRequestFactory;
 /**
  * Get the Google Spreadsheet Data.
  *
+ * @param  string $worksheetname "Spreadsheet name".
+ * @param  string $sheetname "SingleSheet name on Spreadsheet".
  * @return array "description".
  */
 function get_value_google_spreadsheet( $worksheetname, $sheetname ) {
@@ -79,7 +81,7 @@ function get_value_google_spreadsheet( $worksheetname, $sheetname ) {
  */
 function save_spreadsheet() {
 	global $wpdb;
-	$today         = new DateTime();
+	$today = new DateTime();
 	$today->setTimeZone( new DateTimeZone( get_option( 'timezone_string' ) ) );
 	$date          = $today->format( 'Y-m-d H:i:s' );
 	$title         = wp_unslash( $_POST['datatitle'] );
@@ -104,7 +106,7 @@ function save_spreadsheet() {
 			'%s',
 		)
 	);
-	$rowid = $wpdb->insert_id;
+	$rowid  = $wpdb->insert_id;
 
 	$return = array(
 		'id'     => $rowid,
