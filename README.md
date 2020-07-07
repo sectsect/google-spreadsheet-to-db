@@ -74,6 +74,21 @@ add_filter( 'google_ss2db_before_save', function ( $array ) {
 } );
 ```
 
+And also use `add_filter('google_ss2db_after_save', $return_array )` to perform any processing with the return value.
+```php
+add_filter( 'google_ss2db_after_save', function ( $array ) {
+  $id     = $array['id'];
+  $date   = $array['date'];
+  $title  = $array['title'];
+  $value  = $array['value'];
+  $result = $array['result'];
+  // Do something...
+
+  return $array;
+} );
+
+```
+
 ## Functions
 
 ### Get the rows

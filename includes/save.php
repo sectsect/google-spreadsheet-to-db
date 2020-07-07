@@ -104,18 +104,22 @@ function save_spreadsheet() {
 			'%s',
 		)
 	);
+	$rowid = $wpdb->insert_id;
 
-	return $result;
+	$return = array(
+		'id'     => $rowid,
+		'date'   => $date,
+		'title'  => $title,
+		'value'  => $value,
+		'result' => $result,
+	);
+
+	return $return;
 }
 
-$return = save_spreadsheet();
-
-if ( $return ) {
-	$bool = true;
-} else {
-	$bool = false;
-}
-
+$return  = save_spreadsheet();
+$rus     = apply_filters( 'google_ss2db_after_save', $return );
+$bool    = ( $return['result'] ) ? true : false;
 $referer = wp_unslash( $_POST['_wp_http_referer'] );
 $referer = str_replace( '&settings-updated=true', '', $referer );
 $referer = $referer . '&ss2dbupdated=' . $bool;
