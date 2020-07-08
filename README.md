@@ -98,15 +98,16 @@ new Google_Spreadsheet_To_DB_Query();
 
 #### Parameters
 
-| Parameter |      | Type | Notes  | Default Value |
-| -------- | ----- | ------- | ------ | ------ |
-| where    |       | array  | `id` or `date`  | `array()` |
-|          | key   | string | `id` or `date`  |  `false` |
-|          | value | int    | e.g. `3` / `2017-07-24 18:46:23` |  `false` |
-| orderby  |       | string | `date` or `id`  | `date` |
-| order    |       | string | `DESC` or `ASC` | `DESC` |
-| limit    |       | int    | number of row to get  | All Data<br>:memo: You can also use `-1` to get all data. |
-| offset   |       | int    | number of row to displace or pass over | `0` |
+| Parameter |         | Type   | Notes  | Default Value |
+| --------- | ------- | ------ | ------ | ------ |
+| where     |         | array  |                 | `array()` |
+|           | key     | string | `id` or `date`  |  `false` |
+|           | value   | int    | e.g. `3` / `2020-09-01 12:00:00` |  `false` |
+|           | compare | string | e.g. `=`  `>`  `<`  `>=`  `<=`  `<>`  `!=` |  `=` |
+| orderby   |         | string | `date` or `id`  | `date` |
+| order     |         | string | `DESC` or `ASC` | `DESC` |
+| limit     |         | int    | number of row to get  | All Data<br>:memo: You can also use `-1` to get all data. |
+| offset    |         | int    | number of row to displace or pass over | `0` |
 
 ## Usage Example
 
@@ -144,6 +145,24 @@ $args = array(
   'where' => array(
     'key'   => 'id',
     'value' => 3
+  ),
+);
+$sheets = new Google_Spreadsheet_To_DB_Query( $args );
+$rows = $sheets->getrow();
+foreach ( $rows as $row ) {
+  $id = $row->id;
+  $date = $row->date;
+  $val = json_decode( $row->value );
+}
+```
+
+#### Gets the rows larger than or equal the specified datetime
+```php
+$args = array(
+  'where' => array(
+    'key'     => 'date',
+    'value'   => '2020-08-01 12:34:56',
+    'compare' => '>=',
   ),
 );
 $sheets = new Google_Spreadsheet_To_DB_Query( $args );

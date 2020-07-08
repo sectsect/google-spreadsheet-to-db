@@ -73,6 +73,12 @@ class Google_Spreadsheet_To_DB_Query {
 			$whereval = false;
 		}
 
+		if ( isset( $this->data->where->compare ) ) {
+			$wherecompare = (string) $this->data->where->compare;
+		} else {
+			$wherecompare = '=';
+		}
+
 		if ( isset( $this->data->orderby ) ) {
 			$orderby = $this->data->orderby;
 		} else {
@@ -97,8 +103,8 @@ class Google_Spreadsheet_To_DB_Query {
 			$offset = 0;
 		}
 
-		if ( ( 'id' === $wherekey || 'date' === $wherekey ) && $whereval ) {
-			$sql      = 'SELECT * FROM ' . $table . ' WHERE ' . $wherekey . ' = %s ORDER BY ' . $orderby . ' ' . $order . ' LIMIT %d OFFSET %d';
+		if ( ( 'id' === $wherekey || 'date' === $wherekey ) && $whereval && $wherecompare ) {
+			$sql      = 'SELECT * FROM ' . $table . ' WHERE ' . $wherekey . ' ' . $wherecompare . ' %s ORDER BY ' . $orderby . ' ' . $order . ' LIMIT %d OFFSET %d';
 			$prepared = $wpdb->prepare(
 				$sql, // phpcs:ignore
 				$whereval,
