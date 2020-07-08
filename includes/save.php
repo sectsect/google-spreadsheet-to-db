@@ -96,11 +96,15 @@ function save_spreadsheet() {
 	$result = $wpdb->insert(
 		GOOGLE_SS2DB_TABLE_NAME,
 		array(
-			'date'  => $date,
-			'title' => $title,
-			'value' => $value,
+			'date'           => $date,
+			'worksheet_name' => $worksheetname,
+			'sheet_name'     => $sheetname,
+			'title'          => $title,
+			'value'          => $value,
 		),
 		array(
+			'%s',
+			'%s',
 			'%s',
 			'%s',
 			'%s',
@@ -109,11 +113,13 @@ function save_spreadsheet() {
 	$rowid  = $wpdb->insert_id;
 
 	$return = array(
-		'id'     => $rowid,
-		'date'   => $date,
-		'title'  => $title,
-		'value'  => $value,
-		'result' => $result,
+		'id'             => $rowid,
+		'date'           => $date,
+		'worksheet_name' => $worksheetname,
+		'sheet_name'     => $sheetname,
+		'title'          => $title,
+		'value'          => $value,
+		'result'         => $result,
 	);
 
 	return $return;
