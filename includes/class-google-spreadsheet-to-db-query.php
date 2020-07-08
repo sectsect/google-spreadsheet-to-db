@@ -61,8 +61,9 @@ class Google_Spreadsheet_To_DB_Query {
 		global $wpdb;
 		$table = GOOGLE_SS2DB_TABLE_NAME;
 
-		if ( isset( $this->data->where->key ) ) {
-			$wherekey = $this->data->where->key;
+		$allow_wherekeys = array( 'id', 'date', 'title' );
+		if ( isset( $this->data->where->key ) && in_array( $this->data->where->key, $allow_wherekeys, true ) ) {
+			$wherekey = esc_sql( $this->data->where->key );
 		} else {
 			$wherekey = false;
 		}
@@ -73,14 +74,23 @@ class Google_Spreadsheet_To_DB_Query {
 			$whereval = false;
 		}
 
-		if ( isset( $this->data->orderby ) ) {
-			$orderby = $this->data->orderby;
+		$operators = array( '=', '>', '<', '>=', '<=', '<>', '!=' );
+		if ( isset( $this->data->where->compare ) && in_array( $this->data->where->compare, $operators, true ) ) {
+			$wherecompare = esc_sql( (string) $this->data->where->compare );
+		} else {
+			$wherecompare = '=';
+		}
+
+		$allow_orderbys = array( 'date', 'id', 'title' );
+		if ( isset( $this->data->orderby ) && in_array( $this->data->orderby, $allow_orderbys, true ) ) {
+			$orderby = esc_sql( $this->data->orderby );
 		} else {
 			$orderby = 'date';
 		}
 
-		if ( isset( $this->data->order ) ) {
-			$order = $this->data->order;
+		$allow_orders = array( 'DESC', 'ASC' );
+		if ( isset( $this->data->order ) && in_array( $this->data->order, $allow_orders, true ) ) {
+			$order = esc_sql( $this->data->order );
 		} else {
 			$order = 'DESC';
 		}
@@ -97,8 +107,8 @@ class Google_Spreadsheet_To_DB_Query {
 			$offset = 0;
 		}
 
-		if ( ( 'id' === $wherekey || 'date' === $wherekey ) && $whereval ) {
-			$sql      = 'SELECT * FROM ' . $table . ' WHERE ' . $wherekey . ' = %s ORDER BY ' . $orderby . ' ' . $order . ' LIMIT %d OFFSET %d';
+		if ( $wherekey && $whereval && $wherecompare ) {
+			$sql      = 'SELECT * FROM ' . $table . ' WHERE ' . $wherekey . ' ' . $wherecompare . ' %s ORDER BY ' . $orderby . ' ' . $order . ' LIMIT %d OFFSET %d';
 			$prepared = $wpdb->prepare(
 				$sql, // phpcs:ignore
 				$whereval,
