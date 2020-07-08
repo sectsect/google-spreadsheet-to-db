@@ -145,8 +145,10 @@ foreach ( $rows as $row ) {
 ```php
 $args = array(
   'where' => array(
-    'key'   => 'id',
-    'value' => 3
+    array(
+      'key'   => 'id',
+      'value' => 3,
+	)
   ),
 );
 $sheets = new Google_Spreadsheet_To_DB_Query( $args );
