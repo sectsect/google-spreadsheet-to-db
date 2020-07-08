@@ -98,16 +98,18 @@ new Google_Spreadsheet_To_DB_Query();
 
 #### Parameters
 
-| Parameter |         | Type   | Notes  | Default Value |
-| --------- | ------- | ------ | ------ | ------ |
-| where     |         | array  |                 | `array()` |
-|           | key     | string | `id` or `date`  |  `false` |
-|           | value   | int    | e.g. `3` / `2020-09-01 12:00:00` |  `false` |
-|           | compare | string | e.g. `=`  `>`  `<`  `>=`  `<=`  `<>`  `!=` |  `=` |
-| orderby   |         | string | `date` or `id`  | `date` |
-| order     |         | string | `DESC` or `ASC` | `DESC` |
-| limit     |         | int    | number of row to get  | All Data<br>:memo: You can also use `-1` to get all data. |
-| offset    |         | int    | number of row to displace or pass over | `0` |
+| Parameter |          |         | Type   | Notes                                      | Default Value |
+| --------- | -------- | ------- | ------ | ------------------------------------------ | ------------- |
+| where     |          |         | array  |                                            | `array()`     |
+|           | relation |         | string | `AND` or `OR`                              |  `AND`        |
+|           | [array]  |         | array  |                                            |               |
+|           |          | key     | string | `id` or `date`                             |  `false`      |
+|           |          | value   | int    | e.g. `3` / `2020-09-01 12:00:00`           |  `false`      |
+|           |          | compare | string | e.g. `=`  `>`  `<`  `>=`  `<=`  `<>`  `!=` |  `=`          |
+| orderby   |          |         | string | `date` or `id`                             | `date`        |
+| order     |          |         | string | `DESC` or `ASC`                            | `DESC`        |
+| limit     |          |         | int    | number of row to get                       | All Data<br>:memo: You can also use `-1` to get all data. |
+| offset    |          |         | int    | number of row to displace or pass over     | `0`           |
 
 ## Usage Example
 
@@ -160,9 +162,41 @@ foreach ( $rows as $row ) {
 ```php
 $args = array(
   'where' => array(
-    'key'     => 'date',
-    'value'   => '2020-08-01 12:34:56',
-    'compare' => '>=',
+    array(
+      'key'     => 'date',
+      'value'   => '2020-08-01 12:34:56',
+      'compare' => '>=',
+    )
+  ),
+);
+$sheets = new Google_Spreadsheet_To_DB_Query( $args );
+$rows = $sheets->getrow();
+foreach ( $rows as $row ) {
+  $id = $row->id;
+  $date = $row->date;
+  $val = json_decode( $row->value );
+}
+```
+
+#### Gets the rows with multiple conditions
+```php
+$args = array(
+  'orderby' => 'id',
+  'order'   => 'DESC',
+  'limit'   => 10,
+  'offset'  => 10,
+  'where'   => array(
+    'relation' => 'AND', // or 'OR'
+    array(
+      'key'     => 'date',
+      'value'   => '2020-08-01 12:34:56',
+      'compare' => '>='
+    ),
+    array(
+      'key'     => 'id',
+      'value'   => '33',
+      'compare' => '>='
+    ),
   ),
 );
 $sheets = new Google_Spreadsheet_To_DB_Query( $args );

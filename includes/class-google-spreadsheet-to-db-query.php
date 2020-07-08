@@ -61,24 +61,45 @@ class Google_Spreadsheet_To_DB_Query {
 		global $wpdb;
 		$table = GOOGLE_SS2DB_TABLE_NAME;
 
-		$allow_wherekeys = array( 'id', 'date', 'title' );
-		if ( isset( $this->data->where->key ) && in_array( $this->data->where->key, $allow_wherekeys, true ) ) {
-			$wherekey = esc_sql( $this->data->where->key );
+		$allow_whererelation = array( 'AND', 'OR' );
+		if ( isset( $this->data->where->relation ) && in_array( $this->data->where->relation, $allow_whererelation, true ) ) {
+			$order = esc_sql( $this->data->where->relation );
 		} else {
-			$wherekey = false;
+			$order = 'AND';
 		}
 
-		if ( isset( $this->data->where->value ) ) {
-			$whereval = (string) $this->data->where->value;
-		} else {
-			$whereval = false;
-		}
+		// Remove property 'relation' in object '$this->data->where'.
+		unset( $this->data->where->relation );
+		$wheres = $this->data->where;
 
-		$operators = array( '=', '>', '<', '>=', '<=', '<>', '!=' );
-		if ( isset( $this->data->where->compare ) && in_array( $this->data->where->compare, $operators, true ) ) {
-			$wherecompare = esc_sql( (string) $this->data->where->compare );
-		} else {
-			$wherecompare = '=';
+		$wh = array();
+		foreach ( $wheres as $where ) {
+			$allow_wherekeys = array( 'id', 'date', 'title' );
+			if ( isset( $where->key ) && in_array( $where->key, $allow_wherekeys, true ) ) {
+				$wherekey = esc_sql( $where->key );
+			} else {
+				$wherekey = false;
+			}
+
+			if ( isset( $where->value ) ) {
+				$whereval = esc_sql( (string) $where->value );
+			} else {
+				$whereval = false;
+			}
+
+			$operators = array( '=', '>', '<', '>=', '<=', '<>', '!=' );
+			if ( isset( $where->compare ) && in_array( $where->compare, $operators, true ) ) {
+				$wherecompare = esc_sql( (string) $where->compare );
+			} else {
+				$wherecompare = '=';
+			}
+
+			if ( $wherekey && $whereval && $wherecompare ) {
+				$wh[] = $wpdb->prepare( $wherekey . ' ' . $wherecompare . ' %s', $whereval ); // phpcs:ignore
+			}
+		}
+		if ( ! empty( $wh ) ) {
+			$whstr = implode( ' ' . $order . ' ', $wh );
 		}
 
 		$allow_orderbys = array( 'date', 'id', 'title' );
@@ -107,11 +128,10 @@ class Google_Spreadsheet_To_DB_Query {
 			$offset = 0;
 		}
 
-		if ( $wherekey && $whereval && $wherecompare ) {
-			$sql      = 'SELECT * FROM ' . $table . ' WHERE ' . $wherekey . ' ' . $wherecompare . ' %s ORDER BY ' . $orderby . ' ' . $order . ' LIMIT %d OFFSET %d';
+		if ( $whstr ) {
+			$sql      = 'SELECT * FROM ' . $table . ' WHERE ' . $whstr . '  ORDER BY ' . $orderby . ' ' . $order . ' LIMIT %d OFFSET %d';
 			$prepared = $wpdb->prepare(
 				$sql, // phpcs:ignore
-				$whereval,
 				$limit,
 				$offset
 			);
