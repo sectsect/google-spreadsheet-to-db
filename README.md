@@ -103,10 +103,10 @@ new Google_Spreadsheet_To_DB_Query();
 | where     |          |         | array  |                                            | `array()`     |
 |           | relation |         | string | `AND` or `OR`                              |  `AND`        |
 |           | [array]  |         | array  |                                            |               |
-|           |          | key     | string | `id` or `date`                             |  `false`      |
+|           |          | key     | string | `id` or `date` or `worksheet_name` or `sheet_name` or `title` |  `false`      |
 |           |          | value   | int    | e.g. `3` / `2020-09-01 12:00:00`           |  `false`      |
 |           |          | compare | string | e.g. `=`  `>`  `<`  `>=`  `<=`  `<>`  `!=` |  `=`          |
-| orderby   |          |         | string | `date` or `id`                             | `date`        |
+| orderby   |          |         | string | `id` or `date` or `worksheet_name` or `sheet_name` or `title` | `date`        |
 | order     |          |         | string | `DESC` or `ASC`                            | `DESC`        |
 | limit     |          |         | int    | number of row to get                       | All Data<br>:memo: You can also use `-1` to get all data. |
 | offset    |          |         | int    | number of row to displace or pass over     | `0`           |
@@ -135,13 +135,13 @@ $args = array(
 $sheets = new Google_Spreadsheet_To_DB_Query( $args );
 $rows = $sheets->getrow();
 foreach ( $rows as $row ) {
-  $id = $row->id;
+  $id   = $row->id;
   $date = $row->date;
-  $val = json_decode( $row->value );
+  $val  = json_decode( $row->value );
 }
 ```
 
-#### Get the row with specified ID
+#### Get the row with specific ID
 ```php
 $args = array(
   'where' => array(
@@ -151,16 +151,25 @@ $args = array(
 	)
   ),
 );
-$sheets = new Google_Spreadsheet_To_DB_Query( $args );
-$rows = $sheets->getrow();
-foreach ( $rows as $row ) {
-  $id = $row->id;
-  $date = $row->date;
-  $val = json_decode( $row->value );
-}
 ```
 
-#### Gets the rows larger than or equal the specified datetime
+#### Get 3 rows with specific Worksheet ordered by ID
+```php
+$args = array(
+  'orderby' => 'id',
+  'order'   => 'ASC',
+  'limit'   => 3,
+  'where'   => array(
+    array(
+      'key'     => 'worksheet_name',
+      'value'   => 'My Spreadsheet',
+      'compare' => '='
+    ),
+  ),
+);
+```
+
+#### Get the rows larger than or equal the specified datetime
 ```php
 $args = array(
   'where' => array(
@@ -171,16 +180,9 @@ $args = array(
     )
   ),
 );
-$sheets = new Google_Spreadsheet_To_DB_Query( $args );
-$rows = $sheets->getrow();
-foreach ( $rows as $row ) {
-  $id = $row->id;
-  $date = $row->date;
-  $val = json_decode( $row->value );
-}
 ```
 
-#### Gets the rows with multiple conditions
+#### Get the rows with multiple conditions
 ```php
 $args = array(
   'orderby' => 'id',
@@ -201,13 +203,6 @@ $args = array(
     ),
   ),
 );
-$sheets = new Google_Spreadsheet_To_DB_Query( $args );
-$rows = $sheets->getrow();
-foreach ( $rows as $row ) {
-  $id = $row->id;
-  $date = $row->date;
-  $val = json_decode( $row->value );
-}
 ```
 
 ## Notes
@@ -224,6 +219,8 @@ foreach ( $rows as $row ) {
   <tr>
   <th>id</th>
   <th>date</th>
+  <th>worksheet_name</th>
+  <th>sheet_name</th>
   <th>title</th>
   <th>value</th>
   </tr>
@@ -231,8 +228,10 @@ foreach ( $rows as $row ) {
   <tbody>
   <tr>
   <td>1</td>
-  <td>2017-12-31 00:00:00</td>
+  <td>2020-10-01 00:00:00</td>
   <td>My Spreadsheet</td>
+  <td>Sheet1</td>
+  <td>Data-01</td>
   <td><code style="word-break: break-all;">{"area":{"a":["brooklyn","bronx","Queens","Manhattan"],"b":["brooklyn","bronx","Queens","Manhattan"]}}</code></td>
   </tr></tbody></table>
 

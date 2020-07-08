@@ -74,7 +74,7 @@ class Google_Spreadsheet_To_DB_Query {
 
 		$wh = array();
 		foreach ( $wheres as $where ) {
-			$allow_wherekeys = array( 'id', 'date', 'title' );
+			$allow_wherekeys = array( 'id', 'date', 'worksheet_name', 'sheet_name', 'title' );
 			if ( isset( $where->key ) && in_array( $where->key, $allow_wherekeys, true ) ) {
 				$wherekey = esc_sql( $where->key );
 			} else {
@@ -102,7 +102,7 @@ class Google_Spreadsheet_To_DB_Query {
 			$whstr = implode( ' ' . $order . ' ', $wh );
 		}
 
-		$allow_orderbys = array( 'date', 'id', 'title' );
+		$allow_orderbys = array( 'id', 'date', 'worksheet_name', 'sheet_name', 'title' );
 		if ( isset( $this->data->orderby ) && in_array( $this->data->orderby, $allow_orderbys, true ) ) {
 			$orderby = esc_sql( $this->data->orderby );
 		} else {
