@@ -217,7 +217,15 @@
 		<dl class="acorddion" data-id="<?php echo $row->id; ?>">
 			<dt>
 				<span class="ss2db_logo"></span>
-				<span class="ss2db_id"><?php echo $row->id; ?></span>
+				<span class="ss2db_id">
+					<?php echo $row->id; ?>
+				</span>
+				<span class="ss2db_worksheet_name">
+					<?php echo $row->worksheet_name; ?>
+				</span>
+				<span class="ss2db_sheet_name">
+					<?php echo $row->sheet_name; ?>
+				</span>
 				<span class="ss2db_title">
 					<?php
 					if ( $row->title ) {

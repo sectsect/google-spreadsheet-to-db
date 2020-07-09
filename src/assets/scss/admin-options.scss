@@ -120,8 +120,13 @@
           text-align: center;
           border-right: 1px solid #eee;
         }
+        &.ss2db_worksheet_name,
+        &.ss2db_sheet_name {
+          width: 30%;
+          border-right: 1px solid #eee;
+        }
         &.ss2db_title {
-          width: 100%;
+          width: 70%;
           border-right: 1px solid #eee;
         }
         &.ss2db_date {
