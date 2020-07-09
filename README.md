@@ -55,10 +55,10 @@ Hit send. That’s it! :ok_hand:
   - Data format to be stored in database
     - json_encode
     - json_encode (JSON_UNESCAPED_UNICODE)
+4. Click the `Import from Google Spreadsheet` button. :tada:
   - Spreadsheet name
   - Single Sheet name
   - Title (Optional)
-4. Click the `Import from Google Spreadsheet` button. :tada:
 
 ## Filters
 
@@ -197,9 +197,9 @@ $args = array(
       'compare' => '>='
     ),
     array(
-      'key'     => 'id',
-      'value'   => '33',
-      'compare' => '>='
+      'key'     => 'worksheet_name',
+      'value'   => 'My Spreadsheet',
+      'compare' => '='
     ),
   ),
 );
