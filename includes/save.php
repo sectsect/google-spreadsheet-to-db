@@ -69,7 +69,7 @@ function get_value_google_spreadsheet( $worksheetname, $sheetname ) {
 		$returnrows[] = $entry->getValues();
 	}
 
-	$array = apply_filters( 'google_ss2db_before_save', $returnrows );
+	$array = apply_filters( 'google_ss2db_before_save', $returnrows, $worksheetname, $sheetname );
 
 	return $array;
 }
