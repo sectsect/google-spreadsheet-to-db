@@ -1,100 +1,110 @@
 msgid ""
 msgstr ""
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Project-Id-Version: Google Spreadsheet to DB\n"
-"POT-Creation-Date: 2020-07-07 05:01+0900\n"
-"PO-Revision-Date: 2020-07-07 05:01+0900\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2020-07-15 01:10+0900\n"
+"PO-Revision-Date: 2020-07-15 01:16+0900\n"
 "Language-Team: \n"
-"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.4\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: google-spreadsheet-to-db.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
 "_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Last-Translator: \n"
+"Language: ja\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
+#: admin/class-recursivetable.php:34
+msgid "General Settings"
+msgstr "一般設定"
+
 #: admin/class-recursivetable.php:43
 msgid "The absolute path to <code>client_secret.json</code>"
-msgstr ""
+msgstr "パス: client_secret.json"
 
 #: admin/class-recursivetable.php:52
 msgid ""
 "Warning: You must define constants for client_secret.json in the <code>wp-"
 "config.php</code> file."
 msgstr ""
+"Warning: <code>wp-config.php</code> 内に client_secret.json の "
+"<code>define()</code> を定義する必要があります。"
 
 #: admin/class-recursivetable.php:60
 msgid "Data format"
-msgstr ""
+msgstr "データフォーマット"
 
 #: admin/class-recursivetable.php:95
 msgid "Spreadsheet saved"
-msgstr ""
+msgstr "保存しました"
 
 #: admin/class-recursivetable.php:100
 msgid "Saving the spreadsheet failed"
-msgstr ""
+msgstr "スプレッドシートの保存に失敗しました"
 
 #: admin/class-recursivetable.php:106 admin/class-recursivetable.php:138
 msgid "Import from Google Spreadsheet"
-msgstr ""
+msgstr "インポート"
 
 #: admin/class-recursivetable.php:111
 msgid "Spreadsheet name"
-msgstr ""
+msgstr "スプレッドシート名"
 
 #: admin/class-recursivetable.php:119
 msgid "Single Sheet name"
-msgstr ""
+msgstr "（シングル）シート名"
 
 #: admin/class-recursivetable.php:127
 msgid "Title"
-msgstr ""
+msgstr "タイトル"
 
 #: admin/class-recursivetable.php:135
 msgid "This process may takes a few minutes."
-msgstr ""
+msgstr "この処理には数分かかる場合があります。"
 
 #: google-spreadsheet-to-db.php:28
 msgid ""
 "Error: plugin \"Google Spreadsheet to DB\" requires a newer version of PHP "
 "to be running."
 msgstr ""
+"Error: “Google Spreadsheet to DB” を実行するには、新しいバージョンのPHPが必"
+"要です。"
 
 #: google-spreadsheet-to-db.php:29
 msgid "Minimal version of PHP required: "
-msgstr ""
+msgstr "最低限のPHPのバージョン: "
 
 #: google-spreadsheet-to-db.php:30
 msgid "Your server's PHP version: "
-msgstr ""
+msgstr "サーバーのPHPバージョン: "
 
 #. Plugin Name of the plugin/theme
 msgid "Google Spreadsheet to DB"
-msgstr ""
+msgstr "Google Spreadsheet to DB"
 
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/sectsect/google-spreadsheet-to-db"
-msgstr ""
+msgstr "https://github.com/sectsect/google-spreadsheet-to-db"
 
 #. Description of the plugin/theme
 msgid ""
 "Pulls Google Spreadsheet data via Google’s API and saves it in your "
 "WordPress database"
 msgstr ""
+"Pulls Google Spreadsheet data via Google’s API and saves it in your "
+"WordPress database"
 
 #. Author of the plugin/theme
 msgid "SECT INTERACTIVE AGENCY"
-msgstr ""
+msgstr "SECT INTERACTIVE AGENCY"
 
 #. Author URI of the plugin/theme
 msgid "https://www.ilovesect.com/"
-msgstr ""
+msgstr "https://www.ilovesect.com/"

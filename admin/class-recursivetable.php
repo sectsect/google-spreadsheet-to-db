@@ -31,7 +31,7 @@
 	<section>
 		<form method="post" action="options.php">
 			<hr />
-			<h3>General Settings</h3>
+			<h3><?php _e( 'General Settings', 'google_ss2db' ); ?></h3>
 			<?php
 			settings_fields( 'google_ss2db-settings-group' );
 			do_settings_sections( 'google_ss2db-settings-group' );
