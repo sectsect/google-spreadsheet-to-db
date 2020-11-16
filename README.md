@@ -1,7 +1,7 @@
 # <img src="https://github-sect.s3-ap-northeast-1.amazonaws.com/logo.svg" width="28" height="auto"> Google Spreadsheet to DB
 [![Build Status](https://travis-ci.org/sectsect/google-spreadsheet-to-db.svg?branch=master)](https://travis-ci.org/sectsect/google-spreadsheet-to-db) [![Latest Stable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v/stable)](https://packagist.org/packages/sectsect/google-spreadsheet-to-db)  [![License](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/license)](https://packagist.org/packages/sectsect/google-spreadsheet-to-db)
 
-### "Google Spreadsheet to DB" pulls Google Spreadsheet data via Google’s API and saves it in your wordpress database.
+### "Google Spreadsheet to DB" pulls Google Spreadsheet data via Google’s API and saves it in your WordPress database.
 
 ## Requirements
 
@@ -48,7 +48,7 @@ Hit send. That’s it! :ok_hand:
 
 1. Set the `define()` constants for client_secret.json in <code>wp-config.php</code>.
   ```php
-  define('GOOGLE_SS2DB_CLIENT_SECRET_PATH', '/path/to/your/client_secret.json');
+  define( 'GOOGLE_SS2DB_CLIENT_SECRET_PATH', '/path/to/your/client_secret.json' );
   ```
 2. Go to `Settings` -> `Google Spreadsheet to DB` on your WordPress Admin-Panel.
 3. Set the following values and save it once.
@@ -124,11 +124,11 @@ new Google_Spreadsheet_To_DB_Query();
 #### Get all rows
 ```php
 $sheets = new Google_Spreadsheet_To_DB_Query();
-$rows = $sheets->getrow();
+$rows   = $sheets->getrow();
 foreach ( $rows as $row ) {
-  $id = $row->id;
+  $id   = $row->id;
   $date = $row->date;
-  $val = json_decode( $row->value );
+  $val  = json_decode( $row->value );
 }
 ```
 
@@ -141,7 +141,7 @@ $args = array(
   'offset'  => 3,
 );
 $sheets = new Google_Spreadsheet_To_DB_Query( $args );
-$rows = $sheets->getrow();
+$rows   = $sheets->getrow();
 foreach ( $rows as $row ) {
   $id   = $row->id;
   $date = $row->date;
