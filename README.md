@@ -1,5 +1,5 @@
 # <img src="https://github-sect.s3-ap-northeast-1.amazonaws.com/logo.svg" width="28" height="auto"> Google Spreadsheet to DB
-[![Build Status](https://travis-ci.org/sectsect/google-spreadsheet-to-db.svg?branch=master)](https://travis-ci.org/sectsect/google-spreadsheet-to-db) [![Latest Stable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v/stable)](https://packagist.org/packages/sectsect/google-spreadsheet-to-db)  [![License](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/license)](https://packagist.org/packages/sectsect/google-spreadsheet-to-db)
+[![Build Status](https://travis-ci.com/sectsect/google-spreadsheet-to-db.svg?branch=master)](https://travis-ci.com/sectsect/google-spreadsheet-to-db) [![Latest Stable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v/stable)](https://packagist.org/packages/sectsect/google-spreadsheet-to-db)  [![License](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/license)](https://packagist.org/packages/sectsect/google-spreadsheet-to-db)
 
 ### "Google Spreadsheet to DB" pulls Google Spreadsheet data via Google’s API and saves it in your WordPress database.
 
