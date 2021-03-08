@@ -27,7 +27,7 @@ export const deleteData = (): void => {
         showLoaderOnConfirm: true,
         allowOutsideClick: false,
         preConfirm() {
-          return new Promise(resolve => {
+          return new Promise<string>(resolve => {
             jQuery
               .ajax({
                 url: `${window.google_ss2db_data.plugin_dir_url}includes/delete.php`,
@@ -72,7 +72,7 @@ export const deleteData = (): void => {
                     title: 'Something went wrong!',
                   });
                 }
-                resolve();
+                resolve('resolved');
               });
           });
         },
