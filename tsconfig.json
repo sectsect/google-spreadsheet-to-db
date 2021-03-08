@@ -6,13 +6,15 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     // "noImplicitThis": false,
     "target": "esnext",
+    "tsBuildInfoFile": "./.tsbuildinfo",
     "skipLibCheck": true,
     // "types": [
     //   "react-native"
     // ]
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "webpack.config.js"
   ],
   "exclude": [
     "assets",
