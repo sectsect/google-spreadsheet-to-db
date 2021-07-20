@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "09967929d1db6976321e22fb8a3864c8",
+    "content-hash": "b84b98ed4865d2f66d6e3ec1548a85cc",
     "packages": [
         {
             "name": "asimlqt/php-google-spreadsheet-client",
@@ -183,16 +183,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.201.1",
+            "version": "v0.204.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "ee1072221acf7c32e3de9b18e11fec3ab23ec38f"
+                "reference": "c718661b22f9b92e0d89520dbb8f16c62307885a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/ee1072221acf7c32e3de9b18e11fec3ab23ec38f",
-                "reference": "ee1072221acf7c32e3de9b18e11fec3ab23ec38f",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/c718661b22f9b92e0d89520dbb8f16c62307885a",
+                "reference": "c718661b22f9b92e0d89520dbb8f16c62307885a",
                 "shasum": ""
             },
             "require": {
@@ -221,9 +221,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.201.1"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.204.0"
             },
-            "time": "2021-06-27T11:20:22+00:00"
+            "time": "2021-07-18T11:18:23+00:00"
         },
         {
             "name": "google/auth",
@@ -517,16 +517,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.2.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1cb1cde8e8dd0f70cc0fe51354a59acad9302084"
+                "reference": "9738e495f288eec0b187e310b7cdbbb285777dbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1cb1cde8e8dd0f70cc0fe51354a59acad9302084",
-                "reference": "1cb1cde8e8dd0f70cc0fe51354a59acad9302084",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/9738e495f288eec0b187e310b7cdbbb285777dbe",
+                "reference": "9738e495f288eec0b187e310b7cdbbb285777dbe",
                 "shasum": ""
             },
             "require": {
@@ -545,7 +545,7 @@
                 "php-amqplib/php-amqplib": "~2.4",
                 "php-console/php-console": "^3.1.3",
                 "phpspec/prophecy": "^1.6.1",
-                "phpstan/phpstan": "^0.12.59",
+                "phpstan/phpstan": "^0.12.91",
                 "phpunit/phpunit": "^8.5",
                 "predis/predis": "^1.1",
                 "rollbar/rollbar": "^1.3",
@@ -597,7 +597,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.2.0"
+                "source": "https://github.com/Seldaek/monolog/tree/2.3.1"
             },
             "funding": [
                 {
@@ -609,7 +609,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-14T13:15:25+00:00"
+            "time": "2021-07-14T11:56:39+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
