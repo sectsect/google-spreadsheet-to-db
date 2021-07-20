@@ -97,9 +97,8 @@ add_filter( 'google_ss2db_after_save', function ( $array ) {
 
 ```
 
-## Functions
+## APIs
 
-### Get the rows
 ```php
 new Google_Spreadsheet_To_DB_Query();
 ```
