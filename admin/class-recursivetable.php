@@ -132,7 +132,7 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="hasheaderrow"><?php _e( 'Top Header Row', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
+							<label for="hasheaderrow"><?php _e( 'Top Header Row', 'google_ss2db' ); ?></label>
 						</th>
 						<td>
 							<input type="checkbox" id="hasheaderrow" name="hasheaderrow" value="1" checked>
