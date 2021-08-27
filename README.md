@@ -94,17 +94,14 @@ add_filter( 'google_ss2db_before_save', function ( $row, $worksheetid, $workshee
     // $result          = $row['result'];
     
     // Do something...
-    if ( 'My Spreadsheet' === $worksheetname ) {
-      $return = [];
-      foreach ( $row as $val ) {
-        $return[ $val['Date'] ] = $val;
-      }
-    } else {
-      $return = $raw;
+	$return = [];
+    foreach ( $row as $val ) {
+      $return[ $val['Date'] ] = $val;
     }
-
-    return $return;
+  } else {
+    $return = $raw;
   }
+  
   return $return;
 }, 10, 4 );
 ```
