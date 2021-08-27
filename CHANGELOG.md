@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.0.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v3.0.0) (2021-08-27)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v2.6.0...v3.0.0)
+
+**Merged pull requests:**
+
+- Bump phpseclib/phpseclib from 2.0.29 to 2.0.31 in /functions/composer [\#1](https://github.com/sectsect/google-spreadsheet-to-db/pull/1) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v2.6.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v2.6.0) (2021-03-08)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v2.5.3...v2.6.0)
