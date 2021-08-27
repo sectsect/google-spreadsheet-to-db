@@ -1,7 +1,7 @@
 # <img src="https://github-sect.s3-ap-northeast-1.amazonaws.com/logo.svg" width="18" height="auto"> Google Spreadsheet to DB
 [![Build Status](https://travis-ci.com/sectsect/google-spreadsheet-to-db.svg?branch=master)](https://travis-ci.com/sectsect/google-spreadsheet-to-db) [![Latest Stable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v)](//packagist.org/packages/sectsect/google-spreadsheet-to-db)  [![Total Downloads](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/downloads)](//packagist.org/packages/sectsect/google-spreadsheet-to-db) [![Latest Unstable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v/unstable)](//packagist.org/packages/sectsect/google-spreadsheet-to-db) [![License](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/license)](//packagist.org/packages/sectsect/google-spreadsheet-to-db)
 
-### "Google Spreadsheet to DB" pulls Google Sheet data with [Google Sheets API](https://developers.google.com/sheets/api) and saves it to your WordPress database. You can also filter that data before saving.
+### "Google Spreadsheet to DB" pulls Google Sheet data with [Google Sheets API](https://developers.google.com/sheets/api) (v4) and saves it to your WordPress database. You can also filter that data before saving.
 
 ## Requirements
 
@@ -67,13 +67,13 @@ Hit send. That’s it! :ok_hand:
 You can edit the array got from Google API with `add_filter( 'google_ss2db_before_save', $function_to_add )` in your functions.php before saving to database.
 
 ```php
-add_filter( 'google_ss2db_before_save', function ( $raw, $worksheetname, $sheetname ) {
+add_filter( 'google_ss2db_before_save', function ( $row, $worksheetid, $worksheetname, $sheetname ) {
   // Example
   if ( $worksheetname === 'My Spreadsheet' && $sheetname === 'Sheet1' ) {
     // Do something.
     $return = $something;
   } else {
-    $return = $raw;
+    $return = $row;
   }
 
   return $return;
@@ -82,19 +82,31 @@ add_filter( 'google_ss2db_before_save', function ( $raw, $worksheetname, $sheetn
 
 And also use `add_filter('google_ss2db_after_save', $return_array )` to perform any processing with the return value.
 ```php
-add_filter( 'google_ss2db_after_save', function ( $array ) {
-  $id         = $array['id'];
-  $date       = $array['date'];
-  $title      = $array['title'];
-  $value      = $array['value'];
-  $work_sheet = $array['worksheet_name'];
-  $sheet_name = $array['sheet_name'];
-  $result     = $array['result'];
-  // Do something...
+add_filter( 'google_ss2db_before_save', function ( $row, $worksheetid, $worksheetname, $sheetname ) {
+  if ( 'My Spreadsheet' === $worksheetname ) {
+    // $id              = $row['id'];
+    // $date            = $row['date'];
+    // $title           = $row['title'];
+    // $value           = $row['value'];
+    // $work_sheet_id   = $row['worksheet_id'];
+    // $work_sheet_name = $row['worksheet_name'];
+    // $sheet_name      = $row['sheet_name'];
+    // $result          = $row['result'];
+    
+    // Do something...
+    if ( 'My Spreadsheet' === $worksheetname ) {
+      $return = [];
+      foreach ( $row as $val ) {
+        $return[ $val['Date'] ] = $val;
+      }
+    } else {
+      $return = $raw;
+    }
 
-  return $array;
-} );
-
+    return $return;
+  }
+  return $return;
+}, 10, 4 );
 ```
 
 ## APIs
@@ -110,10 +122,10 @@ new Google_Spreadsheet_To_DB_Query();
 | where     |          |         | array  |                                            | `array()`     |
 |           | relation |         | string | `AND` or `OR`                              |  `AND`        |
 |           | [array]  |         | array  |                                            |               |
-|           |          | key     | string | `id` or `date` or `worksheet_name` or `sheet_name` or `title` |  `false`      |
+|           |          | key     | string | `id` or `date` or `worksheet_id` or `worksheet_name` or `sheet_name` or `title` |  `false`      |
 |           |          | value   | int    | e.g. `3` / `2020-09-01 12:00:00`           |  `false`      |
 |           |          | compare | string | e.g. `=`  `>`  `<`  `>=`  `<=`  `<>`  `!=` |  `=`          |
-| orderby   |          |         | string | `id` or `date` or `worksheet_name` or `sheet_name` or `title` | `date`        |
+| orderby   |          |         | string | `id` or `date` or `worksheet_id` or `worksheet_name` or `sheet_name` or `title` | `date`        |
 | order     |          |         | string | `DESC` or `ASC`                            | `DESC`        |
 | limit     |          |         | int    | number of row to get                       | All Data<br>:memo: You can also use `-1` to get all data. |
 | offset    |          |         | int    | number of row to displace or pass over     | `0`           |
@@ -226,6 +238,7 @@ $args = array(
   <tr>
   <th>id</th>
   <th>date</th>
+  <th>worksheet_id</th>
   <th>worksheet_name</th>
   <th>sheet_name</th>
   <th>title</th>
@@ -235,7 +248,8 @@ $args = array(
   <tbody>
   <tr>
   <td>1</td>
-  <td>2020-10-01 00:00:00</td>
+  <td>2021-08-27 00:00:00</td>
+  <td>1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms</td>
   <td>My Spreadsheet</td>
   <td>Sheet1</td>
   <td>Data-01</td>

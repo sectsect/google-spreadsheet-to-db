@@ -108,10 +108,18 @@
 				<tbody>
 					<tr>
 						<th scope="row">
-							<label for="worksheetname"><?php _e( 'Spreadsheet name', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
+							<label for="worksheetid"><?php _e( 'Spreadsheet ID', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
 						</th>
 						<td>
-							<input type="text" id="worksheetname" class="regular-text" name="worksheetname" style="width: 180px;" required>
+							<input type="text" id="worksheetid" class="regular-text" name="worksheetid" style="width: 400px;" required>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="worksheetname"><?php _e( 'Spreadsheet name', 'google_ss2db' ); ?> <span style="color: #999; font-size: 10px; font-weight: normal;">(Optional)</span></label>
+						</th>
+						<td>
+							<input type="text" id="worksheetname" class="regular-text" name="worksheetname" style="width: 180px;">
 						</td>
 					</tr>
 					<tr>
@@ -120,6 +128,15 @@
 						</th>
 						<td>
 							<input type="text" id="sheetname" class="regular-text" name="sheetname" style="width: 180px;" required>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="hasheaderrow"><?php _e( 'Top Header Row', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
+						</th>
+						<td>
+							<input type="checkbox" id="hasheaderrow" name="hasheaderrow" value="1" checked>
+							<span style="font-size: 11px; color: #888"><?php _e( 'Check this if the sheet has a top header row.', 'google_ss2db' ); ?> </span>
 						</td>
 					</tr>
 					<tr>
@@ -220,13 +237,19 @@
 				<span class="ss2db_id">
 					<?php echo $row->id; ?>
 				</span>
+				<span class="ss2db_worksheet_id">
+					<?php
+					$wordsheet_id = ( isset( $row->worksheet_id ) ) ? $row->worksheet_id : '(no ID)';
+					echo $wordsheet_id;
+					?>
+				</span>
 				<span class="ss2db_worksheet_name">
 					<?php echo $row->worksheet_name; ?>
 				</span>
 				<span class="ss2db_sheet_name">
 					<?php echo $row->sheet_name; ?>
 				</span>
-				<span class="ss2db_title">
+				<span class="ss2db_title<?php if ( ! $row->title ) : ?> no_value<?php endif ?>">
 					<?php
 					if ( $row->title ) {
 						echo $row->title;

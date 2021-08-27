@@ -14,7 +14,8 @@
   },
   "include": [
     "src/**/*",
-    "webpack.config.js"
+    "webpack.config.js",
+    ".eslintrc.js"
   ],
   "exclude": [
     "assets",

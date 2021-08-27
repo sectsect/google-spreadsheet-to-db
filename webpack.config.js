@@ -10,7 +10,7 @@ const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-web
 // const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const { WebpackSweetEntry } = require('@sect/webpack-sweet-entry');
 const SizePlugin = require('size-plugin');
-const NotifierPlugin = require('friendly-errors-webpack-plugin');
+const NotifierPlugin = require('@soda/friendly-errors-webpack-plugin');
 const notifier = require('node-notifier');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -66,7 +66,9 @@ const getJSPlugins = env => {
   if (isDev(env)) {
     plugins.push(
       new ForkTsCheckerWebpackPlugin({
-        eslint: true,
+        eslint: {
+          files: './src/assets/ts/**/*',
+        },
       }),
     );
     plugins.push(
