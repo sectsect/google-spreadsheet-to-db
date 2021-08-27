@@ -249,7 +249,13 @@
 				<span class="ss2db_sheet_name">
 					<?php echo $row->sheet_name; ?>
 				</span>
-				<span class="ss2db_title<?php if ( ! $row->title ) : ?> no_value<?php endif ?>">
+				<span class="ss2db_title
+				<?php
+				if ( ! $row->title ) {
+					echo ' no_value';
+				}
+				?>
+				">
 					<?php
 					if ( $row->title ) {
 						echo $row->title;

@@ -35,7 +35,7 @@ if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'google_s
 /**
  * Detect to have specific spreadsheet.
  *
- * @param  array $sheets_list "Array of Spreadsheets".
+ * @param  array  $sheets_list "Array of Spreadsheets".
  * @param  string $sheet_name "Spreadsheet name".
  * @return boolean "description".
  */
@@ -50,6 +50,7 @@ function exist_sheet( $sheets_list, $sheet_name ) {
 
 /**
  * Returns an authorized API client.
+ *
  * @return Google_Client the authorized client object
  */
 function get_client() {
@@ -71,6 +72,7 @@ function get_client() {
  * @param  string $worksheetid "Spreadsheet ID".
  * @param  string $worksheetname "Spreadsheet name".
  * @param  string $sheetname "SingleSheet name on Spreadsheet".
+ * @param  string $hasheaderrow "Spreadsheet has a top header row?".
  * @return array "description".
  */
 function get_value_google_spreadsheet( $worksheetid, $worksheetname, $sheetname, $hasheaderrow ) {
@@ -78,13 +80,13 @@ function get_value_google_spreadsheet( $worksheetid, $worksheetname, $sheetname,
 	$client  = get_client();
 	$service = new Google_Service_Sheets( $client );
 
-	// Prints the names and majors of students in a sample spreadsheet:
-	// https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+	// Prints the names and majors of students in a sample spreadsheet.
+	// https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit .
 	$spreadsheet_id = $worksheetid;
 	$range          = $sheetname;
 
-	$response  = $service->spreadsheets->get( $spreadsheet_id );
-	$sheets    = $response->getSheets();
+	$response = $service->spreadsheets->get( $spreadsheet_id );
+	$sheets   = $response->getSheets();
 	if ( exist_sheet( $sheets, $sheetname ) ) {
 		$response = $service->spreadsheets_values->get( $spreadsheet_id, $range );
 		$values   = $response->getValues();
@@ -108,7 +110,6 @@ function get_value_google_spreadsheet( $worksheetid, $worksheetname, $sheetname,
 					}
 					$i++;
 				}
-				// var_dump($object);
 			} else {
 				$object = $values;
 			}
@@ -116,7 +117,6 @@ function get_value_google_spreadsheet( $worksheetid, $worksheetname, $sheetname,
 	} else {
 		$object = false;
 	}
-	// var_dump($object);
 
 	$array = apply_filters( 'google_ss2db_before_save', $object, $worksheetid, $worksheetname, $sheetname );
 
