@@ -46,6 +46,7 @@ We now have a big chunk of authentication information, including what Google cal
 Grab the value of `client_email` from your `client_secret.json`, and head back to your spreadsheet. Click the Share button in the top right, and paste the `client_email` value into the field to give it edit rights.  
 Hit send. That’s it! :ok_hand:
 
+
 1. Set the `define()` constants for client_secret.json in <code>wp-config.php</code>.
   ```php
   define( 'GOOGLE_SS2DB_CLIENT_SECRET_PATH', '/path/to/your/client_secret.json' );
@@ -56,8 +57,10 @@ Hit send. That’s it! :ok_hand:
     - json_encode
     - json_encode (JSON_UNESCAPED_UNICODE)
 4. Click the `Import from Google Spreadsheet` button. :tada:
-  - Spreadsheet name
+  - Spreadsheet ID
+  - Spreadsheet name (Optional)
   - Single Sheet name
+  - Top Header Row
   - Title (Optional)
 
 ## Filters
@@ -82,28 +85,25 @@ add_filter( 'google_ss2db_before_save', function ( $row, $worksheetid, $workshee
 
 And also use `add_filter('google_ss2db_after_save', $return_array )` to perform any processing with the return value.
 ```php
-add_filter( 'google_ss2db_before_save', function ( $row, $worksheetid, $worksheetname, $sheetname ) {
+add_filter( 'google_ss2db_after_save', function ( $array ) {
   if ( 'My Spreadsheet' === $worksheetname ) {
-    // $id              = $row['id'];
-    // $date            = $row['date'];
-    // $title           = $row['title'];
-    // $value           = $row['value'];
-    // $work_sheet_id   = $row['worksheet_id'];
-    // $work_sheet_name = $row['worksheet_name'];
-    // $sheet_name      = $row['sheet_name'];
-    // $result          = $row['result'];
+    // $id              = $array['id'];
+    // $date            = $array['date'];
+    // $title           = $array['title'];
+    // $value           = $array['value'];
+    // $work_sheet_id   = $array['worksheet_id'];
+    // $work_sheet_name = $array['worksheet_name'];
+    // $sheet_name      = $array['sheet_name'];
+    // $result          = $array['result'];
     
     // Do something...
-	$return = [];
-    foreach ( $row as $val ) {
-      $return[ $val['Date'] ] = $val;
-    }
+    $return = $something;
   } else {
-    $return = $raw;
+    $return = $array;
   }
-  
+
   return $return;
-}, 10, 4 );
+} );
 ```
 
 ## APIs
