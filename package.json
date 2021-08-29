@@ -99,6 +99,6 @@
     "regenerator-runtime": "^0.13.9",
     "sanitize.css": "^12.0.1",
     "select2": "^4.0.13",
-    "sweetalert2": "^10.15.5"
+    "sweetalert2": "^11.1.4"
   }
 }

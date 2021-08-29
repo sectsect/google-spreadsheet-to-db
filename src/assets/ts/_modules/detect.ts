@@ -1,8 +1,8 @@
 import isMobile from 'ismobilejs';
-import { detect } from 'detect-browser';
+import { detect as detectBrowser } from 'detect-browser';
 import Modernizr from 'modernizr';
 
-const browser = detect();
+const browser = detectBrowser();
 
 type Versionable = number | boolean;
 
