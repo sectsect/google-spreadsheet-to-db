@@ -6,7 +6,6 @@ declare global {
     google_ss2db_data: GoogleSS2dbData;
   }
 }
-declare let jQuery: any;
 
 interface GoogleSS2dbData {
   nonce: string;
@@ -49,49 +48,52 @@ export const deleteData = (): void => {
       });
   };
 
-  jQuery('.acorddion .ss2db_delete').on('click', (e: { currentTarget: HTMLElement }) => {
-    const theid: string = jQuery(e.currentTarget).closest('dl').attr('data-id');
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'OK!',
-      showLoaderOnConfirm: true,
-      allowOutsideClick: false,
-      preConfirm: () => {
-        return asyncPreConfirm(theid);
-      },
-    }).then(result => {
-      // console.log(result);
-      if (result.isConfirmed) {
-        if (result.value) {
-          const ele: JQuery = jQuery(`.acorddion[data-id='${result.value?.id}']`);
-          jQuery
-            .when(
-              ele.stop(true, true).animate(
-                {
-                  height: '0',
-                  margin: '0',
-                },
-                300,
-              ),
-            )
-            .done(() => {
-              setTimeout(() => {
-                ele.remove();
-              }, 600);
+  jQuery('.acorddion .ss2db_delete').on('click', e => {
+    const theid = jQuery(e.currentTarget).closest('dl').attr('data-id');
+
+    if (theid) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'OK!',
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: () => {
+          return asyncPreConfirm(theid);
+        },
+      }).then(result => {
+        // console.log(result);
+        if (result.isConfirmed) {
+          if (result.value) {
+            const ele: JQuery = jQuery(`.acorddion[data-id='${result.value?.id}']`);
+            jQuery
+              .when(
+                ele.stop(true, true).animate(
+                  {
+                    height: '0',
+                    margin: '0',
+                  },
+                  300,
+                ),
+              )
+              .done(() => {
+                setTimeout(() => {
+                  ele.remove();
+                }, 600);
+              });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Something went wrong!',
             });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Something went wrong!',
-          });
+          }
         }
-      }
-    });
+      });
+    }
 
     return false;
   });
