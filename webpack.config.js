@@ -19,8 +19,8 @@ const sourcePath = path.join(__dirname, 'src');
 const buildPath = path.join(__dirname, '');
 
 // For Detection Environment  @ https://webpack.js.org/api/cli/#environment-options
-const isProd = env => env && env.production;
-const isDev = env => env && env.development;
+const isProd = env => env?.production;
+const isDev = env => env?.development;
 
 // http://jonnyreeves.co.uk/2016/simple-webpack-prod-and-dev-config/
 const getJSPlugins = env => {
@@ -170,9 +170,7 @@ module.exports = env => [
           exclude: /node_modules/,
           // test: /\.(mjs|js)$/,
           // exclude: /node_modules\/(?!(rambda|quicklink)\/).*/,
-          use: [
-            { loader: 'babel-loader' },
-          ],
+          use: [{ loader: 'babel-loader' }],
         },
         // Modernizr
         {
