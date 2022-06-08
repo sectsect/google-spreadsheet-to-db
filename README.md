@@ -1,7 +1,7 @@
 # <img src="https://github-sect.s3-ap-northeast-1.amazonaws.com/logo.svg" width="18" height="auto"> Google Spreadsheet to DB
 [![Build Status](https://travis-ci.com/sectsect/google-spreadsheet-to-db.svg?branch=master)](https://travis-ci.com/sectsect/google-spreadsheet-to-db) [![Latest Stable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v)](//packagist.org/packages/sectsect/google-spreadsheet-to-db)  [![Total Downloads](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/downloads)](//packagist.org/packages/sectsect/google-spreadsheet-to-db) [![Latest Unstable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v/unstable)](//packagist.org/packages/sectsect/google-spreadsheet-to-db) [![License](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/license)](//packagist.org/packages/sectsect/google-spreadsheet-to-db)
 
-### "Google Spreadsheet to DB" pulls Google Sheet data with [Google Sheets API](https://developers.google.com/sheets/api) (v4) and saves it to your WordPress database. You can also filter that data before saving.
+### Fetch Google Sheets with [Google Sheets API](https://developers.google.com/sheets/api) (v4) and store it to your WordPress database. You can also filter that data before saving.
 
 ## Requirements
 
@@ -24,8 +24,6 @@ $ composer install
 
 ##### 3. Activate the plugin through the 'Plugins' menu in WordPress.<br>
 That's it:ok_hand:
-
-
 
 ## Settings
 
@@ -262,3 +260,8 @@ See [CHANGELOG](https://github.com/sectsect/google-spreadsheet-to-db/blob/master
 ## License
 
 See [LICENSE](https://github.com/sectsect/google-spreadsheet-to-db/blob/master/LICENSE) file.
+
+<p align="center">✌️</p>
+<p align="center">
+<sub><sup>A little project by <a href="https://github.com/sectsect">@sectsect</a></sup></sub>
+</p>
