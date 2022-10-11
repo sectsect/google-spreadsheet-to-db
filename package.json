@@ -72,7 +72,7 @@
     "stylelint-prettier": "^1.2.0",
     "stylelint-scss": "^3.21.0",
     "stylelint-webpack-plugin": "^3.0.1",
-    "svg-spritemap-webpack-plugin": "^4.3.2",
+    "svg-spritemap-webpack-plugin": "^4.5.0",
     "terser-webpack-plugin": "^5.2.4",
     "typescript": "^4.4.3",
     "webpack": "^5.53.0",
