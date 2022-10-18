@@ -261,6 +261,85 @@ See [CHANGELOG](https://github.com/sectsect/google-spreadsheet-to-db/blob/master
 
 See [LICENSE](https://github.com/sectsect/google-spreadsheet-to-db/blob/master/LICENSE) file.
 
+## Known Issues
+
+#### `Call to undefined method GuzzleHttp\Utils::chooseHandler()`
+
+- `google/apiclient` [v2.6.0](https://github.com/googleapis/google-api-php-client/releases/tag/v2.6.0) or later used inside Google Sheets API (v4) has **v7** in `guzzlehttp/guzzle` added as a dependency.
+- `guzzlehttp/guzzle` v7 throws the following error.
+  
+  ```
+  Call to undefined method GuzzleHttp\Utils::chooseHandler()
+  ```
+- So force downgrade below to v6 of `guzzlehttp/guzzle` because rollback and errors are resolved
+  ```
+  composer require guzzlehttp/guzzle:~6.0 --with-all-dependencies
+  ```
+  
+  <details>
+  <summary>OUTPUT</summary>
+
+  ```
+  % composer require guzzlehttp/guzzle:~6.0 --with-all-dependencies
+  ./composer.json has been updated
+  Running composer update guzzlehttp/guzzle --with-all-dependencies
+  Loading composer repositories with package information
+  Updating dependencies
+  Lock file operations: 3 installs, 2 updates, 3 removals
+    - Removing psr/http-client (1.0.1)
+    - Removing psr/http-factory (1.0.1)
+    - Removing symfony/deprecation-contracts (v2.5.2)
+    - Downgrading guzzlehttp/guzzle (7.5.0 => 6.5.8)
+    - Downgrading guzzlehttp/psr7 (2.4.1 => 1.9.0)
+    - Locking symfony/polyfill-intl-idn (v1.26.0)
+    - Locking symfony/polyfill-intl-normalizer (v1.26.0)
+    - Locking symfony/polyfill-php72 (v1.26.0)
+  Writing lock file
+  Installing dependencies from lock file (including require-dev)
+  Package operations: 3 installs, 2 updates, 3 removals
+    - Downloading guzzlehttp/psr7 (1.9.0)
+    - Downloading symfony/polyfill-php72 (v1.26.0)
+    - Downloading symfony/polyfill-intl-normalizer (v1.26.0)
+    - Downloading symfony/polyfill-intl-idn (v1.26.0)
+    - Downloading guzzlehttp/guzzle (6.5.8)
+    - Removing symfony/deprecation-contracts (v2.5.2)
+    - Removing psr/http-factory (1.0.1)
+    - Removing psr/http-client (1.0.1)
+    - Downgrading guzzlehttp/psr7 (2.4.1 => 1.9.0): Extracting archive
+    - Installing symfony/polyfill-php72 (v1.26.0): Extracting archive
+    - Installing symfony/polyfill-intl-normalizer (v1.26.0): Extracting archive
+    - Installing symfony/polyfill-intl-idn (v1.26.0): Extracting archive
+    - Downgrading guzzlehttp/guzzle (7.5.0 => 6.5.8): Extracting archive
+  Generating autoload files
+  8 packages you are using are looking for funding.
+  Use the `composer fund` command to find out more!
+  No security vulnerability advisories found
+
+  % composer show
+  firebase/php-jwt                 v6.3.0    A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current s...
+  google/apiclient                 v2.12.6   Client library for Google APIs
+  google/apiclient-services        v0.271.0  Client library for Google APIs
+  google/auth                      v1.23.0   Google Auth Library for PHP
+  guzzlehttp/guzzle                6.5.8     Guzzle is a PHP HTTP client library
+  guzzlehttp/promises              1.5.2     Guzzle promises library
+  guzzlehttp/psr7                  1.9.0     PSR-7 message implementation that also provides common utility methods
+  monolog/monolog                  2.8.0     Sends your logs to files, sockets, inboxes, databases and various web services
+  paragonie/constant_time_encoding v2.6.3    Constant-time Implementations of RFC 4648 Encoding (Base-64, Base-32, Base-16)
+  paragonie/random_compat          v9.99.100 PHP 5.x polyfill for random_bytes() and random_int() from PHP 7
+  phpseclib/phpseclib              3.0.16    PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.
+  psr/cache                        1.0.1     Common interface for caching libraries
+  psr/http-message                 1.0.1     Common interface for HTTP messages
+  psr/log                          1.1.4     Common interface for logging libraries
+  ralouphie/getallheaders          3.0.3     A polyfill for getallheaders.
+  symfony/polyfill-intl-idn        v1.26.0   Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions
+  symfony/polyfill-intl-normalizer v1.26.0   Symfony polyfill for intl's Normalizer class and related functions
+  symfony/polyfill-php72           v1.26.0   Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions
+  ```
+  </details>
+
+
+
+
 <p align="center">✌️</p>
 <p align="center">
 <sub><sup>A little project by <a href="https://github.com/sectsect">@sectsect</a></sup></sub>
