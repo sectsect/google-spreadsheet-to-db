@@ -7,7 +7,7 @@
  * Author URI:      https://www.ilovesect.com/
  * Text Domain:     google-spreadsheet-to-db
  * Domain Path:     /languages
- * Version:         3.0.5
+ * Version:         3.1.0
  *
  * @package         Google_Spreadsheet_to_DB
  */
