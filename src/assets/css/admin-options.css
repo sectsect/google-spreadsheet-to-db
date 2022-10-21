@@ -1,0 +1,9 @@
+/* stylelint-disable import-notation */
+
+@import '_base/settings.css';
+
+@import '../../../node_modules/select2/dist/css/select2.min.css';
+
+@import '../../../node_modules/sweetalert2/dist/sweetalert2.min.css';
+
+@import '_pages/admin-options.css';

@@ -6,11 +6,15 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     // "noImplicitThis": false,
     "target": "esnext",
+    "incremental": true,
     "tsBuildInfoFile": "./.tsbuildinfo",
     "skipLibCheck": true,
-    // "types": [
-    //   "react-native"
-    // ]
+    // "baseUrl": "src/@types",
+    "baseUrl": ".",
+    "paths": {
+      // "*": ["*"],
+      "*": ["node_modules/*", "src/@types/*"]
+    }
   },
   "include": [
     "src/**/*",

@@ -1,9 +1,3 @@
-# This file is for unifying the coding style for different editors and IDEs
-# editorconfig.org
-
-# WordPress Coding Standards
-# https://make.wordpress.org/core/handbook/coding-standards/
-
 root = true
 
 [*]
@@ -18,13 +12,13 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 
-[{*.txt,wp-config-sample.php}]
-end_of_line = crlf
-
 [*.md]
 trim_trailing_whitespace = false
-indent_size = 4
 
-[*.scss]
+[*.{scss,sass,css}]
+indent_style = space
+indent_size = 2
+
+[{Movefile,.eslintrc}]
 indent_style = space
 indent_size = 2
