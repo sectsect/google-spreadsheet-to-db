@@ -1,86 +1,101 @@
 @charset "UTF-8";
-@import '../../../node_modules/select2/src/scss/core',
-  '../../../node_modules/sweetalert2/dist/sweetalert2.min.css';
 
 #wpbody-content {
-  #field-settings {
+  & #field-settings {
     width: 820px;
     table-layout: fixed;
-    // table-layout: auto;
-    tbody {
-      tr {
-        th {
+
+    & tbody {
+      & tr {
+        & th {
           padding-left: 20px;
         }
-        td {
+
+        & td {
           padding-right: 0;
           padding-left: 0;
         }
+
         &:first-child {
-          th {
+          & th {
             padding-left: 0;
           }
         }
       }
     }
   }
-  .link-doc {
+
+  & .link-doc {
     margin-top: 20px;
-    a {
+
+    & a {
       display: inline-block;
       text-decoration: none;
-      dl {
+
+      & dl {
         display: table;
         width: 100%;
         margin: 0;
-        dt,
-        dd {
+
+        & dt,
+        & dd {
           display: table-cell;
           vertical-align: middle;
         }
-        dt {
+
+        & dt {
           width: 18px;
-          img {
+
+          & img {
             display: block;
           }
         }
-        dd {
+
+        & dd {
           padding-left: 8px;
         }
       }
     }
   }
-  section#list {
+
+  & section#list {
     margin-top: 70px;
   }
-  .pagination {
+
+  & .pagination {
     display: flex;
-    li {
+
+    & li {
       flex: 0 1 40px;
       flex-basis: 40px; /* For bug on IE11 */
       margin: 0;
       text-align: center;
       background: #fff;
       border-left: 1px solid #eee;
+
       &:first-child {
         border: none;
       }
-      a,
-      span {
+
+      & a,
+      & span {
         display: block;
         padding: 10px 0;
         text-decoration: none;
       }
-      span {
+
+      & span {
         font-weight: bold;
       }
     }
   }
-  .acorddion {
+
+  & .acorddion {
     margin: 10px 0 0;
     overflow: hidden;
     transition: all 0.3s linear;
-    dt {
+
+    & dt {
       position: relative;
       box-sizing: border-box;
       display: table;
@@ -89,7 +104,8 @@
       cursor: pointer;
       table-layout: fixed;
       background: #fff;
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 1px 0 rgb(0 0 0 / 0.1);
+
       &::after {
         position: absolute;
         top: 50%;
@@ -104,65 +120,78 @@
         transition: all 0.3s linear;
         transform: rotate(135deg);
       }
-      span {
+
+      & span {
         display: table-cell;
         padding: 10px;
         vertical-align: top;
+
         &.ss2db_logo {
           width: 25px;
-          background: url(../images/ss_logo.svg) no-repeat center center;
+          background: url('../images/ss_logo.svg') no-repeat center center;
           background-size: 15px auto;
           border-right: 1px solid #eee;
         }
+
         &.ss2db_id {
           width: 30px;
           color: #999;
           text-align: center;
           border-right: 1px solid #eee;
         }
+
         &.ss2db_worksheet_id {
           width: 270px;
           font-size: 10px;
           border-right: 1px solid #eee;
         }
+
         &.ss2db_worksheet_name,
         &.ss2db_sheet_name {
           width: 20%;
           border-right: 1px solid #eee;
         }
+
         &.ss2db_title {
           width: 20%;
           border-right: 1px solid #eee;
+
           &.no_value {
             color: #bbb;
           }
         }
+
         &.ss2db_date {
           width: 145px;
           padding: 0;
           border-right: 1px solid #eee;
-          .inner {
+
+          & .inner {
             padding: 10px 10px 10px 20px;
             font-size: 10px;
             color: #999;
+
             @media only screen and (max-width: 782px) {
               padding-left: 10px;
             }
           }
         }
+
         &.ss2db_delete {
           width: 30px;
           text-align: center;
           border-right: 1px solid #eee;
+
           &::after {
             display: inline-block;
             width: 15px;
             height: 15px;
             vertical-align: middle;
             content: '';
-            background: url(../images/trash.svg) no-repeat center center;
+            background: url('../images/trash.svg') no-repeat center center;
             background-size: 15px;
           }
+
           &.disable {
             &::after {
               opacity: 0.3;
@@ -171,21 +200,23 @@
         }
       }
     }
-    dd {
+
+    & dd {
       display: none;
       padding: 1em 0;
       margin: 0;
       font-size: 10px;
 
-      table {
+      & table {
         width: 100%;
         table-layout: fixed;
         border-spacing: 0;
         border-collapse: collapse;
         background: #fff;
-        th,
-        tr,
-        td {
+
+        & th,
+        & tr,
+        & td {
           padding: 0;
           margin: 0;
           vertical-align: middle;
@@ -193,39 +224,48 @@
           border-collapse: collapse;
           border: 1px solid #eee;
         }
-        th,
-        td {
-          span {
+
+        & th,
+        & td {
+          & span {
             display: table-cell;
             padding: 5px 10px;
           }
         }
-        th {
+
+        & th {
           width: 8.5%;
           text-align: center;
-          span {
+
+          & span {
             display: inline;
           }
         }
-        table {
+
+        & table {
           border: none;
-          th,
-          tr,
-          td {
+
+          & th,
+          & tr,
+          & td {
             border-top: none;
             border-left: none;
           }
-          tr {
+
+          & tr {
             border-right: none;
-            td {
+
+            & td {
               &:last-child {
                 border-right: none;
                 border-bottom: none;
               }
             }
+
             &:last-child {
               border-bottom: none;
-              th {
+
+              & th {
                 border-bottom: none;
               }
             }
@@ -235,7 +275,7 @@
     }
 
     &.opened {
-      dt {
+      & dt {
         &::after {
           top: 65%;
           transform: rotate(-45deg);

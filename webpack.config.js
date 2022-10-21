@@ -1,19 +1,20 @@
 const webpack = require('webpack');
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
-const TerserPlugin = require('terser-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
-// const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
+// const dotenv = require('dotenv').config();
 const { WebpackSweetEntry } = require('@sect/webpack-sweet-entry');
-const SizePlugin = require('size-plugin');
 const NotifierPlugin = require('@soda/friendly-errors-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const notifier = require('node-notifier');
+const SizePlugin = require('size-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
 const sourcePath = path.join(__dirname, 'src');
 const buildPath = path.join(__dirname, '');
@@ -36,7 +37,8 @@ const getJSPlugins = env => {
   // );
   plugins.push(
     new ESLintPlugin({
-      context: 'src/assets/ts',
+      // files: ['./src/**/*.ts'],
+      context: 'src/assets',
       extensions: ['ts', 'tsx', 'js', 'jsx'],
       fix: true,
       emitError: true,
@@ -46,12 +48,43 @@ const getJSPlugins = env => {
   // plugins.push(
   //   new SVGSpritemapPlugin(path.resolve(sourcePath, 'assets/images/svg/raw/**/*.svg'), {
   //     output: {
-  //       filename: '../../../dist/assets/images/svg/symbol.svg',
+  //       filename: '../images/svg/symbol.svg',
+  //       svg: {
+  //         attributes: {
+  //           class: 'svg-icon-lib',
+  //         },
+  //       },
   //       svgo: {
   //         plugins: [
-  //           { removeTitle: false },
-  //           { removeAttrs: { attrs: 'fill' } },
-  //           { removeStyleElement: true },
+  //           // {
+  //           //   name: 'addClassesToSVGElement',
+  //           //   params: {
+  //           //     classNames: ['svg-icon-lib'],
+  //           //   },
+  //           // },
+  //           {
+  //             name: 'removeTitle',
+  //             active: false,
+  //           },
+  //           // {
+  //           //   name: 'removeAttrs',
+  //           //   params: {
+  //           //     attrs: 'fill',
+  //           //   },
+  //           // },
+  //           {
+  //             name: 'convertStyleToAttrs',
+  //             active: true,
+  //           },
+  //           // {
+  //           //   name: 'removeStyleElement',
+  //           // },
+  //           {
+  //             name: 'inlineStyles',
+  //           },
+  //           {
+  //             name: 'cleanupEnableBackground',
+  //           },
   //         ],
   //       },
   //     },
@@ -61,15 +94,15 @@ const getJSPlugins = env => {
   //   }),
   // );
   if (isProd(env)) {
-    plugins.push(new SizePlugin());
+    plugins.push(
+      new SizePlugin({
+        writeFile: false,
+      }),
+    );
   }
   if (isDev(env)) {
     plugins.push(
-      new ForkTsCheckerWebpackPlugin({
-        eslint: {
-          files: './src/assets/ts/**/*',
-        },
-      }),
+      new ForkTsCheckerWebpackPlugin(),
     );
     plugins.push(
       new ForkTsCheckerNotifierWebpackPlugin({
@@ -108,15 +141,10 @@ const getJSPlugins = env => {
 const getCSSPlugins = env => {
   const plugins = [];
 
-  plugins.push(
-    new FixStyleOnlyEntriesPlugin({
-      silent: true,
-    }),
-  );
+  plugins.push(new RemoveEmptyScriptsPlugin());
   plugins.push(
     new StyleLintPlugin({
-      files: 'src/assets/scss/**/*.scss',
-      syntax: 'scss',
+      files: 'src/assets/css/**/*.css',
       lintDirtyModulesOnly: true,
       fix: true,
     }),
@@ -127,7 +155,11 @@ const getCSSPlugins = env => {
     }),
   );
   if (isProd(env)) {
-    plugins.push(new SizePlugin());
+    plugins.push(
+      new SizePlugin({
+        writeFile: false,
+      }),
+    );
   }
   plugins.push(
     new NotifierPlugin({
@@ -162,15 +194,24 @@ module.exports = env => [
       buildDependencies: {
         config: [__filename],
       },
+      name: isProd(env) ? `js-production` : `js-development`,
     },
     module: {
       rules: [
         {
+          // test: /\.(ts|js)$/,
           test: /\.(t|j)sx?$/,
           exclude: /node_modules/,
           // test: /\.(mjs|js)$/,
           // exclude: /node_modules\/(?!(rambda|quicklink)\/).*/,
-          use: [{ loader: 'babel-loader' }],
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: true,
+              },
+            },
+          ],
         },
         // Modernizr
         {
@@ -229,7 +270,7 @@ module.exports = env => [
     },
   },
   {
-    entry: WebpackSweetEntry(path.resolve(sourcePath, 'assets/scss/**/*.scss'), 'scss', 'scss'),
+    entry: WebpackSweetEntry(path.resolve(sourcePath, 'assets/css/**/*.css'), 'css', 'css'),
     output: {
       path: path.resolve(buildPath, 'assets/css'),
       // filename: '[name].css',
@@ -240,11 +281,12 @@ module.exports = env => [
       buildDependencies: {
         config: [__filename],
       },
+      name: isProd(env) ? `css-production` : `css-development`,
     },
     module: {
       rules: [
         {
-          test: /\.(sass|scss)$/,
+          test: /\.css$/,
           use: [
             MiniCssExtractPlugin.loader,
             {
@@ -254,7 +296,6 @@ module.exports = env => [
               },
             },
             { loader: 'postcss-loader' },
-            { loader: 'sass-loader' },
           ],
         },
       ],
