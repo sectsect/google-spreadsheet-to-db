@@ -141,8 +141,10 @@
         }
 
         &.ss2db_worksheet_id {
-          width: 270px;
+          width: 130px;
+          overflow: hidden;
           font-size: 10px;
+          font-weight: bold;
           border-right: 1px solid #eee;
         }
 

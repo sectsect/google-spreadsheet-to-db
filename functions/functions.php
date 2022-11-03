@@ -61,3 +61,16 @@ function google_ss2db_options_pagination( $paged = 1, $pages = 1, $range = 2 ) {
 		echo '</ul>';
 	}
 }
+
+/**
+ * Truncate the string (remove characters / words from the middle of the string)
+ *
+ * @param  string $str
+ * @param  number $max_chars
+ * @return string
+ */
+function google_ss2db_truncate_middle( $str, $max_chars = 16 ) {
+	$str_length = strlen( $str );
+
+	return substr_replace( $str, '...', $max_chars / 2, $str_length - $max_chars );
+}

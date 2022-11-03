@@ -240,7 +240,7 @@
 				<span class="ss2db_worksheet_id">
 					<?php
 					$wordsheet_id = ( isset( $row->worksheet_id ) ) ? $row->worksheet_id : '(no ID)';
-					echo $wordsheet_id;
+					echo google_ss2db_truncate_middle( $wordsheet_id );
 					?>
 				</span>
 				<span class="ss2db_worksheet_name">
