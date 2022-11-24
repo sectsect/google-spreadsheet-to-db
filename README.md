@@ -129,8 +129,8 @@ new Google_Spreadsheet_To_DB_Query();
 
 #### Get all rows
 ```php
-$sheets = new Google_Spreadsheet_To_DB_Query();
-$rows   = $sheets->getrow();
+$sheet = new Google_Spreadsheet_To_DB_Query();
+$rows  = $sheet->getrow();
 foreach ( $rows as $row ) {
   $id   = $row->id;
   $date = $row->date;
@@ -146,8 +146,8 @@ $args = array(
   'limit'   => 3,
   'offset'  => 3,
 );
-$sheets = new Google_Spreadsheet_To_DB_Query( $args );
-$rows   = $sheets->getrow();
+$sheet = new Google_Spreadsheet_To_DB_Query( $args );
+$rows  = $sheet->getrow();
 foreach ( $rows as $row ) {
   $id   = $row->id;
   $date = $row->date;
