@@ -67,7 +67,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "eslint-webpack-plugin": "^4.0.0",
     "fork-ts-checker-notifier-webpack-plugin": "^6.0.0",
-    "fork-ts-checker-webpack-plugin": "^8.0.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.13",
     "husky": "^8.0.3",
     "json-loader": "^0.5.7",
     "lint-staged": "^13.1.2",
