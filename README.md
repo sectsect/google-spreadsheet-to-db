@@ -5,25 +5,34 @@
 
 ## Requirements
 
-- PHP 5.5+
+- PHP 7.4 or higher
 - [Composer](https://getcomposer.org/)
 
-## Installation
+## Get Started
 
 ##### 1. Clone this Repo into your `wp-content/plugins` directory.
 ```sh
-$ cd /path-to-your/wp-content/plugins/
-$ git clone git@github.com:sectsect/google-spreadsheet-to-db.git
+cd /path-to-your/wp-content/plugins/
+git clone git@github.com:sectsect/google-spreadsheet-to-db.git
 ```
 
-##### 2. Install composer packages
+##### 2. Remove `vendor/` in `.gitignore` file.
 ```sh
-$ cd google-spreadsheet-to-db/functions/composer/
-$ composer install
+cd google-spreadsheet-to-db
+nano .gitignore
 ```
 
-##### 3. Activate the plugin through the 'Plugins' menu in WordPress.<br>
-That's it:ok_hand:
+```diff
+- vendor/
+```
+
+##### 3. Install composer packages
+```sh
+cd functions/composer/
+composer install
+```
+
+##### 4. Activate the plugin through the 'Plugins' menu in WordPress.
 
 ## Settings
 
@@ -221,7 +230,7 @@ $args = array(
 
 ## Notes
 
-* Tested on WP v4.8.0
+* Tested on WordPress v6.3.1
 
 ## Notes for Developer
 
