@@ -262,6 +262,13 @@ $args = array(
 
 * This Plugin does not hosting on the [wordpress.org](https://wordpress.org/) repo in order to prevent a flood of support requests from wide audience.
 
+## Troubleshooting
+
+> `Uncaught Error: Call to undefined method GuzzleHttp\Utils::chooseHandler()`
+
+Some of WordPress plugins or Composer packages you are using depend on HTTP client [Guzzle](https://github.com/guzzle/guzzle) **v6** (legacy).  
+You can resolve this error by updating to **v7** dependent version.
+
 ## Change log  
 
 See [CHANGELOG](https://github.com/sectsect/google-spreadsheet-to-db/blob/master/CHANGELOG.md) file.
