@@ -81,12 +81,11 @@ add_filter( 'google_ss2db_before_save', function ( $row, $worksheetid, $workshee
   // Example
   if ( $worksheetname === 'My Spreadsheet' && $sheetname === 'Sheet1' ) {
     // Do something.
-    $return = $something;
-  } else {
-    $return = $row;
+
+    return $something;
   }
 
-  return $return;
+  return $row;
 }, 10, 3 );
 ```
 
