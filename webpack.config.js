@@ -9,7 +9,7 @@ const NotifierPlugin = require('@soda/friendly-errors-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const notifier = require('node-notifier');
-const SizePlugin = require('size-plugin');
+// const SizePlugin = require('size-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -93,13 +93,13 @@ const getJSPlugins = env => {
   //     },
   //   }),
   // );
-  if (isProd(env)) {
-    plugins.push(
-      new SizePlugin({
-        writeFile: false,
-      }),
-    );
-  }
+  // if (isProd(env)) {
+  //   plugins.push(
+  //     new SizePlugin({
+  //       writeFile: false,
+  //     }),
+  //   );
+  // }
   if (isDev(env)) {
     plugins.push(
       new ForkTsCheckerWebpackPlugin(),
@@ -154,13 +154,13 @@ const getCSSPlugins = env => {
       filename: '[name].css',
     }),
   );
-  if (isProd(env)) {
-    plugins.push(
-      new SizePlugin({
-        writeFile: false,
-      }),
-    );
-  }
+  // if (isProd(env)) {
+  //   plugins.push(
+  //     new SizePlugin({
+  //       writeFile: false,
+  //     }),
+  //   );
+  // }
   plugins.push(
     new NotifierPlugin({
       onErrors: (severity, errors) => {
