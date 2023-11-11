@@ -34,7 +34,7 @@ add_action( 'admin_menu', 'google_ss2db_menu' );
  * @return void "description".
  */
 function google_ss2db_menu() {
-	$page_hook_suffix = add_options_page( 'Google Spreadsheet to DB', '<img src="' . plugins_url( 'assets/images/ss_logo.svg', dirname( __FILE__ ) ) . '" width="12" height="16" /> Google Spreadsheet to DB', 'manage_options', 'google_ss2db_menu', 'google_ss2db_options_page' );
+	$page_hook_suffix = add_options_page( 'Google Spreadsheet to DB', '<img src="' . plugins_url( 'assets/images/ss_logo.svg', __DIR__ ) . '" width="12" height="16" /> Google Spreadsheet to DB', 'manage_options', 'google_ss2db_menu', 'google_ss2db_options_page' );
 	add_action( 'admin_print_styles-' . $page_hook_suffix, 'google_ss2db_admin_styles' );
 	add_action( 'admin_print_scripts-' . $page_hook_suffix, 'google_ss2db_admin_scripts' );
 	add_action( 'admin_init', 'register_google_ss2db_settings' );
@@ -46,7 +46,7 @@ function google_ss2db_menu() {
  * @return void "description".
  */
 function google_ss2db_admin_styles() {
-	wp_enqueue_style( 'admin-options', plugin_dir_url( dirname( __FILE__ ) ) . 'assets/css/admin-options.css', array() );
+	wp_enqueue_style( 'admin-options', plugin_dir_url( __DIR__ ) . 'assets/css/admin-options.css', array() );
 }
 
 /**
@@ -55,13 +55,13 @@ function google_ss2db_admin_styles() {
  * @return void "description".
  */
 function google_ss2db_admin_scripts() {
-	wp_enqueue_script( 'google-ss2db-script', plugin_dir_url( dirname( __FILE__ ) ) . 'assets/js/admin-options.js', array( 'jquery' ), null, true );
+	wp_enqueue_script( 'google-ss2db-script', plugin_dir_url( __DIR__ ) . 'assets/js/admin-options.js', array( 'jquery' ), null, true );
 	wp_localize_script(
 		'google-ss2db-script',
 		'google_ss2db_data',
 		array(
 			'nonce'          => wp_create_nonce( 'google_ss2db' ),
-			'plugin_dir_url' => plugin_dir_url( dirname( __FILE__ ) ),
+			'plugin_dir_url' => plugin_dir_url( __DIR__ ),
 		)
 	);
 }
@@ -81,5 +81,5 @@ function register_google_ss2db_settings() {
  * @return void "description".
  */
 function google_ss2db_options_page() {
-	require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-recursivetable.php';
+	require_once plugin_dir_path( __DIR__ ) . 'admin/class-recursivetable.php';
 }

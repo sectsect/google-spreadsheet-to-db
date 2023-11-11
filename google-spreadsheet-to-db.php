@@ -62,7 +62,7 @@ register_activation_hook( __FILE__, 'activate_google_ss2db' );
  * @return void "description".
  */
 function google_ss2db_load_textdomain() {
-	load_plugin_textdomain( 'google_ss2db', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+	load_plugin_textdomain( 'google_ss2db', false, plugin_basename( __DIR__ ) . '/languages' );
 }
 add_action( 'plugins_loaded', 'google_ss2db_load_textdomain' );
 

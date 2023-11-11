@@ -65,8 +65,10 @@ function google_ss2db_options_pagination( $paged = 1, $pages = 1, $range = 2 ) {
 /**
  * Truncate the string (remove characters / words from the middle of the string)
  *
- * @param  string $str
- * @param  number $max_chars
+ * @param  string $str The input string that you want to truncate in the middle.
+ * @param  number $max_chars The "max_chars" parameter is an optional parameter that specifies the maximum
+ * number of characters allowed in the string. If this parameter is not provided, the default value is
+ * set to 16.
  * @return string
  */
 function google_ss2db_truncate_middle( $str, $max_chars = 16 ) {

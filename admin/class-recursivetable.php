@@ -101,7 +101,7 @@
 				<button type="button" class="notice-dismiss"><span class="screen-reader-text"></span></button>
 			</div>
 		<?php endif; ?>
-		<form method="post" action="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'includes/save.php'; ?>">
+		<form method="post" action="<?php echo plugin_dir_url( __DIR__ ) . 'includes/save.php'; ?>">
 			<hr />
 			<h3><?php _e( 'Import from Google Spreadsheet', 'google_ss2db' ); ?></h3>
 			<table class="form-table">
@@ -256,13 +256,7 @@
 				}
 				?>
 				">
-					<?php
-					if ( $row->title ) {
-						echo $row->title;
-					} else {
-						echo '(no title)';
-					}
-					?>
+					<?php echo $row->title ? $row->title : ' (no title)'; ?>
 				</span>
 				<span class="ss2db_date">
 					<div class="inner">

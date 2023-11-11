@@ -106,9 +106,9 @@ function get_value_google_spreadsheet( $worksheetid, $worksheetname, $sheetname,
 
 					foreach ( $row as $column ) {
 						$object[ $i ][ $hearder_row[ $j ] ] = $column;
-						$j++;
+						++$j;
 					}
-					$i++;
+					++$i;
 				}
 			} else {
 				$object = $values;
