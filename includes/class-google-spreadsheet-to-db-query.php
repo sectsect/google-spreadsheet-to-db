@@ -128,7 +128,7 @@ class Google_Spreadsheet_To_DB_Query {
 			$offset = 0;
 		}
 
-		if ( $whstr ) {
+		if ( isset( $whstr ) ) {
 			$sql      = 'SELECT * FROM ' . $table . ' WHERE ' . $whstr . '  ORDER BY ' . $orderby . ' ' . $order . ' LIMIT %d OFFSET %d';
 			$prepared = $wpdb->prepare(
 				$sql, // phpcs:ignore
