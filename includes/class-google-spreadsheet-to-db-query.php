@@ -99,7 +99,7 @@ class Google_Spreadsheet_To_DB_Query {
 			}
 		}
 		if ( ! empty( $wh ) ) {
-			$whstr = implode( $wh, ' ' . $order . ' ' );
+			$whstr = implode( ' ' . $order . ' ', $wh );
 		}
 
 		$allow_orderbys = array( 'id', 'date', 'worksheet_id', 'worksheet_name', 'sheet_name', 'title' );
