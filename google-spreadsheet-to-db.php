@@ -2,9 +2,9 @@
 /**
  * Plugin Name:     Google Spreadsheet to DB
  * Plugin URI:      https://github.com/sectsect/google-spreadsheet-to-db
- * Description:     Pulls Google Spreadsheet data via Google’s API and saves it in your WordPress database
- * Author:          SECT INTERACTIVE AGENCY
- * Author URI:      https://www.ilovesect.com/
+ * Description:     Read Google Sheets data with Sheets API and insert into WordPress DB - An alternative to CSV Import
+ * Author:          sect
+ * Author URI:      https://github.com/sectsect/google-spreadsheet-to-db
  * Text Domain:     google-spreadsheet-to-db
  * Domain Path:     /languages
  * Version:         4.0.1
