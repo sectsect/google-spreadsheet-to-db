@@ -80,6 +80,8 @@ function google_ss2db_row_meta( $plugin_meta, $plugin_file, $plugin_data, $statu
 		$plugin_meta[] = '<a href="https://github.com/sectsect/google-spreadsheet-to-db" target="_blank"><span class="dashicons dashicons-randomize"></span> GitHub</a>';
 		return $plugin_meta;
 	}
+
+	return $plugin_meta;
 }
 add_filter( 'plugin_row_meta', 'google_ss2db_row_meta', 10, 4 );
 
