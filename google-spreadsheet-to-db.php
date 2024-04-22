@@ -24,6 +24,8 @@ define( 'GOOGLE_SS2DB_TABLE_NAME', $wpdb->prefix . 'google_ss2db' );
  */
 function google_ss2db_noticephpversionwrong() {
 	global $google_ss2db_minimalrequiredphpversion;
+	// Ensure $google_ss2db_minimalrequiredphpversion is not null and is a string.
+	$required_version = is_null( $google_ss2db_minimalrequiredphpversion ) ? 'unknown' : $google_ss2db_minimalrequiredphpversion;
 	echo '<div class="updated fade">' .
 	__( 'Error: plugin "Google Spreadsheet to DB" requires a newer version of PHP to be running.', 'google_ss2db' ) .
 			'<br/>' . __( 'Minimal version of PHP required: ', 'google_ss2db' ) . '<strong>' . $google_ss2db_minimalrequiredphpversion . '</strong>' .
@@ -38,7 +40,8 @@ function google_ss2db_noticephpversionwrong() {
  */
 function google_ss2db_phpversioncheck() {
 	global $google_ss2db_minimalrequiredphpversion;
-	if ( version_compare( phpversion(), $google_ss2db_minimalrequiredphpversion ) < 0 ) {
+	// Ensure $google_ss2db_minimalrequiredphpversion is not null before comparison.
+	if ( null === $google_ss2db_minimalrequiredphpversion || version_compare( phpversion(), $google_ss2db_minimalrequiredphpversion ) < 0 ) {
 		add_action( 'admin_notices', 'google_ss2db_noticephpversionwrong' );
 		return false;
 	}
