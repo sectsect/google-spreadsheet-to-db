@@ -1,5 +1,39 @@
 # Changelog
 
+## [v5.1.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v5.1.0) (2024-04-23)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v5.0.1...v5.1.0)
+
+**Merged pull requests:**
+
+- refactor: code refactor [\#32](https://github.com/sectsect/google-spreadsheet-to-db/pull/32) ([sectsect](https://github.com/sectsect))
+- chore: improve doc comments [\#31](https://github.com/sectsect/google-spreadsheet-to-db/pull/31) ([sectsect](https://github.com/sectsect))
+- Drop support for PHP 7.4 / 8.0 on PHPUnit 10 [\#30](https://github.com/sectsect/google-spreadsheet-to-db/pull/30) ([sectsect](https://github.com/sectsect))
+- test: fix config for phpunit [\#29](https://github.com/sectsect/google-spreadsheet-to-db/pull/29) ([sectsect](https://github.com/sectsect))
+- test: migrate config for phpunit [\#28](https://github.com/sectsect/google-spreadsheet-to-db/pull/28) ([sectsect](https://github.com/sectsect))
+- ci: migrate CI to GitHub Actions [\#27](https://github.com/sectsect/google-spreadsheet-to-db/pull/27) ([sectsect](https://github.com/sectsect))
+
+## [v5.0.1](https://github.com/sectsect/google-spreadsheet-to-db/tree/v5.0.1) (2024-04-15)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v5.0.0...v5.0.1)
+
+## [v5.0.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v5.0.0) (2024-04-15)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v4.1.0...v5.0.0)
+
+**Merged pull requests:**
+
+- chore\(deps\): bump phpseclib/phpseclib from 3.0.34 to 3.0.37 in /functions/composer [\#25](https://github.com/sectsect/google-spreadsheet-to-db/pull/25) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump phpseclib/phpseclib from 3.0.23 to 3.0.34 in /functions/composer [\#24](https://github.com/sectsect/google-spreadsheet-to-db/pull/24) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v4.1.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v4.1.0) (2023-11-14)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v4.0.1...v4.1.0)
+
+## [v4.0.1](https://github.com/sectsect/google-spreadsheet-to-db/tree/v4.0.1) (2023-11-11)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v4.0.0...v4.0.1)
+
 ## [v4.0.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v4.0.0) (2023-10-09)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v3.3.2...v4.0.0)
