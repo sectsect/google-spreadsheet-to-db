@@ -1,4 +1,15 @@
 <?php
+	/**
+	 * This file contains the Google_Spreadsheet_To_DB_Query class which handles SQL queries for the Google Spreadsheet to DB plugin.
+	 *
+	 * The class is designed to construct and execute SQL queries with support for filtering, sorting, and pagination.
+	 * It is initialized with customizable parameters to tailor the query operations.
+	 *
+	 * @package    Google_Spreadsheet_to_DB
+	 * @subpackage Google_Spreadsheet_to_DB/includes
+	 * @since      1.0.2
+	 */
+
 /**
  * Handles database queries for the Google Spreadsheet to DB plugin.
  *
@@ -10,149 +21,89 @@
  * @package    Google_Spreadsheet_to_DB
  * @subpackage Google_Spreadsheet_to_DB/includes
  */
-
-/**
- * Fired during plugin activation.
- *
- * This class defines all code necessary to run during the plugin's activation.
- *
- * @since      1.0.2
- * @package    Google_Spreadsheet_to_DB
- * @subpackage Google_Spreadsheet_to_DB/includes
- */
 class Google_Spreadsheet_To_DB_Query {
+	/**
+	 * Holds the parameters and defaults for the query.
+	 *
+	 * @var object
+	 */
+	private $data;
 
 	/**
 	 * Constructor for the Google_Spreadsheet_To_DB_Query class.
-	 * Initializes the query object with specified or default parameters.
+	 * Initializes the class with default or custom parameters.
 	 *
-	 * @param array $args {
-	 *     Optional. Array of query parameters to override defaults.
-	 *
-	 *     @type array  $where   Conditions for filtering the query.
-	 *     @type string $orderby Column by which to order the results.
-	 *     @type string $order   Direction to order the results (ASC or DESC).
-	 *     @type int    $limit   Maximum number of results to retrieve.
-	 *     @type int    $offset  Number of results to skip.
-	 * }
+	 * @param array $args Customizable parameters including 'where', 'orderby', 'order', 'limit', and 'offset'.
 	 */
 	public function __construct( $args = array() ) {
-		$defaults = array(
+		$defaults   = array(
 			'where'   => array(),
 			'orderby' => 'date',
 			'order'   => 'DESC',
-			'limit'   => false,
-			'offset'  => false,
+			'limit'   => PHP_INT_MAX,
+			'offset'  => 0,
 		);
-		$d        = wp_parse_args( $args, $defaults );
-		$this->setobject( $d );
+		$this->data = (object) wp_parse_args( $args, $defaults );
 	}
 
 	/**
-	 * Sets the internal data object based on provided query parameters.
-	 * Converts the array to a JSON object for internal processing.
+	 * Builds the WHERE SQL clause based on the conditions specified in the 'where' parameter.
+	 * Supports basic comparison operators and handles multiple conditions with AND/OR relations.
 	 *
-	 * @param array $d The array of query parameters.
+	 * @return string The WHERE clause of the SQL query.
 	 */
-	public function setobject( $d ) {
-		$this->data = json_decode( json_encode( $d ) );
+	private function build_where_clause() {
+		global $wpdb;
+		$wheres   = array();
+		$relation = isset( $this->data->where['relation'] ) && in_array( $this->data->where['relation'], array( 'AND', 'OR' ), true ) ? $this->data->where['relation'] : 'AND';
+		unset( $this->data->where['relation'] );
+
+		foreach ( $this->data->where as $where ) {
+			if ( in_array( $where['key'], array( 'id', 'date', 'worksheet_id', 'worksheet_name', 'sheet_name', 'title' ), true ) ) {
+				$compare  = isset( $where['compare'] ) && in_array( $where['compare'], array( '=', '>', '<', '>=', '<=', '<>', '!=' ), true ) ? $where['compare'] : '=';
+				$wheres[] = $wpdb->prepare( "{$where['key']} $compare %s", $where['value'] ); // phpcs:ignore
+			}
+		}
+
+		return $wheres ? implode( " $relation ", $wheres ) : '';
 	}
 
 	/**
-	 * Retrieves rows from the database based on the query parameters set in the data object.
-	 * Constructs a SQL query dynamically based on conditions such as where, order, and limit.
+	 * Builds the ORDER BY SQL clause based on the 'orderby' and 'order' parameters.
+	 * Ensures that the ordering is by a valid column and in a valid direction (ASC/DESC).
 	 *
-	 * @return array An array of stdClass objects representing each row returned by the query.
+	 * @return string The ORDER BY clause of the SQL query.
+	 */
+	private function build_order_by_clause() {
+		$orderby = in_array( $this->data->orderby, array( 'id', 'date', 'worksheet_id', 'worksheet_name', 'sheet_name', 'title' ), true ) ? $this->data->orderby : 'date';
+		$order   = in_array( $this->data->order, array( 'ASC', 'DESC' ), true ) ? $this->data->order : 'DESC';
+		return "ORDER BY $orderby $order";
+	}
+
+	/**
+	 * Retrieves rows from the database based on the constructed SQL query.
+	 * Applies filtering, sorting, and pagination as specified in the class parameters.
+	 *
+	 * @return array|object|null Database query results.
 	 */
 	public function getrow() {
 		global $wpdb;
-		$table = GOOGLE_SS2DB_TABLE_NAME;
+		$table           = GOOGLE_SS2DB_TABLE_NAME;
+		$where_clause    = $this->build_where_clause();
+		$order_by_clause = $this->build_order_by_clause();
+		$limit           = is_numeric( $this->data->limit ) ? intval( $this->data->limit ) : PHP_INT_MAX;
+		$limit           = ( -1 === $limit ) ? PHP_INT_MAX : $limit;
+		$offset          = is_numeric( $this->data->offset ) ? intval( $this->data->offset ) : 0;
 
-		$allow_whererelation = array( 'AND', 'OR' );
-		if ( isset( $this->data->where->relation ) && in_array( $this->data->where->relation, $allow_whererelation, true ) ) {
-			$order = esc_sql( $this->data->where->relation );
-		} else {
-			$order = 'AND';
-		}
+		$sql  = "SELECT * FROM $table";
+		$sql .= $where_clause ? " WHERE $where_clause" : '';
+		$sql .= " $order_by_clause LIMIT %d OFFSET %d";
 
-		// Remove property 'relation' in object '$this->data->where'.
-		unset( $this->data->where->relation );
-		$wheres = $this->data->where;
-
-		$wh = array();
-		foreach ( $wheres as $where ) {
-			$allow_wherekeys = array( 'id', 'date', 'worksheet_id', 'worksheet_name', 'sheet_name', 'title' );
-			if ( isset( $where->key ) && in_array( $where->key, $allow_wherekeys, true ) ) {
-				$wherekey = esc_sql( $where->key );
-			} else {
-				$wherekey = false;
-			}
-
-			if ( isset( $where->value ) ) {
-				$whereval = esc_sql( (string) $where->value );
-			} else {
-				$whereval = false;
-			}
-
-			$operators = array( '=', '>', '<', '>=', '<=', '<>', '!=' );
-			if ( isset( $where->compare ) && in_array( $where->compare, $operators, true ) ) {
-				$wherecompare = esc_sql( (string) $where->compare );
-			} else {
-				$wherecompare = '=';
-			}
-
-			if ( $wherekey && $whereval && $wherecompare ) {
-				$wh[] = $wpdb->prepare( $wherekey . ' ' . $wherecompare . ' %s', $whereval ); // phpcs:ignore
-			}
-		}
-		if ( ! empty( $wh ) ) {
-			$whstr = implode( ' ' . $order . ' ', $wh );
-		}
-
-		$allow_orderbys = array( 'id', 'date', 'worksheet_id', 'worksheet_name', 'sheet_name', 'title' );
-		if ( isset( $this->data->orderby ) && in_array( $this->data->orderby, $allow_orderbys, true ) ) {
-			$orderby = esc_sql( $this->data->orderby );
-		} else {
-			$orderby = 'date';
-		}
-
-		$allow_orders = array( 'DESC', 'ASC' );
-		if ( isset( $this->data->order ) && in_array( $this->data->order, $allow_orders, true ) ) {
-			$order = esc_sql( $this->data->order );
-		} else {
-			$order = 'DESC';
-		}
-
-		if ( $this->data->limit && intval( $this->data->limit ) !== -1 ) {
-			$limit = intval( $this->data->limit );
-		} else {
-			$limit = 2147483647;
-		}
-
-		if ( $this->data->offset ) {
-			$offset = intval( $this->data->offset );
-		} else {
-			$offset = 0;
-		}
-
-		if ( isset( $whstr ) ) {
-			$sql      = 'SELECT * FROM ' . $table . ' WHERE ' . $whstr . '  ORDER BY ' . $orderby . ' ' . $order . ' LIMIT %d OFFSET %d';
-			$prepared = $wpdb->prepare(
-				$sql, // phpcs:ignore
-				$limit,
-				$offset
-			);
-		} else {
-			$sql      = 'SELECT * FROM ' . $table . ' ORDER BY ' . $orderby . ' ' . $order . ' LIMIT %d OFFSET %d';
-			$prepared = $wpdb->prepare(
-				$sql, // phpcs:ignore
-				$limit,
-				$offset
-			);
-		}
-
-		$myrows = $wpdb->get_results( $prepared ); // phpcs:ignore
-
-		return $myrows;
+		$prepared = $wpdb->prepare(
+			$sql, // phpcs:ignore
+			$limit,
+			$offset
+		);
+		return $wpdb->get_results( $prepared ); // phpcs:ignore
 	}
 }
