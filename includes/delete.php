@@ -1,9 +1,12 @@
 <?php
 /**
- * The file that defines the core plugin class
+ * Handles the deletion of data entries from the database.
  *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
+ * This script is triggered via a POST request and is responsible for deleting entries
+ * from a specified database table. It checks for a valid nonce to secure the request,
+ * verifies the request method is POST, and confirms the presence of an 'id' in the POST data.
+ * If any of these checks fail, the script will terminate the execution and return an error.
+ * On successful deletion, it returns the result and the ID of the deleted entry in JSON format.
  *
  * @link       https://github.com/sectsect/
  * @since      1.0.0

@@ -20,9 +20,11 @@
  */
 class Google_Spreadsheet_To_DB_Activator {
 	/**
-	 * Short Description. (use period)
+	 * Activates the plugin by creating or updating the necessary database table.
 	 *
-	 * Long Description.
+	 * This method checks the current installed version of the plugin and updates the database schema if required.
+	 * It creates a new table if it doesn't exist or updates the existing table to match the new schema version.
+	 * This ensures that the plugin's database table is always up to date with the current version.
 	 *
 	 * @since    1.0.0
 	 */

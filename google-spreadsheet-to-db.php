@@ -18,13 +18,10 @@ global $wpdb;
 define( 'GOOGLE_SS2DB_TABLE_NAME', $wpdb->prefix . 'google_ss2db' );
 
 /**
- * Check the PHP version and give a useful error message if the user's version is less than the required version.
- *
- * @return void "description".
+ * Displays an admin notice if the server's PHP version is below the plugin's required PHP version.
  */
 function google_ss2db_noticephpversionwrong() {
 	global $google_ss2db_minimalrequiredphpversion;
-	// Ensure $google_ss2db_minimalrequiredphpversion is not null and is a string.
 	$required_version = is_null( $google_ss2db_minimalrequiredphpversion ) ? 'unknown' : $google_ss2db_minimalrequiredphpversion;
 	echo '<div class="updated fade">' .
 	__( 'Error: plugin "Google Spreadsheet to DB" requires a newer version of PHP to be running.', 'google_ss2db' ) .
@@ -34,13 +31,12 @@ function google_ss2db_noticephpversionwrong() {
 }
 
 /**
- * Check the PHP version and give a useful error message if the user's version is less than the required version.
+ * Checks the server's PHP version against the plugin's required PHP version.
  *
- * @return boolean "description".
+ * @return bool True if the PHP version is compatible, false otherwise.
  */
 function google_ss2db_phpversioncheck() {
 	global $google_ss2db_minimalrequiredphpversion;
-	// Ensure $google_ss2db_minimalrequiredphpversion is not null before comparison.
 	if ( null === $google_ss2db_minimalrequiredphpversion || version_compare( phpversion(), $google_ss2db_minimalrequiredphpversion ) < 0 ) {
 		add_action( 'admin_notices', 'google_ss2db_noticephpversionwrong' );
 		return false;
@@ -49,9 +45,7 @@ function google_ss2db_phpversioncheck() {
 }
 
 /**
- * The code that runs during plugin activation.
- *
- * @return void "description".
+ * Runs during plugin activation to set up initial settings or structures.
  */
 function activate_google_ss2db() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-spreadsheet-to-db-activator.php';
@@ -60,9 +54,7 @@ function activate_google_ss2db() {
 register_activation_hook( __FILE__, 'activate_google_ss2db' );
 
 /**
- * Load the textdomain.
- *
- * @return void "description".
+ * Loads the plugin's text domain for internationalization.
  */
 function google_ss2db_load_textdomain() {
 	load_plugin_textdomain( 'google_ss2db', false, plugin_basename( __DIR__ ) . '/languages' );
@@ -70,13 +62,13 @@ function google_ss2db_load_textdomain() {
 add_action( 'plugins_loaded', 'google_ss2db_load_textdomain' );
 
 /**
- * Add my meta data to row.
+ * Adds a link to the plugin's GitHub page in the plugin meta row.
  *
- * @param  array  $plugin_meta "description".
- * @param  string $plugin_file "description".
- * @param  string $plugin_data "description".
- * @param  string $status      "description".
- * @return statement           "description".
+ * @param array  $plugin_meta An array of the plugin's metadata.
+ * @param string $plugin_file Path to the plugin file relative to the plugins directory.
+ * @param string $plugin_data An array of plugin data.
+ * @param string $status Status of the plugin.
+ * @return array Modified plugin meta data.
  */
 function google_ss2db_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
 	if ( plugin_basename( __FILE__ ) === $plugin_file ) {
