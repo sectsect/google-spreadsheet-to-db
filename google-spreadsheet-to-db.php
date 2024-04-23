@@ -7,7 +7,7 @@
  * Author URI:      https://github.com/sectsect/google-spreadsheet-to-db
  * Text Domain:     google-spreadsheet-to-db
  * Domain Path:     /languages
- * Version:         5.0.1
+ * Version:         5.1.0
  *
  * @package         Google_Spreadsheet_to_DB
  */
