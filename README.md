@@ -1,12 +1,16 @@
 # <img src="https://github-sect.s3-ap-northeast-1.amazonaws.com/logo.svg" width="18" height="auto"> Google Spreadsheet to DB
 [![PHP Unit Tests](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpunit.yml/badge.svg)](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpunit.yml) [![PHP Coding Standards](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpcs.yml/badge.svg)](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpcs.yml) [![Latest Stable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v)](//packagist.org/packages/sectsect/google-spreadsheet-to-db)
 
-### Fetch Google Sheets with [Google Sheets API](https://developers.google.com/sheets/api) (v4) and store it to your WordPress database. You can also filter that data before saving.
+### The "Google Spreadsheet to DB" plugin is designed for WordPress and facilitates the import of data from Google Sheets into a WordPress database using Google's [Sheets API](https://developers.google.com/sheets/api) (v4). It supports data manipulation before saving and is configurable via a WordPress admin interface.
+
+## Features
+- Data Import: Pulls data from Google Sheets and saves it directly into the WordPress database.
+- Customization: Offers settings for defining constants, spreadsheet IDs, names, and configuring data formats.
+- Admin Interface: Provides an admin page for easy management and configuration of the plugin settings.
 
 ## Requirements
-
-- PHP 7.4 or higher
-- [Composer](https://getcomposer.org/)
+- PHP version 7.4 or higher.
+- [Composer](https://getcomposer.org/) for managing PHP dependencies.
 
 ## Get Started
 
