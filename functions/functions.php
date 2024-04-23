@@ -25,13 +25,14 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . 'composer/vendor/autoload.php' )
 }
 
 /**
- * Push the object.
+ * Displays pagination links based on the provided parameters.
  *
- * @since  1.0.5
- * @param  array $paged "Paged".
- * @param  array $pages "Total page numbers".
- * @param  array $range "Range for Pagination".
- * @return void "description".
+ * This function generates HTML for a simple pagination interface, based on the current page,
+ * total number of pages, and the range of pages to display around the current page.
+ *
+ * @param int $paged Current page number, defaults to 1.
+ * @param int $pages Total number of pages, defaults to 1.
+ * @param int $range Number of pages to display around the current page, defaults to 2.
  */
 function google_ss2db_options_pagination( $paged = 1, $pages = 1, $range = 2 ) {
 	$paged     = intval( $paged );
@@ -63,13 +64,14 @@ function google_ss2db_options_pagination( $paged = 1, $pages = 1, $range = 2 ) {
 }
 
 /**
- * Truncate the string (remove characters / words from the middle of the string)
+ * Truncates a string by removing characters from the middle and replacing them with an ellipsis.
  *
- * @param  string $str The input string that you want to truncate in the middle.
- * @param  number $max_chars The "max_chars" parameter is an optional parameter that specifies the maximum
- * number of characters allowed in the string. If this parameter is not provided, the default value is
- * set to 16.
- * @return string
+ * This function is useful for creating previews or shortening strings without losing the beginning
+ * and end of the string. It ensures the string does not exceed the maximum specified length.
+ *
+ * @param string $str The string to truncate.
+ * @param int    $max_chars Maximum number of characters to retain, defaults to 16.
+ * @return string The truncated string.
  */
 function google_ss2db_truncate_middle( $str, $max_chars = 16 ) {
 	$str_length = strlen( $str );

@@ -1,10 +1,12 @@
 <?php
 /**
- * Fired during plugin activation
+ * Handles database queries for the Google Spreadsheet to DB plugin.
  *
- * @link       https://www.ilovesect.com/
+ * This class is responsible for constructing and executing SQL queries based on specified parameters.
+ * It supports filtering, sorting, and pagination of the results. The class is typically initialized
+ * during the plugin's activation to set up necessary configurations.
+ *
  * @since      1.0.2
- *
  * @package    Google_Spreadsheet_to_DB
  * @subpackage Google_Spreadsheet_to_DB/includes
  */
@@ -21,13 +23,18 @@
 class Google_Spreadsheet_To_DB_Query {
 
 	/**
-	 * Short Description. (use period)
+	 * Constructor for the Google_Spreadsheet_To_DB_Query class.
+	 * Initializes the query object with specified or default parameters.
 	 *
-	 * Long Description.
+	 * @param array $args {
+	 *     Optional. Array of query parameters to override defaults.
 	 *
-	 * @since  1.0.2
-	 * @param  array $args "description".
-	 * @return void "description".
+	 *     @type array  $where   Conditions for filtering the query.
+	 *     @type string $orderby Column by which to order the results.
+	 *     @type string $order   Direction to order the results (ASC or DESC).
+	 *     @type int    $limit   Maximum number of results to retrieve.
+	 *     @type int    $offset  Number of results to skip.
+	 * }
 	 */
 	public function __construct( $args = array() ) {
 		$defaults = array(
@@ -42,20 +49,20 @@ class Google_Spreadsheet_To_DB_Query {
 	}
 
 	/**
-	 * Push the object.
+	 * Sets the internal data object based on provided query parameters.
+	 * Converts the array to a JSON object for internal processing.
 	 *
-	 * @since  1.0.2
-	 * @param  array $d "description".
-	 * @return void "description".
+	 * @param array $d The array of query parameters.
 	 */
 	public function setobject( $d ) {
 		$this->data = json_decode( json_encode( $d ) );
 	}
 
 	/**
-	 * Get the rows.
+	 * Retrieves rows from the database based on the query parameters set in the data object.
+	 * Constructs a SQL query dynamically based on conditions such as where, order, and limit.
 	 *
-	 * @return array "description".
+	 * @return array An array of stdClass objects representing each row returned by the query.
 	 */
 	public function getrow() {
 		global $wpdb;

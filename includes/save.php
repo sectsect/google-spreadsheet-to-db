@@ -33,11 +33,11 @@ if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'google_s
 }
 
 /**
- * Detect to have specific spreadsheet.
+ * Checks if a specific sheet exists within a list of sheets.
  *
- * @param  array  $sheets_list "Array of Spreadsheets".
- * @param  string $sheet_name "Spreadsheet name".
- * @return boolean "description".
+ * @param array  $sheets_list An array of sheet objects.
+ * @param string $sheet_name The name of the sheet to check for.
+ * @return bool Returns true if the sheet exists, false otherwise.
  */
 function exist_sheet( $sheets_list, $sheet_name ) {
 	foreach ( $sheets_list as $sheet ) {
@@ -49,9 +49,9 @@ function exist_sheet( $sheets_list, $sheet_name ) {
 }
 
 /**
- * Returns an authorized API client.
+ * Creates and returns a Google_Client authorized for Google Sheets and Drive APIs.
  *
- * @return Google_Client the authorized client object
+ * @return Google_Client The authorized client object.
  */
 function get_client() {
 	$client_secret = ( defined( 'GOOGLE_SS2DB_CLIENT_SECRET_PATH' ) ) ? GOOGLE_SS2DB_CLIENT_SECRET_PATH : '';
@@ -67,13 +67,13 @@ function get_client() {
 }
 
 /**
- * Get the Google Spreadsheet Data.
+ * Retrieves data from a specified Google Spreadsheet.
  *
- * @param  string $worksheetid "Spreadsheet ID".
- * @param  string $worksheetname "Spreadsheet name".
- * @param  string $sheetname "SingleSheet name on Spreadsheet".
- * @param  string $hasheaderrow "Spreadsheet has a top header row?".
- * @return array "description".
+ * @param string $worksheetid The ID of the Google Spreadsheet.
+ * @param string $worksheetname The name of the Google Spreadsheet.
+ * @param string $sheetname The name of the individual sheet within the Spreadsheet.
+ * @param bool   $hasheaderrow Indicates if the spreadsheet contains a header row.
+ * @return array|bool The spreadsheet data as an associative array if successful, or false if the sheet does not exist.
  */
 function get_value_google_spreadsheet( $worksheetid, $worksheetname, $sheetname, $hasheaderrow ) {
 	// Get the API client and construct the service object.
@@ -124,9 +124,12 @@ function get_value_google_spreadsheet( $worksheetid, $worksheetname, $sheetname,
 }
 
 /**
- * Save Google Spreadsheet Data to DB.
+ * Saves data from a Google Spreadsheet to the database.
  *
- * @return boolean "description".
+ * This function fetches data from a specified Google Spreadsheet and saves it to a custom database table.
+ * The data can be formatted as JSON with or without escaped Unicode characters based on plugin settings.
+ *
+ * @return array Contains details of the operation including the database row ID, date, worksheet identifiers, and operation result.
  */
 function save_spreadsheet() {
 	global $wpdb;

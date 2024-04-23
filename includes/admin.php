@@ -29,9 +29,8 @@
 add_action( 'admin_menu', 'google_ss2db_menu' );
 
 /**
- * Add options page.
- *
- * @return void "description".
+ * Registers the plugin menu in the WordPress admin dashboard.
+ * This function adds a new options page under the Settings menu.
  */
 function google_ss2db_menu() {
 	$page_hook_suffix = add_options_page( 'Google Spreadsheet to DB', '<img src="' . plugins_url( 'assets/images/ss_logo.svg', __DIR__ ) . '" width="12" height="16" /> Google Spreadsheet to DB', 'manage_options', 'google_ss2db_menu', 'google_ss2db_options_page' );
@@ -41,18 +40,17 @@ function google_ss2db_menu() {
 }
 
 /**
- * Enqueue style.
- *
- * @return void "description".
+ * Enqueues custom styles for the admin options page.
+ * This function is hooked to the WordPress admin styles queue.
  */
 function google_ss2db_admin_styles() {
 	wp_enqueue_style( 'admin-options', plugin_dir_url( __DIR__ ) . 'assets/css/admin-options.css', array() );
 }
 
 /**
- * Enqueue script.
- *
- * @return void "description".
+ * Enqueues custom scripts for the admin options page.
+ * This function is hooked to the WordPress admin scripts queue.
+ * It also localizes the script to include nonce and plugin directory URL.
  */
 function google_ss2db_admin_scripts() {
 	wp_enqueue_script( 'google-ss2db-script', plugin_dir_url( __DIR__ ) . 'assets/js/admin-options.js', array( 'jquery' ), null, true );
@@ -67,18 +65,16 @@ function google_ss2db_admin_scripts() {
 }
 
 /**
- * Register setting.
- *
- * @return void "description".
+ * Registers settings for the Google Spreadsheet to DB plugin.
+ * This function adds a new setting to the WordPress settings API.
  */
 function register_google_ss2db_settings() {
 	register_setting( 'google_ss2db-settings-group', 'google_ss2db_dataformat' );
 }
 
 /**
- * Require file.
- *
- * @return void "description".
+ * Includes the options page for the Google Spreadsheet to DB plugin.
+ * This function loads an external PHP class file that handles the display of the options page.
  */
 function google_ss2db_options_page() {
 	require_once plugin_dir_path( __DIR__ ) . 'admin/class-recursivetable.php';
