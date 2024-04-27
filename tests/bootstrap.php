@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file.
  *
- * @package Wp_Tag_Order
+ * @package Google_Spreadsheet_to_DB
  */
 
 require_once dirname( dirname( __FILE__ ) ) . '/vendor/autoload.php';

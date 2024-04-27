@@ -2,7 +2,7 @@
 /**
  * Class SampleTest
  *
- * @package Wp_Tag_Order
+ * @package Google_Spreadsheet_to_DB
  */
 
 /**
