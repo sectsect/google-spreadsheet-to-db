@@ -1,0 +1,9 @@
+parameters:
+  level: 9
+  paths:
+    - google-spreadsheet-to-db.php
+    - admin/
+    - functions/functions.php
+    - includes/
+  bootstrapFiles:
+    - vendor/autoload.php

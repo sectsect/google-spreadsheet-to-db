@@ -167,12 +167,12 @@
 	 */
 	class RecursiveTable {
 		/**
-		 * Set the description.
+		 * Convert JSON text to HTML debug output.
 		 *
-		 * @param  array $json_text "jsonText".
-		 * @return string "description".
+		 * @param string $json_text JSON text to be converted.
+		 * @return string HTML representation of the JSON.
 		 */
-		public static function json_to_debug( $json_text = '' ) {
+		public static function json_to_debug( string $json_text = '' ): string {
 			$arr  = json_decode( $json_text, true );
 			$html = '';
 			if ( $arr && is_array( $arr ) ) {
@@ -182,23 +182,27 @@
 		}
 
 		/**
-		 * Set the description.
+		 * Recursively convert an array to an HTML table.
 		 *
-		 * @param  array $arr "array".
-		 * @return string "description".
+		 * @param array<mixed> $arr Array to be converted.
+		 * @return string HTML table representation of the array.
 		 */
-		private static function array_to_html_table_recursive( $arr ) {
+		private static function array_to_html_table_recursive( array $arr ): string {
 			$str = '<table><tbody>';
 			foreach ( $arr as $key => $val ) {
 				$str .= '<tr>';
-				$str .= "<th><span>$key</span></th>";
+				$str .= '<th><span>' . htmlspecialchars( $key ) . '</span></th>';
 				$str .= '<td>';
 				if ( is_array( $val ) ) {
 					if ( ! empty( $val ) ) {
 						$str .= self::array_to_html_table_recursive( $val );
 					}
 				} else {
-					$str .= "<span>$val</span>";
+					if ( ! is_string( $val ) ) {
+						return $str;
+					}
+					$value = $val;
+					$str  .= '<span>' . htmlspecialchars( $value ) . '</span>';
 				}
 				$str .= '</td></tr>';
 			}
@@ -278,7 +282,7 @@
 		<?php endforeach; ?>
 		<?php
 		if ( function_exists( 'google_ss2db_options_pagination' ) ) {
-			google_ss2db_options_pagination( $paged, $max_num_pages, 2 );
+			google_ss2db_options_pagination( $paged, (int) $max_num_pages, 2 );
 		}
 		?>
 	</section>

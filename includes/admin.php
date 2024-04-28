@@ -30,9 +30,9 @@ add_action( 'admin_menu', 'google_ss2db_menu' );
 
 /**
  * Registers the plugin menu in the WordPress admin dashboard.
- * This function adds a new options page under the Settings menu.
+ * Adds a new options page under the Settings menu specifically for the 'Google Spreadsheet to DB' plugin.
  */
-function google_ss2db_menu() {
+function google_ss2db_menu(): void {
 	$page_hook_suffix = add_options_page( 'Google Spreadsheet to DB', '<img src="' . plugins_url( 'assets/images/ss_logo.svg', __DIR__ ) . '" width="12" height="16" /> Google Spreadsheet to DB', 'manage_options', 'google_ss2db_menu', 'google_ss2db_options_page' );
 	add_action( 'admin_print_styles-' . $page_hook_suffix, 'google_ss2db_admin_styles' );
 	add_action( 'admin_print_scripts-' . $page_hook_suffix, 'google_ss2db_admin_scripts' );
@@ -40,19 +40,18 @@ function google_ss2db_menu() {
 }
 
 /**
- * Enqueues custom styles for the admin options page.
+ * Enqueues custom styles for the admin options page of the plugin.
  * This function is hooked to the WordPress admin styles queue.
  */
-function google_ss2db_admin_styles() {
+function google_ss2db_admin_styles(): void {
 	wp_enqueue_style( 'admin-options', plugin_dir_url( __DIR__ ) . 'assets/css/admin-options.css', array() );
 }
 
 /**
- * Enqueues custom scripts for the admin options page.
- * This function is hooked to the WordPress admin scripts queue.
- * It also localizes the script to include nonce and plugin directory URL.
+ * Enqueues custom scripts for the admin options page of the plugin.
+ * It also localizes the script to include nonce and plugin directory URL for secure AJAX calls.
  */
-function google_ss2db_admin_scripts() {
+function google_ss2db_admin_scripts(): void {
 	wp_enqueue_script( 'google-ss2db-script', plugin_dir_url( __DIR__ ) . 'assets/js/admin-options.js', array( 'jquery' ), null, true );
 	wp_localize_script(
 		'google-ss2db-script',
@@ -65,17 +64,16 @@ function google_ss2db_admin_scripts() {
 }
 
 /**
- * Registers settings for the Google Spreadsheet to DB plugin.
- * This function adds a new setting to the WordPress settings API.
+ * Registers settings for the Google Spreadsheet to DB plugin within the WordPress settings API.
  */
-function register_google_ss2db_settings() {
+function register_google_ss2db_settings(): void {
 	register_setting( 'google_ss2db-settings-group', 'google_ss2db_dataformat' );
 }
 
 /**
- * Includes the options page for the Google Spreadsheet to DB plugin.
- * This function loads an external PHP class file that handles the display of the options page.
+ * Loads and displays the options page for the Google Spreadsheet to DB plugin.
+ * This page allows users to configure settings specific to the plugin.
  */
-function google_ss2db_options_page() {
+function google_ss2db_options_page(): void {
 	require_once plugin_dir_path( __DIR__ ) . 'admin/class-recursivetable.php';
 }
