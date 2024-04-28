@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../includes/class-google-spreadsheet-to-db-query.php';
+
 /**
  * Class Test_Google_Spreadsheet_To_DB_Query
  * Tests the Google_Spreadsheet_To_DB_Query class functionality.
@@ -32,8 +34,8 @@ class Test_Google_Spreadsheet_To_DB_Query extends WP_UnitTestCase {
 
 		// Mocking wpdb.
 		global $wpdb;
-		$wpdb = $this->getMockBuilder( stdClass::class )
-					->setMethods( array( 'prepare', 'get_results' ) )
+		$wpdb = $this->getMockBuilder(stdClass::class)
+					->setMethods(['prepare', 'get_results', 'query'])
 					->getMock();
 
 		$wpdb->method( 'prepare' )->will(
