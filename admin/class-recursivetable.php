@@ -191,14 +191,18 @@
 			$str = '<table><tbody>';
 			foreach ( $arr as $key => $val ) {
 				$str .= '<tr>';
-				$str .= "<th><span>$key</span></th>";
+				$str .= '<th><span>' . htmlspecialchars( $key ) . '</span></th>';
 				$str .= '<td>';
 				if ( is_array( $val ) ) {
 					if ( ! empty( $val ) ) {
 						$str .= self::array_to_html_table_recursive( $val );
 					}
 				} else {
-					$str .= "<span>$val</span>";
+					if ( ! is_string( $val ) ) {
+						return $str;
+					}
+					$value = $val;
+					$str  .= '<span>' . htmlspecialchars( $value ) . '</span>';
 				}
 				$str .= '</td></tr>';
 			}

@@ -126,8 +126,12 @@ function get_value_google_spreadsheet( string $worksheetid, string $worksheetnam
  */
 function save_spreadsheet(): array {
 	global $wpdb;
-	$today = new DateTime();
-	$today->setTimeZone( new DateTimeZone( get_option( 'timezone_string' ) ) );
+	$today           = new DateTime();
+	$timezone_string = get_option( 'timezone_string' );
+	if ( ! is_string( $timezone_string ) || empty( $timezone_string ) ) {
+		return array();  // Early return if not a valid string.
+	}
+	$today->setTimeZone( new DateTimeZone( $timezone_string ) );
 	$date          = $today->format( 'Y-m-d H:i:s' );
 	$title         = wp_unslash( $_POST['datatitle'] );
 	$worksheetid   = wp_unslash( $_POST['worksheetid'] );
