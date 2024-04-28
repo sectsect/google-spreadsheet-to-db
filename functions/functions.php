@@ -76,5 +76,5 @@ function google_ss2db_options_pagination( int $paged = 1, int $pages = 1, int $r
 function google_ss2db_truncate_middle( string $str, int $max_chars = 16 ): string {
 	$str_length = strlen( $str );
 
-	return substr_replace( $str, '...', $max_chars / 2, $str_length - $max_chars );
+	return substr_replace( $str, '...', (int) floor( $max_chars / 2 ), $str_length - $max_chars );
 }
