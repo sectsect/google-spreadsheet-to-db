@@ -34,8 +34,11 @@ class FunctionsTest extends WP_UnitTestCase {
 
 		// Expected output.
 		$expected_output  = '<ul class="pagination">';
-		$expected_output .= '<li class="prevnext"><a href="' . get_pagenum_link( $current_page + 1 ) . '">&rsaquo;</a></li>';
-		$expected_output .= '<li class="last"><a href="' . get_pagenum_link( $total_pages ) . '">&raquo;</a></li>';
+		$expected_output .= '<li class="current"><span>1</span></li>';
+		$expected_output .= '<li><a href="' . get_pagenum_link( $current_page + 1 ) . '">2</a></li>';
+		$expected_output .= '<li><a href="' . get_pagenum_link( $current_page + 2 ) . '">3</a></li>';
+		$expected_output .= '<li><a href="' . get_pagenum_link( $current_page + 3 ) . '">4</a></li>';
+		$expected_output .= '<li><a href="' . get_pagenum_link( $current_page + 4 ) . '">5</a></li>';
 		$expected_output .= '</ul>';
 
 		// Capture the output.
