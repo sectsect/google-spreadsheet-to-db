@@ -184,7 +184,7 @@
 		/**
 		 * Recursively convert an array to an HTML table.
 		 *
-		 * @param array $arr Array to be converted.
+		 * @param array<mixed> $arr Array to be converted.
 		 * @return string HTML table representation of the array.
 		 */
 		private static function array_to_html_table_recursive( array $arr ): string {
@@ -278,7 +278,7 @@
 		<?php endforeach; ?>
 		<?php
 		if ( function_exists( 'google_ss2db_options_pagination' ) ) {
-			google_ss2db_options_pagination( $paged, $max_num_pages, 2 );
+			google_ss2db_options_pagination( $paged, (int) $max_num_pages, 2 );
 		}
 		?>
 	</section>

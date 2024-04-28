@@ -5,3 +5,5 @@ parameters:
     - admin/
     - functions/functions.php
     - includes/
+  bootstrapFiles:
+    - vendor/autoload.php
