@@ -66,7 +66,7 @@ class Test_Google_Spreadsheet_To_DB_Query extends WP_UnitTestCase {
 
 		$wpdb->method( 'prepare' )->will(
 			$this->returnCallback(
-				function ( $query, $limit, $offset ) {
+				function ( $query, ...$params ) {
 					return $query;
 				}
 			)
