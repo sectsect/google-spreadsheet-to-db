@@ -34,7 +34,7 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . 'composer/vendor/autoload.php' )
  * @param int $pages Total number of pages, defaults to 1.
  * @param int $range Number of pages to display around the current page, defaults to 2.
  */
-function google_ss2db_options_pagination( $paged = 1, $pages = 1, $range = 2 ) {
+function google_ss2db_options_pagination( int $paged = 1, int $pages = 1, int $range = 2 ): void {
 	$paged     = intval( $paged );
 	$pages     = intval( $pages );
 	$range     = intval( $range );
@@ -73,7 +73,7 @@ function google_ss2db_options_pagination( $paged = 1, $pages = 1, $range = 2 ) {
  * @param int    $max_chars Maximum number of characters to retain, defaults to 16.
  * @return string The truncated string.
  */
-function google_ss2db_truncate_middle( $str, $max_chars = 16 ) {
+function google_ss2db_truncate_middle( string $str, int $max_chars = 16 ): string {
 	$str_length = strlen( $str );
 
 	return substr_replace( $str, '...', $max_chars / 2, $str_length - $max_chars );

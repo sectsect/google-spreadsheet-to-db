@@ -35,7 +35,7 @@ class Google_Spreadsheet_To_DB_Query {
 	 *
 	 * @param array $args Customizable parameters including 'where', 'orderby', 'order', 'limit', and 'offset'.
 	 */
-	public function __construct( $args = array() ) {
+	public function __construct( array $args = array() ) {
 		$defaults   = array(
 			'where'   => array(),
 			'orderby' => 'date',
@@ -52,7 +52,7 @@ class Google_Spreadsheet_To_DB_Query {
 	 *
 	 * @return string The WHERE clause of the SQL query.
 	 */
-	private function build_where_clause() {
+	private function build_where_clause(): string {
 		global $wpdb;
 		$wheres   = array();
 		$relation = isset( $this->data->where['relation'] ) && in_array( $this->data->where['relation'], array( 'AND', 'OR' ), true ) ? $this->data->where['relation'] : 'AND';
@@ -74,7 +74,7 @@ class Google_Spreadsheet_To_DB_Query {
 	 *
 	 * @return string The ORDER BY clause of the SQL query.
 	 */
-	private function build_order_by_clause() {
+	private function build_order_by_clause(): string {
 		$orderby = in_array( $this->data->orderby, array( 'id', 'date', 'worksheet_id', 'worksheet_name', 'sheet_name', 'title' ), true ) ? $this->data->orderby : 'date';
 		$order   = in_array( $this->data->order, array( 'ASC', 'DESC' ), true ) ? $this->data->order : 'DESC';
 		return "ORDER BY $orderby $order";
@@ -86,7 +86,7 @@ class Google_Spreadsheet_To_DB_Query {
 	 *
 	 * @return array|object|null Database query results.
 	 */
-	public function getrow() {
+	public function getrow(): ?array {
 		global $wpdb;
 		$table           = GOOGLE_SS2DB_TABLE_NAME;
 		$where_clause    = $this->build_where_clause();

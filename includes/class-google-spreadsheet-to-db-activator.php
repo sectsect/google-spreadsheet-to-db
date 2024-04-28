@@ -28,7 +28,7 @@ class Google_Spreadsheet_To_DB_Activator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function activate() {
+	public static function activate(): void {
 		global $wpdb;
 		$google_ss2db_db_version = '1.2.0';
 		$installed_ver           = get_option( 'google_ss2db_version' );

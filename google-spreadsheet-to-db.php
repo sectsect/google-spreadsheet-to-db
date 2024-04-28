@@ -20,7 +20,7 @@ define( 'GOOGLE_SS2DB_TABLE_NAME', $wpdb->prefix . 'google_ss2db' );
 /**
  * Displays an admin notice if the server's PHP version is below the plugin's required PHP version.
  */
-function google_ss2db_noticephpversionwrong() {
+function google_ss2db_noticephpversionwrong(): void {
 	global $google_ss2db_minimalrequiredphpversion;
 	$required_version = is_null( $google_ss2db_minimalrequiredphpversion ) ? 'unknown' : $google_ss2db_minimalrequiredphpversion;
 	echo '<div class="updated fade">' .
@@ -35,7 +35,7 @@ function google_ss2db_noticephpversionwrong() {
  *
  * @return bool True if the PHP version is compatible, false otherwise.
  */
-function google_ss2db_phpversioncheck() {
+function google_ss2db_phpversioncheck(): bool {
 	global $google_ss2db_minimalrequiredphpversion;
 	if ( null === $google_ss2db_minimalrequiredphpversion || version_compare( phpversion(), $google_ss2db_minimalrequiredphpversion ) < 0 ) {
 		add_action( 'admin_notices', 'google_ss2db_noticephpversionwrong' );
@@ -66,11 +66,11 @@ add_action( 'plugins_loaded', 'google_ss2db_load_textdomain' );
  *
  * @param array  $plugin_meta An array of the plugin's metadata.
  * @param string $plugin_file Path to the plugin file relative to the plugins directory.
- * @param string $plugin_data An array of plugin data.
+ * @param array  $plugin_data An array of plugin data.
  * @param string $status Status of the plugin.
  * @return array Modified plugin meta data.
  */
-function google_ss2db_row_meta( $plugin_meta, $plugin_file, $plugin_data, $status ) {
+function google_ss2db_row_meta( array $plugin_meta, string $plugin_file, array $plugin_data, string $status ): array {
 	if ( plugin_basename( __FILE__ ) === $plugin_file ) {
 		$plugin_meta[] = '<a href="https://github.com/sectsect/google-spreadsheet-to-db" target="_blank"><span class="dashicons dashicons-randomize"></span> GitHub</a>';
 		return $plugin_meta;
