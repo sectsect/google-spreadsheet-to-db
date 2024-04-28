@@ -25,7 +25,7 @@ class Google_Spreadsheet_To_DB_Query {
 	/**
 	 * Holds the parameters and defaults for the query.
 	 *
-	 * @var object
+	 * @var stdClass
 	 */
 	private $data;
 
@@ -33,7 +33,7 @@ class Google_Spreadsheet_To_DB_Query {
 	 * Constructor for the Google_Spreadsheet_To_DB_Query class.
 	 * Initializes the class with default or custom parameters.
 	 *
-	 * @param array $args Customizable parameters including 'where', 'orderby', 'order', 'limit', and 'offset'.
+	 * @param array<string, mixed> $args Customizable parameters including 'where', 'orderby', 'order', 'limit', and 'offset'.
 	 */
 	public function __construct( array $args = array() ) {
 		$defaults   = array(
@@ -84,7 +84,7 @@ class Google_Spreadsheet_To_DB_Query {
 	 * Retrieves rows from the database based on the constructed SQL query.
 	 * Applies filtering, sorting, and pagination as specified in the class parameters.
 	 *
-	 * @return array|object|null Database query results.
+	 * @return array<object>|null Database query results.
 	 */
 	public function getrow(): ?array {
 		global $wpdb;

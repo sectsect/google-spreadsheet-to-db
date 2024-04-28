@@ -1,5 +1,5 @@
 # <img src="https://github-sect.s3-ap-northeast-1.amazonaws.com/logo.svg" width="18" height="auto"> Google Spreadsheet to DB
-[![PHP Unit Tests](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpunit.yml/badge.svg)](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpunit.yml) [![PHP Coding Standards](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpcs.yml/badge.svg)](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpcs.yml) [![Latest Stable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v)](//packagist.org/packages/sectsect/google-spreadsheet-to-db)
+[![PHP Unit Tests](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpunit.yml/badge.svg)](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpunit.yml) [![PHPStan](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpstan.yml/badge.svg)](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpstan.yml) [![PHP Coding Standards](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpcs.yml/badge.svg)](https://github.com/sectsect/google-spreadsheet-to-db/actions/workflows/phpcs.yml) [![Latest Stable Version](https://poser.pugx.org/sectsect/google-spreadsheet-to-db/v)](//packagist.org/packages/sectsect/google-spreadsheet-to-db)
 
 ### The "Google Spreadsheet to DB" plugin is designed for WordPress and facilitates the import of data from Google Sheets into a WordPress database using Google's [Sheets API](https://developers.google.com/sheets/api) (v4). It supports data manipulation before saving and is configurable via a WordPress admin interface.
 
@@ -9,7 +9,7 @@
 - Admin Interface: Provides an admin page for easy management and configuration of the plugin settings.
 
 ## Requirements
-- PHP version 7.4 or higher.
+- PHP version 8.0 or higher.
 - [Composer](https://getcomposer.org/) for managing PHP dependencies.
 
 ## Get Started

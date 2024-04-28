@@ -41,7 +41,7 @@ if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'google_s
  */
 function exist_sheet( array $sheets_list, string $sheet_name ): bool {
 	foreach ( $sheets_list as $sheet ) {
-		if ( $sheet->properties->title === $sheet_name ) {
+		if ( $sheet->getProperties()->getTitle() === $sheet_name ) {
 			return true;
 		}
 	}
@@ -73,20 +73,18 @@ function get_client(): Google_Client {
  * @param string $worksheetname The name of the Google Spreadsheet.
  * @param string $sheetname The name of the individual sheet within the Spreadsheet.
  * @param bool   $hasheaderrow Indicates if the spreadsheet contains a header row.
- * @return array|bool The spreadsheet data as an associative array if successful, or false if the sheet does not exist.
+ * @return array<string, mixed>|bool The spreadsheet data as an associative array if successful, or false if the sheet does not exist.
  */
 function get_value_google_spreadsheet( string $worksheetid, string $worksheetname, string $sheetname, bool $hasheaderrow ): array|bool {
-	// Get the API client and construct the service object.
 	$client  = get_client();
 	$service = new Google_Service_Sheets( $client );
 
-	// Prints the names and majors of students in a sample spreadsheet.
-	// https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit .
 	$spreadsheet_id = $worksheetid;
 	$range          = $sheetname;
 
 	$response = $service->spreadsheets->get( $spreadsheet_id );
 	$sheets   = $response->getSheets();
+	$object   = array(); // Initialize $object to prevent undefined variable issues.
 	if ( exist_sheet( $sheets, $sheetname ) ) {
 		$response = $service->spreadsheets_values->get( $spreadsheet_id, $range );
 		$values   = $response->getValues();
@@ -97,8 +95,7 @@ function get_value_google_spreadsheet( string $worksheetid, string $worksheetnam
 				// Remove the header row.
 				unset( $values[0] );
 
-				$i      = 0;
-				$object = array();
+				$i = 0;
 				foreach ( $values as $row ) {
 					$j            = 0;
 					$object[ $i ] = array();
@@ -125,12 +122,16 @@ function get_value_google_spreadsheet( string $worksheetid, string $worksheetnam
 /**
  * Saves data from a Google Spreadsheet to the database.
  *
- * @return array Contains details of the operation including the database row ID, date, worksheet identifiers, and operation result.
+ * @return array<string, mixed> Contains details of the operation including the database row ID, date, worksheet identifiers, and operation result.
  */
 function save_spreadsheet(): array {
 	global $wpdb;
-	$today = new DateTime();
-	$today->setTimeZone( new DateTimeZone( get_option( 'timezone_string' ) ) );
+	$today           = new DateTime();
+	$timezone_string = get_option( 'timezone_string' );
+	if ( ! is_string( $timezone_string ) || empty( $timezone_string ) ) {
+		return array();  // Early return if not a valid string.
+	}
+	$today->setTimeZone( new DateTimeZone( $timezone_string ) );
 	$date          = $today->format( 'Y-m-d H:i:s' );
 	$title         = wp_unslash( $_POST['datatitle'] );
 	$worksheetid   = wp_unslash( $_POST['worksheetid'] );

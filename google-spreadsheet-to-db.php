@@ -12,7 +12,7 @@
  * @package         Google_Spreadsheet_to_DB
  */
 
-$google_ss2db_minimalrequiredphpversion = '5.5';
+$google_ss2db_minimalrequiredphpversion = '8.0';
 
 global $wpdb;
 define( 'GOOGLE_SS2DB_TABLE_NAME', $wpdb->prefix . 'google_ss2db' );
@@ -46,8 +46,10 @@ function google_ss2db_phpversioncheck(): bool {
 
 /**
  * Runs during plugin activation to set up initial settings or structures.
+ *
+ * @return void
  */
-function activate_google_ss2db() {
+function activate_google_ss2db(): void {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-spreadsheet-to-db-activator.php';
 	Google_Spreadsheet_To_DB_Activator::activate();
 }
@@ -55,8 +57,10 @@ register_activation_hook( __FILE__, 'activate_google_ss2db' );
 
 /**
  * Loads the plugin's text domain for internationalization.
+ *
+ * @return void
  */
-function google_ss2db_load_textdomain() {
+function google_ss2db_load_textdomain(): void {
 	load_plugin_textdomain( 'google_ss2db', false, plugin_basename( __DIR__ ) . '/languages' );
 }
 add_action( 'plugins_loaded', 'google_ss2db_load_textdomain' );
@@ -64,11 +68,11 @@ add_action( 'plugins_loaded', 'google_ss2db_load_textdomain' );
 /**
  * Adds a link to the plugin's GitHub page in the plugin meta row.
  *
- * @param array  $plugin_meta An array of the plugin's metadata.
- * @param string $plugin_file Path to the plugin file relative to the plugins directory.
- * @param array  $plugin_data An array of plugin data.
- * @param string $status Status of the plugin.
- * @return array Modified plugin meta data.
+ * @param string[] $plugin_meta An array of the plugin's metadata.
+ * @param string   $plugin_file Path to the plugin file relative to the plugins directory.
+ * @param string[] $plugin_data An array of plugin data.
+ * @param string   $status Status of the plugin.
+ * @return string[] Modified plugin meta data.
  */
 function google_ss2db_row_meta( array $plugin_meta, string $plugin_file, array $plugin_data, string $status ): array {
 	if ( plugin_basename( __FILE__ ) === $plugin_file ) {

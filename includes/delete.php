@@ -39,7 +39,9 @@ $theid = wp_unslash( $_POST['id'] );
 $array = array(
 	'id' => $theid,
 );
-$res   = $wpdb->delete( GOOGLE_SS2DB_TABLE_NAME, $array );
+
+global $wpdb;
+$res = $wpdb->delete( GOOGLE_SS2DB_TABLE_NAME, $array );
 
 $return = array(
 	'res' => $res,
