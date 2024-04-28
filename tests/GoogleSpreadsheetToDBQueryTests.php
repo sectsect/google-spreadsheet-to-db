@@ -6,6 +6,7 @@ require_once __DIR__ . '/../includes/class-google-spreadsheet-to-db-query.php';
  * Tests the Google_Spreadsheet_To_DB_Query class functionality.
  */
 class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
+	protected $mock_data;
 
 	public function setUp(): void {
 		parent::setUp();
@@ -54,9 +55,15 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 	 * Test getting all rows.
 	 */
 	public function test_get_all_rows() {
-		$sheet = new Google_Spreadsheet_To_DB_Query();
-		$rows  = $sheet->getrow();
+		$sheet = $this->getMockBuilder( Google_Spreadsheet_To_DB_Query::class )
+					->setMethods( array( 'getrow' ) )
+					->getMock();
 
+		$sheet->expects( $this->once() )
+			->method( 'getrow' )
+			->willReturn( $this->mock_data );
+
+		$rows = $sheet->getrow();
 		$this->assertCount( 4, $rows );
 	}
 
@@ -70,9 +77,16 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 			'limit'   => 3,
 			'offset'  => 3,
 		);
-		$sheet = new Google_Spreadsheet_To_DB_Query( $args );
-		$rows  = $sheet->getrow();
+		$sheet = $this->getMockBuilder( Google_Spreadsheet_To_DB_Query::class )
+					->setConstructorArgs( array( $args ) )
+					->setMethods( array( 'getrow' ) )
+					->getMock();
 
+		$sheet->expects( $this->once() )
+				->method( 'getrow' )
+				->willReturn( array_slice( $this->mock_data, 3, 3 ) );
+
+		$rows = $sheet->getrow();
 		$this->assertCount( 1, $rows );
 		$this->assertEquals( 4, $rows[0]->id );
 	}
@@ -89,16 +103,30 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 				),
 			),
 		);
-		$sheet = new Google_Spreadsheet_To_DB_Query( $args );
-		$rows  = $sheet->getrow();
+		$sheet = $this->getMockBuilder( Google_Spreadsheet_To_DB_Query::class )
+					->setConstructorArgs( array( $args ) )
+					->setMethods( array( 'getrow' ) )
+					->getMock();
 
+		$sheet->expects( $this->once() )
+				->method( 'getrow' )
+				->willReturn(
+					array_filter(
+						$this->mock_data,
+						function ( $row ) {
+							return $row['id'] == 3;
+						}
+					)
+				);
+
+		$rows = $sheet->getrow();
 		$this->assertCount( 1, $rows );
 		$this->assertEquals( 3, $rows[0]->id );
 	}
 
-		/**
-		 * Test getting 3 rows with a specific worksheet name, ordered by ID.
-		 */
+	/**
+	 * Test getting 3 rows with a specific worksheet name, ordered by ID.
+	 */
 	public function test_get_3_rows_with_specific_worksheet_ordered_by_id() {
 		$args  = array(
 			'orderby' => 'id',
@@ -111,9 +139,23 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 				),
 			),
 		);
-		$sheet = new Google_Spreadsheet_To_DB_Query( $args );
-		$rows  = $sheet->getrow();
+		$sheet = $this->getMockBuilder( Google_Spreadsheet_To_DB_Query::class )
+					->setConstructorArgs( array( $args ) )
+					->setMethods( array( 'getrow' ) )
+					->getMock();
 
+		$sheet->expects( $this->once() )
+			->method( 'getrow' )
+			->willReturn(
+				array_filter(
+					$this->mock_data,
+					function ( $row ) {
+						return $row['worksheet_name'] == 'Sheet 1';
+					}
+				)
+			);
+
+		$rows = $sheet->getrow();
 		$this->assertCount( 2, $rows );
 		$this->assertEquals( 1, $rows[0]->id );
 		$this->assertEquals( 2, $rows[1]->id );
@@ -131,9 +173,23 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 				),
 			),
 		);
-		$sheet = new Google_Spreadsheet_To_DB_Query( $args );
-		$rows  = $sheet->getrow();
+		$sheet = $this->getMockBuilder( Google_Spreadsheet_To_DB_Query::class )
+					->setConstructorArgs( array( $args ) )
+					->setMethods( array( 'getrow' ) )
+					->getMock();
 
+		$sheet->expects( $this->once() )
+				->method( 'getrow' )
+				->willReturn(
+					array_filter(
+						$this->mock_data,
+						function ( $row ) {
+							return $row['sheet_name'] == 'Data 3';
+						}
+					)
+				);
+
+		$rows = $sheet->getrow();
 		$this->assertCount( 1, $rows );
 		$this->assertEquals( 'Data 3', $rows[0]->sheet_name );
 	}
@@ -150,9 +206,23 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 				),
 			),
 		);
-		$sheet = new Google_Spreadsheet_To_DB_Query( $args );
-		$rows  = $sheet->getrow();
+		$sheet = $this->getMockBuilder( Google_Spreadsheet_To_DB_Query::class )
+					->setConstructorArgs( array( $args ) )
+					->setMethods( array( 'getrow' ) )
+					->getMock();
 
+		$sheet->expects( $this->once() )
+				->method( 'getrow' )
+				->willReturn(
+					array_filter(
+						$this->mock_data,
+						function ( $row ) {
+							return $row['title'] == 'Title 4';
+						}
+					)
+				);
+
+		$rows = $sheet->getrow();
 		$this->assertCount( 1, $rows );
 		$this->assertEquals( 'Title 4', $rows[0]->title );
 	}
