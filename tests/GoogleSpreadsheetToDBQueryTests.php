@@ -83,7 +83,62 @@ class Test_Google_Spreadsheet_To_DB_Query extends WP_UnitTestCase {
 				}
 			)
 		);
-		$wpdb->method( 'get_results' )->willReturn( $mock_api_response );
+		$wpdb->method( 'get_results' )->will(
+			$this->returnCallback(
+				function ( $query ) use ( $mock_api_response ) {
+					// IDに基づくフィルタリング
+					if ( strpos( $query, 'WHERE id =' ) !== false ) {
+						$id     = intval( str_replace( 'SELECT * FROM data WHERE id =', '', $query ) );
+						$result = array_filter(
+							$mock_api_response,
+							function ( $item ) use ( $id ) {
+								return $item->id === $id;
+							}
+						);
+						return $result;
+					}
+					// オフセットと制限に基づくフィルタリング
+					if ( strpos( $query, 'LIMIT' ) !== false ) {
+						$limit  = intval( explode( ',', explode( 'LIMIT', $query )[1] )[1] );
+						$offset = intval( explode( ',', explode( 'LIMIT', $query )[1] )[0] );
+						return array_slice( $mock_api_response, $offset, $limit );
+					}
+					// ワークシート名に基づくフィルタリング
+					if ( strpos( $query, 'WHERE worksheet_name =' ) !== false ) {
+						$worksheet_name = str_replace( array( "SELECT * FROM data WHERE worksheet_name = '", "'" ), '', $query );
+						return array_filter(
+							$mock_api_response,
+							function ( $item ) use ( $worksheet_name ) {
+								return $item->worksheet_name === $worksheet_name;
+							}
+						);
+					}
+					// 日付に基づくフィルタリング
+					if ( strpos( $query, 'WHERE date >=' ) !== false ) {
+						$date = str_replace( array( "SELECT * FROM data WHERE date >= '", "'" ), '', $query );
+						return array_filter(
+							$mock_api_response,
+							function ( $item ) use ( $date ) {
+								return $item->date >= $date;
+							}
+						);
+					}
+					// 複数の条件に基づくフィルタリング
+					if ( strpos( $query, 'WHERE worksheet_name =' ) !== false && strpos( $query, 'AND date >=' ) !== false ) {
+						$worksheet_name = str_replace( array( "SELECT * FROM data WHERE worksheet_name = '", "' AND date >= '" ), '', explode( "' AND date >= '", $query )[0] );
+						$date           = str_replace( "'", '', explode( "' AND date >= '", $query )[1] );
+						return array_filter(
+							$mock_api_response,
+							function ( $item ) use ( $worksheet_name, $date ) {
+								return $item->worksheet_name === $worksheet_name && $item->date >= $date;
+							}
+						);
+					}
+					// 他の条件に基づくフィルタリングも同様に実装
+					return $mock_api_response;
+				}
+			)
+		);
 	}
 
 	/**
