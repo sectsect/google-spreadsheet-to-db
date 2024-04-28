@@ -34,9 +34,20 @@ class Test_Google_Spreadsheet_To_DB_Query extends WP_UnitTestCase {
 
 		// Mocking wpdb.
 		global $wpdb;
-		$wpdb = $this->getMockBuilder(stdClass::class)
-					->setMethods(['prepare', 'get_results', 'query'])
+		$wpdb = $this->getMockBuilder( stdClass::class )
+					->setMethods( array( 'prepare', 'get_results', 'query' ) )
 					->getMock();
+
+		$wpdb->posts              = 'wp_posts';
+		$wpdb->postmeta           = 'wp_postmeta';
+		$wpdb->comments           = 'wp_comments';
+		$wpdb->commentmeta        = 'wp_commentmeta';
+		$wpdb->terms              = 'wp_terms';
+		$wpdb->term_taxonomy      = 'wp_term_taxonomy';
+		$wpdb->term_relationships = 'wp_term_relationships';
+		$wpdb->termmeta           = 'wp_termmeta';
+		$wpdb->users              = 'wp_users';
+		$wpdb->usermeta           = 'wp_usermeta';
 
 		$wpdb->method( 'prepare' )->will(
 			$this->returnCallback(
