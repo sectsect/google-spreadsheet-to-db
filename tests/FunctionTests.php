@@ -22,4 +22,26 @@ class FunctionsTest extends WP_UnitTestCase {
 			array( 'HelloWorld', 1, '...d' ), // Max chars is one.
 		);
 	}
+
+	/**
+	 * Tests the output of the google_ss2db_options_pagination function.
+	 */
+	public function testPaginationOutput() {
+		// Pagination settings.
+		$current_page = 1;
+		$total_pages  = 5;
+		$range        = 2;
+
+		// Expected output.
+		$expected_output  = '<ul class="pagination">';
+		$expected_output .= '<li class="prevnext"><a href="' . get_pagenum_link( $current_page + 1 ) . '">&rsaquo;</a></li>';
+		$expected_output .= '<li class="last"><a href="' . get_pagenum_link( $total_pages ) . '">&raquo;</a></li>';
+		$expected_output .= '</ul>';
+
+		// Capture the output.
+		$this->expectOutputString( $expected_output );
+
+		// Execute the pagination function.
+		google_ss2db_options_pagination( $current_page, $total_pages, $range );
+	}
 }
