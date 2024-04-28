@@ -12,7 +12,7 @@
  * @package         Google_Spreadsheet_to_DB
  */
 
-$google_ss2db_minimalrequiredphpversion = '5.5';
+$google_ss2db_minimalrequiredphpversion = '8.0';
 
 global $wpdb;
 define( 'GOOGLE_SS2DB_TABLE_NAME', $wpdb->prefix . 'google_ss2db' );

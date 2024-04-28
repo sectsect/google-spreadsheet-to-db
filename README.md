@@ -9,7 +9,7 @@
 - Admin Interface: Provides an admin page for easy management and configuration of the plugin settings.
 
 ## Requirements
-- PHP version 7.4 or higher.
+- PHP version 8.0 or higher.
 - [Composer](https://getcomposer.org/) for managing PHP dependencies.
 
 ## Get Started
