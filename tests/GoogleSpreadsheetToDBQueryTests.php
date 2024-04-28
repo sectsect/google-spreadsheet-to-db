@@ -64,6 +64,18 @@ class Test_Google_Spreadsheet_To_DB_Query extends WP_UnitTestCase {
 					->setMethods( array( 'prepare', 'get_results', 'query' ) )
 					->getMock();
 
+		// Adding properties to mock object to avoid undefined property warnings
+		$wpdb->posts              = 'wp_posts';
+		$wpdb->postmeta           = 'wp_postmeta';
+		$wpdb->comments           = 'wp_comments';
+		$wpdb->commentmeta        = 'wp_commentmeta';
+		$wpdb->terms              = 'wp_terms';
+		$wpdb->term_taxonomy      = 'wp_term_taxonomy';
+		$wpdb->term_relationships = 'wp_term_relationships';
+		$wpdb->termmeta           = 'wp_termmeta';
+		$wpdb->users              = 'wp_users';
+		$wpdb->usermeta           = 'wp_usermeta';
+
 		$wpdb->method( 'prepare' )->will(
 			$this->returnCallback(
 				function ( $query, ...$params ) {
@@ -71,7 +83,24 @@ class Test_Google_Spreadsheet_To_DB_Query extends WP_UnitTestCase {
 				}
 			)
 		);
-		$wpdb->method( 'get_results' )->willReturn( $mock_api_response );
+		$wpdb->method( 'get_results' )->will(
+			$this->returnCallback(
+				function ( $query ) use ( $mock_api_response ) {
+					// Filtering logic based on query
+					if ( strpos( $query, 'WHERE id =' ) !== false ) {
+						$id = intval( str_replace( 'SELECT * FROM data WHERE id =', '', $query ) );
+						return array_filter(
+							$mock_api_response,
+							function ( $item ) use ( $id ) {
+								return $item->id === $id;
+							}
+						);
+					}
+					// Default to return all data
+					return $mock_api_response;
+				}
+			)
+		);
 
 		// Adjusting the instantiation to include parameters if needed.
 		$this->google_spreadsheet_to_db_query = new Google_Spreadsheet_To_DB_Query();
@@ -99,9 +128,8 @@ class Test_Google_Spreadsheet_To_DB_Query extends WP_UnitTestCase {
 		$args                                 = array(
 			'where' => array(
 				array(
-					'key'     => 'id',
-					'value'   => 2,
-					'compare' => '=',
+					'key'   => 'id',
+					'value' => 2,
 				),
 			),
 		);
