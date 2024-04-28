@@ -167,12 +167,12 @@
 	 */
 	class RecursiveTable {
 		/**
-		 * Set the description.
+		 * Convert JSON text to HTML debug output.
 		 *
-		 * @param  array $json_text "jsonText".
-		 * @return string "description".
+		 * @param string $json_text JSON text to be converted.
+		 * @return string HTML representation of the JSON.
 		 */
-		public static function json_to_debug( $json_text = '' ) {
+		public static function json_to_debug( string $json_text = '' ): string {
 			$arr  = json_decode( $json_text, true );
 			$html = '';
 			if ( $arr && is_array( $arr ) ) {
@@ -182,12 +182,12 @@
 		}
 
 		/**
-		 * Set the description.
+		 * Recursively convert an array to an HTML table.
 		 *
-		 * @param  array $arr "array".
-		 * @return string "description".
+		 * @param array $arr Array to be converted.
+		 * @return string HTML table representation of the array.
 		 */
-		private static function array_to_html_table_recursive( $arr ) {
+		private static function array_to_html_table_recursive( array $arr ): string {
 			$str = '<table><tbody>';
 			foreach ( $arr as $key => $val ) {
 				$str .= '<tr>';
