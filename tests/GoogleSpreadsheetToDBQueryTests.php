@@ -83,46 +83,7 @@ class Test_Google_Spreadsheet_To_DB_Query extends WP_UnitTestCase {
 				}
 			)
 		);
-		$wpdb->method('get_results')->will(
-			$this->returnCallback(
-				function ($query) use ($mock_api_response) {
-					// オフセットと制限に基づくフィルタリング
-					if (strpos($query, 'LIMIT') !== false) {
-						$limit = intval(explode(',', explode('LIMIT', $query)[1])[1]);
-						$offset = intval(explode(',', explode('LIMIT', $query)[1])[0]);
-						return array_slice($mock_api_response, $offset, $limit);
-					}
-					// ワークシート名に基づくフィルタリング
-					if (strpos($query, 'WHERE worksheet_name =') !== false) {
-						$worksheet_name = str_replace(["SELECT * FROM data WHERE worksheet_name = '", "'"], "", $query);
-						return array_filter($mock_api_response, function ($item) use ($worksheet_name) {
-							return $item->worksheet_name === $worksheet_name;
-						});
-					}
-					// 日付に基づくフィルタリング
-					if (strpos($query, 'WHERE date >=') !== false) {
-						$date = str_replace(["SELECT * FROM data WHERE date >= '", "'"], "", $query);
-						return array_filter($mock_api_response, function ($item) use ($date) {
-							return $item->date >= $date;
-						});
-					}
-					// 複数の条件に基づくフィルタリング
-					if (strpos($query, 'WHERE worksheet_name =') !== false && strpos($query, 'AND date >=') !== false) {
-						$worksheet_name = str_replace(["SELECT * FROM data WHERE worksheet_name = '", "' AND date >= '"], "", explode("' AND date >= '", $query)[0]);
-						$date = str_replace("'", "", explode("' AND date >= '", $query)[1]);
-						return array_filter($mock_api_response, function ($item) use ($worksheet_name, $date) {
-							return $item->worksheet_name === $worksheet_name && $item->date >= $date;
-						});
-					}
-
-					// 他の条件に基づくフィルタリングも同様に実装
-					return $mock_api_response;
-				}
-			)
-		);
-
-		// Adjusting the instantiation to include parameters if needed.
-		$this->google_spreadsheet_to_db_query = new Google_Spreadsheet_To_DB_Query();
+		$wpdb->method( 'get_results' )->willReturn( $mock_api_response );
 	}
 
 	/**
@@ -154,8 +115,8 @@ class Test_Google_Spreadsheet_To_DB_Query extends WP_UnitTestCase {
 		);
 		$this->google_spreadsheet_to_db_query = new Google_Spreadsheet_To_DB_Query( $args );
 		$result                               = $this->google_spreadsheet_to_db_query->getrow();
-		$this->assertEquals( '2021-01-02', $result->date );
-		$this->assertEquals( 'Sample Data 2', $result->title );
+		$this->assertEquals( '2021-01-02', $result[0]->date );
+		$this->assertEquals( 'Sample Data 2', $result[0]->title );
 	}
 
 	/**
