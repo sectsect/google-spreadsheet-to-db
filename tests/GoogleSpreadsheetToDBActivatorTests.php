@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../includes/class-google-spreadsheet-to-db-activator.php';
+
 /**
  * Class for testing the Google_Spreadsheet_To_DB_Activator activation functionality.
  *
