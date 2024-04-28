@@ -25,7 +25,7 @@ class Google_Spreadsheet_To_DB_Query {
 	/**
 	 * Holds the parameters and defaults for the query.
 	 *
-	 * @var object
+	 * @var stdClass
 	 */
 	private $data;
 
