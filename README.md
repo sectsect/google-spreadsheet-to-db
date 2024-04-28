@@ -235,7 +235,7 @@ $args = array(
 
 * Tested on WordPress v6.3.1
 
-## Notes for Developer
+## For Developers
 
 * This plugin saves Spreadsheet's data to the global area, not to each post. If you want to have Spredsheet data for individual posts, you can link data `ID` with custom fields.
 * The data is added and stored in the `wp_google_ss2db` table as a JSON-encoded array.
