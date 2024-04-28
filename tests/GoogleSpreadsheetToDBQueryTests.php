@@ -88,7 +88,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 		$rows = $sheet->getrow();
 		$this->assertCount( 1, $rows );
-		$this->assertEquals( 4, $rows[0]->id );
+		$this->assertEquals( 4, $rows[0]['id'] );
 	}
 
 	/**
@@ -121,7 +121,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 		$rows = $sheet->getrow();
 		$this->assertCount( 1, $rows );
-		$this->assertEquals( 3, $rows[0]->id );
+		$this->assertEquals( 3, $rows[0]['id'] );
 	}
 
 	/**
@@ -157,8 +157,8 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 		$rows = $sheet->getrow();
 		$this->assertCount( 2, $rows );
-		$this->assertEquals( 1, $rows[0]->id );
-		$this->assertEquals( 2, $rows[1]->id );
+		$this->assertEquals( 1, $rows[0]['id'] );
+		$this->assertEquals( 2, $rows[1]['id'] );
 	}
 
 	/**
@@ -191,7 +191,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 		$rows = $sheet->getrow();
 		$this->assertCount( 1, $rows );
-		$this->assertEquals( 'Data 3', $rows[0]->sheet_name );
+		$this->assertEquals( 'Data 3', $rows[0]['sheet_name'] );
 	}
 
 	/**
@@ -224,6 +224,6 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 		$rows = $sheet->getrow();
 		$this->assertCount( 1, $rows );
-		$this->assertEquals( 'Title 4', $rows[0]->title );
+		$this->assertEquals( 'Title 4', $rows[0]['title'] );
 	}
 }
