@@ -1,5 +1,17 @@
 # Changelog
 
+## [v6.0.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.0.0) (2024-04-28)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v5.1.0...v6.0.0)
+
+**Merged pull requests:**
+
+- test: add a unit test [\#37](https://github.com/sectsect/google-spreadsheet-to-db/pull/37) ([sectsect](https://github.com/sectsect))
+- add code linting with PHPStan [\#36](https://github.com/sectsect/google-spreadsheet-to-db/pull/36) ([sectsect](https://github.com/sectsect))
+- refactor: add PHP type hints [\#35](https://github.com/sectsect/google-spreadsheet-to-db/pull/35) ([sectsect](https://github.com/sectsect))
+- test: add unit test that covered class Google\_Spreadsheet\_To\_DB\_Query [\#34](https://github.com/sectsect/google-spreadsheet-to-db/pull/34) ([sectsect](https://github.com/sectsect))
+- Downgrade PHPUnit version for WordPress Plugin [\#33](https://github.com/sectsect/google-spreadsheet-to-db/pull/33) ([sectsect](https://github.com/sectsect))
+
 ## [v5.1.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v5.1.0) (2024-04-23)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v5.0.1...v5.1.0)
