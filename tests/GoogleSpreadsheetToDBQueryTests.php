@@ -160,8 +160,12 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 		$rows = $sheet->getrow();
 		$this->assertCount( 2, $rows );
 
+		var_dump( $rows );
+
 		// Convert an associative array into an indexed array forcely.
 		$rows = array_values( $rows );
+
+		var_dump( $rows );
 
 		$this->assertEquals( 1, $rows[0]['id'] );
 		$this->assertEquals( 2, $rows[1]['id'] );
