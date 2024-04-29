@@ -2,10 +2,12 @@
 /**
  * Class FunctionsTest
  * Tests the functionality of functions in functions.php.
+ * @coversDefaultClass Functions
  */
 class FunctionsTest extends WP_UnitTestCase {
 	/**
 	 * @dataProvider providerTruncateMiddle
+	 * @covers ::google_ss2db_truncate_middle
 	 */
 	public function test_google_ss2db_truncate_middle( $input, $max_chars, $expected ) {
 		require_once 'functions/functions.php'; // Include the file where the function is defined.
@@ -25,6 +27,7 @@ class FunctionsTest extends WP_UnitTestCase {
 
 	/**
 	 * Tests the output of the google_ss2db_options_pagination function.
+	 * @covers ::google_ss2db_options_pagination
 	 */
 	public function testPaginationOutput() {
 		// Pagination settings.
