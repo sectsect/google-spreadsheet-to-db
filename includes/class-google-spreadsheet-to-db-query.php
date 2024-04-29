@@ -75,19 +75,9 @@ class Google_Spreadsheet_To_DB_Query {
 	 * @return string The ORDER BY clause of the SQL query.
 	 */
 	private function build_order_by_clause(): string {
-		$allowed_columns = array( 'id', 'date', 'worksheet_id', 'worksheet_name', 'sheet_name', 'title' );
-		$allowed_orders  = array( 'ASC', 'DESC' );
-
-		$order_clauses = array();
-		foreach ( (array) $this->data->orderby as $order_by ) {
-			$order_by        = (array) $order_by;
-			$column          = isset( $order_by['column'] ) && in_array( $order_by['column'], $allowed_columns, true ) ? $order_by['column'] : 'date';
-			$order           = isset( $order_by['order'] ) && in_array( strtoupper( $order_by['order'] ), $allowed_orders, true ) ? strtoupper( $order_by['order'] ) : 'DESC';
-			$order_clauses[] = "$column $order";
-		}
-
-		$order_by_clause = implode( ', ', $order_clauses );
-		return $order_by_clause ? "ORDER BY $order_by_clause" : '';
+		$orderby = in_array( $this->data->orderby, array( 'id', 'date', 'worksheet_id', 'worksheet_name', 'sheet_name', 'title' ), true ) ? $this->data->orderby : 'date';
+		$order   = in_array( $this->data->order, array( 'ASC', 'DESC' ), true ) ? $this->data->order : 'DESC';
+		return "ORDER BY $orderby $order";
 	}
 
 	/**
