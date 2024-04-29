@@ -35,7 +35,7 @@ class SaveSpreadsheetTest extends WP_UnitTestCase {
 	/**
 	 * Resets the environment after each test.
 	 */
-	public function tearDown() {
+	public function tearDown(): void {
 		parent::tearDown();
 		unset( $_POST );
 		unset( $_SERVER['REQUEST_METHOD'] );
