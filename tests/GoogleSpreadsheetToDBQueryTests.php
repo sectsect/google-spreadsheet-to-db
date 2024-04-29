@@ -229,4 +229,51 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 		$first = reset( $rows );
 		$this->assertEquals( 'Title 4', $first['title'] );
 	}
+
+	/**
+	 * Test getting the 2nd row with a date greater than or equal to '2023-06-03 12:00:00' and a specific worksheet name, ordered by ID in descending order.
+	 */
+	public function test_get_2nd_row_with_date_gte_and_specific_worksheet_ordered_by_id_desc() {
+		$args  = array(
+			'orderby' => 'id',
+			'order'   => 'DESC',
+			'limit'   => 1,
+			'offset'  => 1,
+			'where'   => array(
+				array(
+					'key'     => 'date',
+					'value'   => '2023-06-03 12:00:00',
+					'compare' => '>=',
+				),
+				array(
+					'key'   => 'worksheet_name',
+					'value' => 'Sheet 2',
+				),
+			),
+		);
+		$sheet = $this->getMockBuilder( Google_Spreadsheet_To_DB_Query::class )
+					->setConstructorArgs( array( $args ) )
+					->setMethods( array( 'getrow' ) )
+					->getMock();
+
+		$sheet->expects( $this->once() )
+			->method( 'getrow' )
+			->willReturn(
+				array_slice(
+					array_filter(
+						$this->mock_data,
+						function ( $row ) {
+							return $row['date'] >= '2023-06-03 12:00:00' && $row['worksheet_name'] == 'Sheet 2';
+						}
+					),
+					1,
+					1
+				)
+			);
+
+		$rows = $sheet->getrow();
+		$this->assertCount( 1, $rows );
+		$first = reset( $rows );
+		$this->assertEquals( 3, $first['id'] );
+	}
 }
