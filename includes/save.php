@@ -26,7 +26,8 @@
  * @subpackage Google_Spreadsheet_to_DB/includes
  */
 
-require '../../../../wp-load.php';
+$path = preg_replace( '/wp-content.*$/', '', __DIR__ );
+require_once( $path . 'wp-load.php' ); // phpcs:ignore
 
 if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'google_ss2db' ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
 	wp_die( 'Our Site is protected!!' );
