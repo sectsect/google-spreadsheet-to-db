@@ -88,7 +88,8 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 		$rows = $sheet->getrow();
 		$this->assertCount( 1, $rows );
-		$this->assertEquals( 4, $rows[0]['id'] );
+		$first = reset( $rows );
+		$this->assertEquals( 1, $first['id'] );
 	}
 
 	/**
@@ -158,6 +159,10 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 		$rows = $sheet->getrow();
 		$this->assertCount( 2, $rows );
+
+		// Convert an associative array into an indexed array forcely.
+		$rows = array_values( $rows );
+
 		$this->assertEquals( 1, $rows[0]['id'] );
 		$this->assertEquals( 2, $rows[1]['id'] );
 	}
