@@ -17,7 +17,7 @@ class SaveSpreadsheetTest extends WP_UnitTestCase {
 	/**
 	 * Sets up the environment for each test.
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->post_data           = array(
 			'nonce'            => wp_create_nonce( 'google_ss2db' ),
