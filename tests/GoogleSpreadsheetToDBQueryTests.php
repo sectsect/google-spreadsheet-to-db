@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/class-google-spreadsheet-to-db-query.php';
 /**
  * Class Test_Google_Spreadsheet_To_DB_Query
  * Tests the Google_Spreadsheet_To_DB_Query class functionality.
+ * @covers Google_Spreadsheet_To_DB_Query
  */
 class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 	protected $mock_data;
@@ -53,6 +54,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting all rows.
+	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_all_rows() {
 		$sheet = $this->getMockBuilder( Google_Spreadsheet_To_DB_Query::class )
@@ -69,6 +71,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting 3 rows starting from the 4th row, ordered by ID in ascending order.
+	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_3_rows_from_4th_ascending_by_id() {
 		$args  = array(
@@ -94,6 +97,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting a row with a specific ID.
+	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_row_with_specific_id() {
 		$args  = array(
@@ -128,6 +132,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting 3 rows with a specific worksheet name, ordered by ID.
+	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_3_rows_with_specific_worksheet_ordered_by_id() {
 		$args  = array(
@@ -178,6 +183,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting rows with a specific sheet name.
+	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_rows_with_specific_sheet_name() {
 		$args  = array(
@@ -212,6 +218,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting rows with a specific title.
+	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_rows_with_specific_title() {
 		$args  = array(
@@ -246,6 +253,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting the 2nd row with a date greater than or equal to '2023-06-03 12:00:00' and a specific worksheet name, ordered by ID in descending order.
+	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_2nd_row_with_date_gte_and_specific_worksheet_ordered_by_id_desc() {
 		$args  = array(
