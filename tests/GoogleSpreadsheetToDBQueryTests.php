@@ -13,22 +13,13 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 		// Mock response from Google Sheets API.
 		$this->mock_data = array(
 			array(
-				'id'             => 1,
-				'date'           => '2023-06-01 10:00:00',
-				'worksheet_id'   => 'sheet1',
-				'worksheet_name' => 'Sheet 1',
-				'sheet_name'     => 'Data 1',
-				'title'          => 'Title 1',
-				'value'          => '{"key1":"value1"}',
-			),
-			array(
-				'id'             => 2,
-				'date'           => '2023-06-02 11:00:00',
-				'worksheet_id'   => 'sheet1',
-				'worksheet_name' => 'Sheet 1',
-				'sheet_name'     => 'Data 2',
-				'title'          => 'Title 2',
-				'value'          => '{"key2":"value2"}',
+				'id'             => 4,
+				'date'           => '2023-06-04 13:00:00',
+				'worksheet_id'   => 'sheet2',
+				'worksheet_name' => 'Sheet 2',
+				'sheet_name'     => 'Data 4',
+				'title'          => 'Title 4',
+				'value'          => '{"key4":"value4"}',
 			),
 			array(
 				'id'             => 3,
@@ -40,13 +31,22 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 				'value'          => '{"key3":"value3"}',
 			),
 			array(
-				'id'             => 4,
-				'date'           => '2023-06-04 13:00:00',
-				'worksheet_id'   => 'sheet2',
-				'worksheet_name' => 'Sheet 2',
-				'sheet_name'     => 'Data 4',
-				'title'          => 'Title 4',
-				'value'          => '{"key4":"value4"}',
+				'id'             => 2,
+				'date'           => '2023-06-02 11:00:00',
+				'worksheet_id'   => 'sheet1',
+				'worksheet_name' => 'Sheet 1',
+				'sheet_name'     => 'Data 2',
+				'title'          => 'Title 2',
+				'value'          => '{"key2":"value2"}',
+			),
+			array(
+				'id'             => 1,
+				'date'           => '2023-06-01 10:00:00',
+				'worksheet_id'   => 'sheet1',
+				'worksheet_name' => 'Sheet 1',
+				'sheet_name'     => 'Data 1',
+				'title'          => 'Title 1',
+				'value'          => '{"key1":"value1"}',
 			),
 		);
 	}
@@ -88,7 +88,8 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 		$rows = $sheet->getrow();
 		$this->assertCount( 1, $rows );
-		$this->assertEquals( 4, $rows[0]['id'] );
+		$first = reset( $rows );
+		$this->assertEquals( 1, $first['id'] );
 	}
 
 	/**
@@ -147,17 +148,30 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 		$sheet->expects( $this->once() )
 			->method( 'getrow' )
-			->willReturn(
-				array_filter(
-					$this->mock_data,
-					function ( $row ) {
-						return $row['worksheet_name'] == 'Sheet 1';
-					}
-				)
+			->willReturnCallback(
+				function () {
+					$filtered = array_filter(
+						$this->mock_data,
+						function ( $row ) {
+							return $row['worksheet_name'] == 'Sheet 1';
+						}
+					);
+					usort(
+						$filtered,
+						function ( $a, $b ) {
+							return $a['id'] <=> $b['id'];
+						}
+					);
+					return $filtered;
+				}
 			);
 
 		$rows = $sheet->getrow();
 		$this->assertCount( 2, $rows );
+
+		// Convert an associative array into an indexed array forcibly.
+		$rows = array_values( $rows );
+
 		$this->assertEquals( 1, $rows[0]['id'] );
 		$this->assertEquals( 2, $rows[1]['id'] );
 	}
@@ -228,5 +242,52 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 		$this->assertCount( 1, $rows );
 		$first = reset( $rows );
 		$this->assertEquals( 'Title 4', $first['title'] );
+	}
+
+	/**
+	 * Test getting the 2nd row with a date greater than or equal to '2023-06-03 12:00:00' and a specific worksheet name, ordered by ID in descending order.
+	 */
+	public function test_get_2nd_row_with_date_gte_and_specific_worksheet_ordered_by_id_desc() {
+		$args  = array(
+			'orderby' => 'id',
+			'order'   => 'DESC',
+			'limit'   => 1,
+			'offset'  => 1,
+			'where'   => array(
+				array(
+					'key'     => 'date',
+					'value'   => '2023-06-03 12:00:00',
+					'compare' => '>=',
+				),
+				array(
+					'key'   => 'worksheet_name',
+					'value' => 'Sheet 2',
+				),
+			),
+		);
+		$sheet = $this->getMockBuilder( Google_Spreadsheet_To_DB_Query::class )
+					->setConstructorArgs( array( $args ) )
+					->setMethods( array( 'getrow' ) )
+					->getMock();
+
+		$sheet->expects( $this->once() )
+			->method( 'getrow' )
+			->willReturn(
+				array_slice(
+					array_filter(
+						$this->mock_data,
+						function ( $row ) {
+							return $row['date'] >= '2023-06-03 12:00:00' && $row['worksheet_name'] == 'Sheet 2';
+						}
+					),
+					1,
+					1
+				)
+			);
+
+		$rows = $sheet->getrow();
+		$this->assertCount( 1, $rows );
+		$first = reset( $rows );
+		$this->assertEquals( 3, $first['id'] );
 	}
 }
