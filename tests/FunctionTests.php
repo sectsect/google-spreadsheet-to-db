@@ -1,13 +1,29 @@
 <?php
 /**
+ * FunctionsTest class
+ *
+ * Tests the functionality of functions in functions.php.
+ *
+ * @package YourPackageName
+ * @subpackage Tests
+ */
+
+/**
  * Class FunctionsTest
  * Tests the functionality of functions in functions.php.
+ *
  * @coversDefaultClass Functions
  */
 class FunctionsTest extends WP_UnitTestCase {
 	/**
+	 * Test the google_ss2db_truncate_middle function.
+	 *
 	 * @dataProvider providerTruncateMiddle
 	 * @covers ::google_ss2db_truncate_middle
+	 *
+	 * @param string $input      The input string to truncate.
+	 * @param int    $max_chars  The maximum number of characters to keep.
+	 * @param string $expected   The expected truncated string.
 	 */
 	public function test_google_ss2db_truncate_middle( $input, $max_chars, $expected ) {
 		require_once 'functions/functions.php'; // Include the file where the function is defined.
@@ -15,6 +31,11 @@ class FunctionsTest extends WP_UnitTestCase {
 		$this->assertEquals( $expected, $result );
 	}
 
+	/**
+	 * Data provider for test_google_ss2db_truncate_middle.
+	 *
+	 * @return array Test data.
+	 */
 	public function providerTruncateMiddle() {
 		return array(
 			array( 'HelloWorld', 5, 'He...rld' ), // Basic case.
@@ -27,6 +48,7 @@ class FunctionsTest extends WP_UnitTestCase {
 
 	/**
 	 * Tests the output of the google_ss2db_options_pagination function.
+	 *
 	 * @covers ::google_ss2db_options_pagination
 	 */
 	public function testPaginationOutput() {

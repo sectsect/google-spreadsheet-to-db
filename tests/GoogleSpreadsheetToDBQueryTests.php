@@ -1,14 +1,30 @@
 <?php
+/**
+ * Tests for the Google_Spreadsheet_To_DB_Query class.
+ *
+ * @package Google_Spreadsheet_To_DB_Query
+ */
+
+// Require the class file.
 require_once __DIR__ . '/../includes/class-google-spreadsheet-to-db-query.php';
 
 /**
  * Class Test_Google_Spreadsheet_To_DB_Query
  * Tests the Google_Spreadsheet_To_DB_Query class functionality.
+ *
  * @covers Google_Spreadsheet_To_DB_Query
  */
 class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
+	/**
+	 * Mock data for testing.
+	 *
+	 * @var array
+	 */
 	protected $mock_data;
 
+	/**
+	 * Set up the test environment.
+	 */
 	public function setUp(): void {
 		parent::setUp();
 		// Mock response from Google Sheets API.
@@ -54,6 +70,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting all rows.
+	 *
 	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_all_rows() {
@@ -71,6 +88,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting 3 rows starting from the 4th row, ordered by ID in ascending order.
+	 *
 	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_3_rows_from_4th_ascending_by_id() {
@@ -97,6 +115,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting a row with a specific ID.
+	 *
 	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_row_with_specific_id() {
@@ -119,7 +138,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 					array_filter(
 						$this->mock_data,
 						function ( $row ) {
-							return $row['id'] == 3;
+							return 3 === $row['id'];
 						}
 					)
 				);
@@ -132,6 +151,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting 3 rows with a specific worksheet name, ordered by ID.
+	 *
 	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_3_rows_with_specific_worksheet_ordered_by_id() {
@@ -158,7 +178,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 					$filtered = array_filter(
 						$this->mock_data,
 						function ( $row ) {
-							return $row['worksheet_name'] == 'Sheet 1';
+							return 'Sheet 1' === $row['worksheet_name'];
 						}
 					);
 					usort(
@@ -183,6 +203,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting rows with a specific sheet name.
+	 *
 	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_rows_with_specific_sheet_name() {
@@ -205,7 +226,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 					array_filter(
 						$this->mock_data,
 						function ( $row ) {
-							return $row['sheet_name'] == 'Data 3';
+							return 'Data 3' === $row['sheet_name'];
 						}
 					)
 				);
@@ -218,6 +239,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting rows with a specific title.
+	 *
 	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_rows_with_specific_title() {
@@ -240,7 +262,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 					array_filter(
 						$this->mock_data,
 						function ( $row ) {
-							return $row['title'] == 'Title 4';
+							return 'Title 4' === $row['title'];
 						}
 					)
 				);
@@ -253,6 +275,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test getting the 2nd row with a date greater than or equal to '2023-06-03 12:00:00' and a specific worksheet name, ordered by ID in descending order.
+	 *
 	 * @covers Google_Spreadsheet_To_DB_Query::getrow
 	 */
 	public function test_get_2nd_row_with_date_gte_and_specific_worksheet_ordered_by_id_desc() {
@@ -285,7 +308,7 @@ class Google_Spreadsheet_To_DB_Query_Test extends WP_UnitTestCase {
 					array_filter(
 						$this->mock_data,
 						function ( $row ) {
-							return $row['date'] >= '2023-06-03 12:00:00' && $row['worksheet_name'] == 'Sheet 2';
+							return $row['date'] >= '2023-06-03 12:00:00' && 'Sheet 2' === $row['worksheet_name'];
 						}
 					),
 					1,
