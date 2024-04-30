@@ -132,25 +132,24 @@ function save_spreadsheet(): array {
 		return array();  // Early return if not a valid string.
 	}
 	$today->setTimeZone( new DateTimeZone( $timezone_string ) );
-	$date          = $today->format( 'Y-m-d H:i:s' );
-	$title         = wp_unslash( $_POST['datatitle'] );
-	$worksheetid   = wp_unslash( $_POST['worksheetid'] );
-	$worksheetname = wp_unslash( $_POST['worksheetname'] );
-	$sheetname     = wp_unslash( $_POST['sheetname'] );
-	$hasheaderrow  = wp_unslash( $_POST['hasheaderrow'] );
-	$value         = get_value_google_spreadsheet( $worksheetid, $worksheetname, $sheetname, $hasheaderrow );
-	if ( get_option( 'google_ss2db_dataformat' ) === 'json-unescp' ) {
-		$value = json_encode( $value, JSON_UNESCAPED_UNICODE );
-	} else {
-		$value = json_encode( $value );
-	}
+	$date           = $today->format( 'Y-m-d H:i:s' );
+	$title          = wp_unslash( $_POST['datatitle'] ?? '' );
+	$worksheet_id   = wp_unslash( $_POST['worksheetid'] ?? '' );
+	$worksheet_name = wp_unslash( $_POST['worksheetname'] ?? '' );
+	$sheet_name     = wp_unslash( $_POST['sheetname'] ?? '' );
+	$has_header_row = wp_unslash( $_POST['hasheaderrow'] ?? false );
+	$value          = get_value_google_spreadsheet( $worksheet_id, $worksheet_name, $sheet_name, $has_header_row );
+
+	$value = get_value_google_spreadsheet( $worksheet_id, $worksheet_name, $sheet_name, $has_header_row );
+	$value = json_encode( $value, get_option( 'google_ss2db_dataformat' ) === 'json-unescp' ? JSON_UNESCAPED_UNICODE : 0 );
+
 	$result = $wpdb->insert(
 		GOOGLE_SS2DB_TABLE_NAME,
 		array(
 			'date'           => $date,
-			'worksheet_id'   => $worksheetid,
-			'worksheet_name' => $worksheetname,
-			'sheet_name'     => $sheetname,
+			'worksheet_id'   => $worksheet_id,
+			'worksheet_name' => $worksheet_name,
+			'sheet_name'     => $sheet_name,
 			'title'          => $title,
 			'value'          => $value,
 		),
@@ -163,20 +162,18 @@ function save_spreadsheet(): array {
 			'%s',
 		)
 	);
-	$rowid  = $wpdb->insert_id;
+	$row_id = $wpdb->insert_id;
 
-	$return = array(
-		'id'             => $rowid,
+	return array(
+		'id'             => $row_id,
 		'date'           => $date,
-		'worksheet_id'   => $worksheetid,
-		'worksheet_name' => $worksheetname,
-		'sheet_name'     => $sheetname,
+		'worksheet_id'   => $worksheet_id,
+		'worksheet_name' => $worksheet_name,
+		'sheet_name'     => $sheet_name,
 		'title'          => $title,
 		'value'          => $value,
 		'result'         => $result,
 	);
-
-	return $return;
 }
 
 $return  = save_spreadsheet();
