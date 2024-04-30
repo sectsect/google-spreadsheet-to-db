@@ -1,5 +1,18 @@
 # Changelog
 
+## [v6.2.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.2.0) (2024-04-30)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.1.0...v6.2.0)
+
+**Merged pull requests:**
+
+- refactor: code refactor [\#47](https://github.com/sectsect/google-spreadsheet-to-db/pull/47) ([sectsect](https://github.com/sectsect))
+- test: code formatting with phpcs [\#46](https://github.com/sectsect/google-spreadsheet-to-db/pull/46) ([sectsect](https://github.com/sectsect))
+- test: update config [\#45](https://github.com/sectsect/google-spreadsheet-to-db/pull/45) ([sectsect](https://github.com/sectsect))
+- \[PHPUnit\] add `@covers` annotations to test classes and methods [\#43](https://github.com/sectsect/google-spreadsheet-to-db/pull/43) ([sectsect](https://github.com/sectsect))
+- test: add unit test [\#42](https://github.com/sectsect/google-spreadsheet-to-db/pull/42) ([sectsect](https://github.com/sectsect))
+- test: add some unit tests [\#40](https://github.com/sectsect/google-spreadsheet-to-db/pull/40) ([sectsect](https://github.com/sectsect))
+
 ## [v6.1.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.1.0) (2024-04-28)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.0.0...v6.1.0)
