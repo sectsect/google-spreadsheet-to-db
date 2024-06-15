@@ -176,9 +176,10 @@ function save_spreadsheet(): array {
 	);
 }
 
-$return  = save_spreadsheet();
-$rus     = apply_filters( 'google_ss2db_after_save', $return );
-$bool    = ( $return['result'] ) ? true : false;
+$data = save_spreadsheet();
+apply_filters( 'google_ss2db_after_save', $data );
+
+$bool    = (bool) $data['result'];
 $referer = wp_unslash( $_POST['_wp_http_referer'] );
 $referer = str_replace( '&settings-updated=true', '', $referer );
 $referer = $referer . '&ss2dbupdated=' . $bool;
