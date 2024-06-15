@@ -95,25 +95,21 @@ add_filter( 'google_ss2db_before_save', function ( $row, $worksheetid, $workshee
 
 And also use `add_filter('google_ss2db_after_save', $return_array )` to perform any processing with the return value.
 ```php
-add_filter( 'google_ss2db_after_save', function ( $array ) {
-  if ( 'My Spreadsheet' === $worksheetname ) {
-    // $id              = $array['id'];
-    // $date            = $array['date'];
-    // $title           = $array['title'];
-    // $value           = $array['value'];
-    // $work_sheet_id   = $array['worksheet_id'];
-    // $work_sheet_name = $array['worksheet_name'];
-    // $sheet_name      = $array['sheet_name'];
-    // $result          = $array['result'];
-    
-    // Do something...
-    $return = $something;
-  } else {
-    $return = $array;
-  }
+add_filter( 'google_ss2db_after_save', function ( $data ) {
+  if ( 'My Spreadsheet' === $data['worksheet_name'] ) {
+    // $id              = $data['id'];
+    // $date            = $data['date'];
+    // $title           = $data['title'];
+    // $value           = $data['value'];
+    // $work_sheet_id   = $data['worksheet_id'];
+    // $work_sheet_name = $data['worksheet_name'];
+    // $sheet_name      = $data['sheet_name'];
+    // $result          = $data['result'];
 
-  return $return;
-} );
+    // Example
+    my_callback( $data );
+  }
+});
 ```
 
 ## APIs
