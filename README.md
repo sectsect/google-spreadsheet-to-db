@@ -81,9 +81,9 @@ Hit send. That’s it! :ok_hand:
 You can edit the array got from Google API with `add_filter( 'google_ss2db_before_save', $function_to_add )` in your functions.php before saving to database.
 
 ```php
-add_filter( 'google_ss2db_before_save', function ( $row, $worksheetid, $worksheetname, $sheetname ) {
+add_filter( 'google_ss2db_before_save', function ( $row, $worksheet_id, $worksheet_name, $sheet_name ) {
   // Example
-  if ( $worksheetname === 'My Spreadsheet' && $sheetname === 'Sheet1' ) {
+  if ( $worksheet_name === 'My Spreadsheet' && $sheet_name === 'Sheet1' ) {
     // Do something.
 
     return $something;
