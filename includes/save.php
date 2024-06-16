@@ -69,28 +69,28 @@ function get_client(): Google_Client {
 /**
  * Retrieves data from a specified Google Spreadsheet.
  *
- * @param string $worksheetid The ID of the Google Spreadsheet.
- * @param string $worksheetname The name of the Google Spreadsheet.
- * @param string $sheetname The name of the individual sheet within the Spreadsheet.
- * @param bool   $hasheaderrow Indicates if the spreadsheet contains a header row.
+ * @param string $worksheet_id The ID of the Google Spreadsheet.
+ * @param string $worksheet_name The name of the Google Spreadsheet.
+ * @param string $sheet_name The name of the individual sheet within the Spreadsheet.
+ * @param bool   $has_header_row Indicates if the spreadsheet contains a header row.
  * @return array<string, mixed>|bool The spreadsheet data as an associative array if successful, or false if the sheet does not exist.
  */
-function get_value_google_spreadsheet( string $worksheetid, string $worksheetname, string $sheetname, bool $hasheaderrow ): array|bool {
+function get_value_google_spreadsheet( string $worksheet_id, string $worksheet_name, string $sheet_name, bool $has_header_row ): array|bool {
 	$client  = get_client();
 	$service = new Google_Service_Sheets( $client );
 
-	$spreadsheet_id = $worksheetid;
-	$range          = $sheetname;
+	$spreadsheet_id = $worksheet_id;
+	$range          = $sheet_name;
 
 	$response = $service->spreadsheets->get( $spreadsheet_id );
 	$sheets   = $response->getSheets();
 	$object   = array(); // Initialize $object to prevent undefined variable issues.
-	if ( exist_sheet( $sheets, $sheetname ) ) {
+	if ( exist_sheet( $sheets, $sheet_name ) ) {
 		$response = $service->spreadsheets_values->get( $spreadsheet_id, $range );
 		$values   = $response->getValues();
 
 		if ( ! empty( $values ) ) {
-			if ( $hasheaderrow ) {
+			if ( $has_header_row ) {
 				$header_row = $values[0];
 				// Remove the header row.
 				unset( $values[0] );
@@ -114,7 +114,7 @@ function get_value_google_spreadsheet( string $worksheetid, string $worksheetnam
 		$object = false;
 	}
 
-	$array = apply_filters( 'google_ss2db_before_save', $object, $worksheetid, $worksheetname, $sheetname );
+	$array = apply_filters( 'google_ss2db_before_save', $object, $worksheet_id, $worksheet_name, $sheet_name );
 
 	return $array;
 }
@@ -139,9 +139,7 @@ function save_spreadsheet(): array {
 	$sheet_name     = wp_unslash( $_POST['sheetname'] ?? '' );
 	$has_header_row = wp_unslash( $_POST['hasheaderrow'] ?? false );
 	$value          = get_value_google_spreadsheet( $worksheet_id, $worksheet_name, $sheet_name, $has_header_row );
-
-	$value = get_value_google_spreadsheet( $worksheet_id, $worksheet_name, $sheet_name, $has_header_row );
-	$value = json_encode( $value, get_option( 'google_ss2db_dataformat' ) === 'json-unescp' ? JSON_UNESCAPED_UNICODE : 0 );
+	$value          = json_encode( $value, get_option( 'google_ss2db_dataformat' ) === 'json-unescp' ? JSON_UNESCAPED_UNICODE : 0 );
 
 	$result = $wpdb->insert(
 		GOOGLE_SS2DB_TABLE_NAME,
