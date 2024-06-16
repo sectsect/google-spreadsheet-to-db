@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.2.2](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.2.2) (2024-06-16)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.2.1...v6.2.2)
+
+**Merged pull requests:**
+
+- refactor: code refactor [\#49](https://github.com/sectsect/google-spreadsheet-to-db/pull/49) ([sectsect](https://github.com/sectsect))
+
 ## [v6.2.1](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.2.1) (2024-06-15)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.2.0...v6.2.1)
