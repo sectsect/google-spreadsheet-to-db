@@ -139,9 +139,7 @@ function save_spreadsheet(): array {
 	$sheet_name     = wp_unslash( $_POST['sheetname'] ?? '' );
 	$has_header_row = wp_unslash( $_POST['hasheaderrow'] ?? false );
 	$value          = get_value_google_spreadsheet( $worksheet_id, $worksheet_name, $sheet_name, $has_header_row );
-
-	$value = get_value_google_spreadsheet( $worksheet_id, $worksheet_name, $sheet_name, $has_header_row );
-	$value = json_encode( $value, get_option( 'google_ss2db_dataformat' ) === 'json-unescp' ? JSON_UNESCAPED_UNICODE : 0 );
+	$value          = json_encode( $value, get_option( 'google_ss2db_dataformat' ) === 'json-unescp' ? JSON_UNESCAPED_UNICODE : 0 );
 
 	$result = $wpdb->insert(
 		GOOGLE_SS2DB_TABLE_NAME,
