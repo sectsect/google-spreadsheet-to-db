@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.2.3](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.2.3) (2024-06-17)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.2.2...v6.2.3)
+
+**Merged pull requests:**
+
+- chore\(deps-dev\): bump braces from 3.0.2 to 3.0.3 [\#50](https://github.com/sectsect/google-spreadsheet-to-db/pull/50) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v6.2.2](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.2.2) (2024-06-16)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.2.1...v6.2.2)
