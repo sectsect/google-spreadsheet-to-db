@@ -202,7 +202,7 @@
 						return $str;
 					}
 					$value = $val;
-					$str  .= '<span>' . htmlspecialchars( $value ) . '</span>';
+					$str  .= '<span>' . nl2br( htmlspecialchars( $value ) ) . '</span>';
 				}
 				$str .= '</td></tr>';
 			}
