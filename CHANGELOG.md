@@ -1,5 +1,14 @@
 # Changelog
 
+## [v6.3.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.3.0) (2024-06-19)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.2.3...v6.3.0)
+
+**Merged pull requests:**
+
+- feat: allow HTML \<br /\> tag in data table in Plugin option page [\#52](https://github.com/sectsect/google-spreadsheet-to-db/pull/52) ([sectsect](https://github.com/sectsect))
+- chore\(deps-dev\): bump ws from 7.5.5 to 7.5.10 [\#51](https://github.com/sectsect/google-spreadsheet-to-db/pull/51) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v6.2.3](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.2.3) (2024-06-17)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.2.2...v6.2.3)
