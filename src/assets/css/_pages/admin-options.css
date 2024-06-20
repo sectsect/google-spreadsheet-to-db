@@ -173,7 +173,7 @@
             font-size: 10px;
             color: #999;
 
-            @media only screen and (max-width: 782px) {
+            @media only screen and (width <= 782px) {
               padding-left: 10px;
             }
           }
@@ -255,6 +255,7 @@
           }
 
           & tr {
+            height: 28px;
             border-right: none;
 
             & td {
