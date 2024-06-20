@@ -44,7 +44,9 @@ function google_ss2db_menu(): void {
  * This function is hooked to the WordPress admin styles queue.
  */
 function google_ss2db_admin_styles(): void {
-	wp_enqueue_style( 'admin-options', plugin_dir_url( __DIR__ ) . 'assets/css/admin-options.css', array() );
+	$plugin_data    = google_ss2db_get_plugin_data();
+	$plugin_version = $plugin_data['Version'];
+	wp_enqueue_style( 'admin-options', plugin_dir_url( __DIR__ ) . 'assets/css/admin-options.css?v=' . $plugin_version, array() );
 }
 
 /**
@@ -52,7 +54,9 @@ function google_ss2db_admin_styles(): void {
  * It also localizes the script to include nonce and plugin directory URL for secure AJAX calls.
  */
 function google_ss2db_admin_scripts(): void {
-	wp_enqueue_script( 'google-ss2db-script', plugin_dir_url( __DIR__ ) . 'assets/js/admin-options.js', array( 'jquery' ), null, true );
+	$plugin_data    = google_ss2db_get_plugin_data();
+	$plugin_version = $plugin_data['Version'];
+	wp_enqueue_script( 'google-ss2db-script', plugin_dir_url( __DIR__ ) . 'assets/js/admin-options.js?v=' . $plugin_version, array( 'jquery' ), null, true );
 	wp_localize_script(
 		'google-ss2db-script',
 		'google_ss2db_data',

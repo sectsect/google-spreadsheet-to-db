@@ -78,3 +78,14 @@ function google_ss2db_truncate_middle( string $str, int $max_chars = 16 ): strin
 
 	return substr_replace( $str, '...', (int) floor( $max_chars / 2 ), $str_length - $max_chars );
 }
+
+/**
+ * Retrieves plugin data from the main plugin file.
+ * This function fetches data such as version number and plugin name from the plugin's main file.
+ *
+ * @return array<string, mixed> The plugin data.
+ */
+function google_ss2db_get_plugin_data(): array {
+	$plugin_data = get_plugin_data( plugin_dir_path( __DIR__ ) . 'google-spreadsheet-to-db.php' );
+	return $plugin_data;
+}
