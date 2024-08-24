@@ -104,7 +104,7 @@ add_filter( 'google_ss2db_after_save', function ( $data ) {
     // $work_sheet_id   = $data['worksheet_id'];
     // $work_sheet_name = $data['worksheet_name'];
     // $sheet_name      = $data['sheet_name'];
-    // $result          = $data['result'];
+    // $result          = $data['result']; // `int|false` The number of rows inserted, or false on error.
 
     // Example
     my_callback( $data );
