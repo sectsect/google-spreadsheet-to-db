@@ -263,10 +263,14 @@ $args = array(
 
 ## Troubleshooting
 
+This plugin depends on [Guzzle](https://github.com/guzzle/guzzle) **v7**, which may conflict with other WordPress plugins or Composer packages using Guzzle **v6**.  
+If you encounter errors like:
+
 > `Uncaught Error: Call to undefined method GuzzleHttp\Utils::chooseHandler()`
 
-Some of WordPress plugins or Composer packages you are using depend on HTTP client [Guzzle](https://github.com/guzzle/guzzle) **v6** (legacy).  
-You can resolve this error by updating to **v7** dependent version.
+This is likely due to a Guzzle version conflict. To resolve:
+1. Update other plugins/packages to versions compatible with Guzzle v7
+2. Find alternative solutions that don't conflict with this plugin's dependencies
 
 ## Change log  
 
