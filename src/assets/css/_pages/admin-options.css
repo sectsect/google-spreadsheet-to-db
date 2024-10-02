@@ -1,23 +1,23 @@
 @charset "UTF-8";
 
 #wpbody-content {
-  & #field-settings {
+  #field-settings {
     width: 820px;
     table-layout: fixed;
 
-    & tbody {
-      & tr {
-        & th {
+    tbody {
+      tr {
+        th {
           padding-left: 20px;
         }
 
-        & td {
+        td {
           padding-right: 0;
           padding-left: 0;
         }
 
         &:first-child {
-          & th {
+          th {
             padding-left: 0;
           }
         }
@@ -25,47 +25,47 @@
     }
   }
 
-  & .link-doc {
+  .link-doc {
     margin-top: 20px;
 
-    & a {
+    a {
       display: inline-block;
       text-decoration: none;
 
-      & dl {
+      dl {
         display: table;
         width: 100%;
         margin: 0;
 
-        & dt,
-        & dd {
+        dt,
+        dd {
           display: table-cell;
           vertical-align: middle;
         }
 
-        & dt {
+        dt {
           width: 18px;
 
-          & img {
+          img {
             display: block;
           }
         }
 
-        & dd {
+        dd {
           padding-left: 8px;
         }
       }
     }
   }
 
-  & section#list {
+  section#list {
     margin-top: 70px;
   }
 
-  & .pagination {
+  .pagination {
     display: flex;
 
-    & li {
+    li {
       flex: 0 1 40px;
       flex-basis: 40px; /* For bug on IE11 */
       margin: 0;
@@ -77,25 +77,25 @@
         border: none;
       }
 
-      & a,
-      & span {
+      a,
+      span {
         display: block;
         padding: 10px 0;
         text-decoration: none;
       }
 
-      & span {
+      span {
         font-weight: bold;
       }
     }
   }
 
-  & .acorddion {
+  .acorddion {
     margin: 10px 0 0;
     overflow: hidden;
     transition: all 0.3s linear;
 
-    & dt {
+    dt {
       position: relative;
       box-sizing: border-box;
       display: table;
@@ -121,7 +121,7 @@
         transform: rotate(135deg);
       }
 
-      & span {
+      span {
         display: table-cell;
         padding: 10px;
         vertical-align: top;
@@ -168,7 +168,7 @@
           padding: 0;
           border-right: 1px solid #eee;
 
-          & .inner {
+          .inner {
             padding: 10px 10px 10px 20px;
             font-size: 10px;
             color: #999;
@@ -203,22 +203,22 @@
       }
     }
 
-    & dd {
+    dd {
       display: none;
       padding: 1em 0;
       margin: 0;
       font-size: 10px;
 
-      & table {
+      table {
         width: 100%;
         table-layout: fixed;
         border-spacing: 0;
         border-collapse: collapse;
         background: #fff;
 
-        & th,
-        & tr,
-        & td {
+        th,
+        tr,
+        td {
           padding: 0;
           margin: 0;
           vertical-align: middle;
@@ -227,38 +227,38 @@
           border: 1px solid #eee;
         }
 
-        & th,
-        & td {
-          & span {
+        th,
+        td {
+          span {
             display: table-cell;
             padding: 5px 10px;
           }
         }
 
-        & th {
+        th {
           width: 8.5%;
           text-align: center;
 
-          & span {
+          span {
             display: inline;
           }
         }
 
-        & table {
+        table {
           border: none;
 
-          & th,
-          & tr,
-          & td {
+          th,
+          tr,
+          td {
             border-top: none;
             border-left: none;
           }
 
-          & tr {
+          tr {
             height: 28px;
             border-right: none;
 
-            & td {
+            td {
               &:last-child {
                 border-right: none;
                 border-bottom: none;
@@ -268,7 +268,7 @@
             &:last-child {
               border-bottom: none;
 
-              & th {
+              th {
                 border-bottom: none;
               }
             }
@@ -278,7 +278,7 @@
     }
 
     &.opened {
-      & dt {
+      dt {
         &::after {
           top: 65%;
           transform: rotate(-45deg);

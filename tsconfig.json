@@ -3,6 +3,8 @@
   "compilerOptions": {
     // "allowJs": true,
     // "allowSyntheticDefaultImports": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
     "lib": ["dom", "dom.iterable", "esnext"],
     // "noImplicitThis": false,
     "target": "esnext",
@@ -16,14 +18,6 @@
       "*": ["node_modules/*", "src/@types/*"]
     }
   },
-  "include": [
-    "src/**/*",
-    "webpack.config.js",
-    ".eslintrc.js"
-  ],
-  "exclude": [
-    "assets",
-    "node_modules",
-    "**/*.spec.ts",
-  ]
+  "include": ["src/**/*", ".eslintrc.js", "rspack.config.ts"],
+  "exclude": ["dist", "node_modules", "**/*.spec.ts"]
 }

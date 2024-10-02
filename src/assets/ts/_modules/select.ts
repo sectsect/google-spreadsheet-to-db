@@ -1,5 +1,12 @@
-import 'select2';
+import TomSelect from 'tom-select';
 
 export const select = (): void => {
-  jQuery('#google_ss2db_dataformat').select2();
+  const settings = {
+    controlInput: undefined,
+    // allowEmptyOption: true,
+    // hideSelected: null,
+  };
+
+  // eslint-disable-next-line no-new
+  new TomSelect('#google_ss2db_dataformat', settings);
 };

@@ -25,10 +25,10 @@
   "css.validate": false,
   "scss.validate": false,
   // Add support for nested project structure.
-  "eslint.nodePath": "nextjs/node_modules",
-  "eslint.workingDirectories": [
-    "src",
-  ],
+  // "eslint.nodePath": "nextjs/node_modules",
+  // "eslint.workingDirectories": [
+  //   "src",
+  // ],
   "vitest.enable": true,
   "phpsab.executablePathCS": "./vendor/squizlabs/php_codesniffer/bin/phpcs",
   "phpsab.executablePathCBF": "./vendor/squizlabs/php_codesniffer/bin/phpcbf",
