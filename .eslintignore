@@ -1,0 +1,5 @@
+.prettierrc.json
+.stylelintrc.json
+postcss.config.js
+tsconfig.json
+tailwind.config.js

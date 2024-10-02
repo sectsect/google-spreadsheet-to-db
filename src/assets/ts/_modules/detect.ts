@@ -1,6 +1,5 @@
-import isMobile from 'ismobilejs';
 import { detect as detectBrowser } from 'detect-browser';
-import Modernizr from 'modernizr';
+import isMobile from 'ismobilejs';
 
 const browser = detectBrowser();
 
@@ -8,7 +7,6 @@ type Versionable = number | boolean;
 
 interface Detection {
   device: Device;
-  htmlcss: Htmlcss;
   breakpoints: Breakpoints;
 }
 
@@ -35,16 +33,9 @@ interface Device {
   androidOS: boolean;
 }
 
-interface Htmlcss {
-  cssgrid: boolean;
-  flexbox: boolean;
-  flexboxtweener: boolean;
-  objectfit: boolean;
-}
-
 export const detection = (): Detection => {
-  const bn: string = browser?.name || '';
-  const bv: number = parseInt(browser?.version || '0', 10);
+  const bn: string = browser?.name ?? '';
+  const bv: number = parseInt(browser?.version ?? '0', 10);
   const detect: Detection = {
     device: {
       desktop: !isMobile().any,
@@ -60,12 +51,6 @@ export const detection = (): Detection => {
       androidphone: isMobile().android.phone,
       iOS: isMobile().apple.device,
       androidOS: isMobile().android.device,
-    },
-    htmlcss: {
-      cssgrid: Modernizr.cssgrid,
-      flexbox: Modernizr.flexbox,
-      flexboxtweener: Modernizr.flexboxtweener,
-      objectfit: Modernizr.objectfit,
     },
     breakpoints: {
       sm: 768,

@@ -1,9 +1,7 @@
-/* stylelint-disable import-notation */
+@import url('_base/settings.css');
 
-@import '_base/settings.css';
+@import url('../../../node_modules/tom-select/dist/css/tom-select.default.css');
 
-@import '../../../node_modules/select2/dist/css/select2.min.css';
+@import url('../../../node_modules/sweetalert2/dist/sweetalert2.min.css');
 
-@import '../../../node_modules/sweetalert2/dist/sweetalert2.min.css';
-
-@import '_pages/admin-options.css';
+@import url('_pages/admin-options.css');

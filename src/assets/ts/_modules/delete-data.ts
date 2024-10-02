@@ -1,4 +1,3 @@
-import 'es6-promise/auto';
 import Swal from 'sweetalert2';
 
 declare global {
@@ -23,19 +22,24 @@ export const deleteData = (): void => {
   //     resolve('resolved');
   //   });
 
-  const asyncPreConfirm = async (theid: string): Promise<GoogleSS2dbResponse> => {
+  const asyncPreConfirm = async (
+    theid: string,
+  ): Promise<GoogleSS2dbResponse> => {
     // await beforeSend();
 
-    return fetch(`${window.google_ss2db_data.plugin_dir_url}includes/delete.php`, {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-        'Cache-Control': 'no-cache',
+    return fetch(
+      `${window.google_ss2db_data.plugin_dir_url}includes/delete.php`,
+      {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+          'Cache-Control': 'no-cache',
+        },
+        body: `id=${theid}&nonce=${window.google_ss2db_data.nonce}`,
       },
-      body: `id=${theid}&nonce=${window.google_ss2db_data.nonce}`,
-    })
+    )
       .then(response => {
         if (!response.ok) {
           throw new Error(response.statusText);
@@ -69,7 +73,9 @@ export const deleteData = (): void => {
         // console.log(result);
         if (result.isConfirmed) {
           if (result.value) {
-            const ele: JQuery = jQuery(`.acorddion[data-id='${result.value?.id}']`);
+            const ele: JQuery = jQuery(
+              `.acorddion[data-id='${result.value?.id}']`,
+            );
             jQuery
               .when(
                 ele.stop(true, true).animate(
