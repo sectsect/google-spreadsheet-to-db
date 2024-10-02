@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.4.2](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.4.2) (2024-10-02)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.4.1...v6.4.2)
+
+**Merged pull requests:**
+
+- chore\(deps-dev\): bump webpack from 5.88.2 to 5.94.0 [\#54](https://github.com/sectsect/google-spreadsheet-to-db/pull/54) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v6.4.1](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.4.1) (2024-08-24)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.4.0...v6.4.1)
