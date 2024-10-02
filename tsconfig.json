@@ -18,6 +18,11 @@
       "*": ["node_modules/*", "src/@types/*"]
     }
   },
-  "include": ["src/**/*", ".eslintrc.js", "rspack.config.ts"],
+  "include": [
+    "src/**/*",
+    ".eslintrc.js",
+    "rspack.config.ts",
+    "commitlint.config.ts"
+  ],
   "exclude": ["dist", "node_modules", "**/*.spec.ts"]
 }
