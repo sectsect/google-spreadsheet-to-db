@@ -16,6 +16,9 @@
   },
   "browserslist": "defaults and fully supports es6-module",
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@commitlint/types": "^19.5.0",
     "@csstools/postcss-global-data": "^3.0.0",
     "@rspack/cli": "^1.0.8",
     "@rspack/core": "^1.0.8",
