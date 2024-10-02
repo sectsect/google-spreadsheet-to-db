@@ -1,5 +1,5 @@
-// @ https://stylelint.io/user-guide/example-config
-module.exports = {
+/** @type {import('stylelint').Config} */
+const config = {
   extends: [
     'stylelint-config-standard',
     'stylelint-config-recess-order',
@@ -29,3 +29,5 @@ module.exports = {
     'selector-class-pattern': null,
   },
 };
+
+export default config;
