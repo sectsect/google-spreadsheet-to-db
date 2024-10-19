@@ -55,13 +55,26 @@ function exist_sheet( array $sheets_list, string $sheet_name ): bool {
  */
 function get_client(): Google_Client {
 	$client_secret = ( defined( 'GOOGLE_SS2DB_CLIENT_SECRET_PATH' ) ) ? GOOGLE_SS2DB_CLIENT_SECRET_PATH : '';
+
+	if ( empty( $client_secret ) ) {
+		wp_die( 'Client secret path is not set. Please check GOOGLE_SS2DB_CLIENT_SECRET_PATH.' );
+	}
+
+	if ( ! file_exists( $client_secret ) ) {
+		wp_die( 'Client secret file not found: ' . $client_secret );
+	}
+
 	putenv( 'GOOGLE_APPLICATION_CREDENTIALS=' . $client_secret );
 
-	$client = new Google_Client();
-	$client->setApplicationName( 'Google Sheets API PHP Quickstart' );
-	$client->setScopes( array( Google_Service_Sheets::SPREADSHEETS, Google_Service_Sheets::DRIVE ) );
-	$client->setAuthConfig( $client_secret );
-	$client->setAccessType( 'offline' );
+	try {
+		$client = new Google_Client();
+		$client->setApplicationName( 'Google Sheets API PHP Quickstart' );
+		$client->setScopes( array( Google_Service_Sheets::SPREADSHEETS, Google_Service_Sheets::DRIVE ) );
+		$client->setAuthConfig( $client_secret );
+		$client->setAccessType( 'offline' );
+	} catch ( Exception $e ) {
+		wp_die( 'Error occurred during Google Client initialization: ' . $e->getMessage() );
+	}
 
 	return $client;
 }
