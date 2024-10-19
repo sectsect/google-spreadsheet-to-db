@@ -84,34 +84,35 @@ function get_value_google_spreadsheet( string $worksheet_id, string $worksheet_n
 
 	$response = $service->spreadsheets->get( $spreadsheet_id );
 	$sheets   = $response->getSheets();
-	$object   = array(); // Initialize $object to prevent undefined variable issues.
-	if ( exist_sheet( $sheets, $sheet_name ) ) {
-		$response = $service->spreadsheets_values->get( $spreadsheet_id, $range );
-		$values   = $response->getValues();
 
-		if ( ! empty( $values ) ) {
-			if ( $has_header_row ) {
-				$header_row = $values[0];
-				// Remove the header row.
-				unset( $values[0] );
+	if ( ! exist_sheet( $sheets, $sheet_name ) ) {
+		wp_die( 'The specified sheet does not exist. Please check the sheet name.' );
+	}
 
-				$i = 0;
-				foreach ( $values as $row ) {
-					$j            = 0;
-					$object[ $i ] = array();
+	$response = $service->spreadsheets_values->get( $spreadsheet_id, $range );
+	$values   = $response->getValues();
+	$object   = array();
 
-					foreach ( $row as $column ) {
-						$object[ $i ][ $header_row[ $j ] ] = $column;
-						++$j;
-					}
-					++$i;
+	if ( ! empty( $values ) ) {
+		if ( $has_header_row ) {
+			$header_row = $values[0];
+			// Remove the header row.
+			unset( $values[0] );
+
+			$i = 0;
+			foreach ( $values as $row ) {
+				$j            = 0;
+				$object[ $i ] = array();
+
+				foreach ( $row as $column ) {
+					$object[ $i ][ $header_row[ $j ] ] = $column;
+					++$j;
 				}
-			} else {
-				$object = $values;
+				++$i;
 			}
+		} else {
+			$object = $values;
 		}
-	} else {
-		$object = false;
 	}
 
 	$array = apply_filters( 'google_ss2db_before_save', $object, $worksheet_id, $worksheet_name, $sheet_name );
