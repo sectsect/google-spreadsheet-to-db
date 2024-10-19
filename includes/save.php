@@ -127,9 +127,9 @@ function get_value_google_spreadsheet( string $worksheet_id, string $worksheet_n
 function save_spreadsheet(): array {
 	global $wpdb;
 	$today           = new DateTime();
-	$timezone_string = get_option( 'timezone_string' );
-	if ( ! is_string( $timezone_string ) || empty( $timezone_string ) ) {
-		return array();  // Early return if not a valid string.
+	$timezone_string = wp_timezone_string();
+	if ( empty( $timezone_string ) ) {
+		wp_die( __( 'Error: Timezone is not set. Please check your WordPress settings.', 'google_ss2db' ) );
 	}
 	$today->setTimeZone( new DateTimeZone( $timezone_string ) );
 	$date           = $today->format( 'Y-m-d H:i:s' );
