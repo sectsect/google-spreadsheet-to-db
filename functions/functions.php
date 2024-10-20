@@ -178,7 +178,7 @@ function google_ss2db_get_value_google_spreadsheet( string $worksheet_id, string
 		$sheets      = $spreadsheet->getSheets();
 
 		if ( ! google_ss2db_exist_sheet( $sheets, $sheet_name ) ) {
-			throw new Exception( 'The specified sheet does not exist. Please check the sheet name.' );
+			wp_die( 'The specified sheet does not exist. Please check the sheet name.' );
 		}
 
 		$response = $service->spreadsheets_values->get( $worksheet_id, $sheet_name );
