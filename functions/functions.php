@@ -208,10 +208,10 @@ function google_ss2db_save_spreadsheet( array $post_data ): array {
 	}
 	$today->setTimeZone( new DateTimeZone( $timezone_string ) );
 	$date           = $today->format( 'Y-m-d H:i:s' );
-	$title          = wp_unslash( $post_data['datatitle'] ?? '' );
-	$worksheet_id   = wp_unslash( $post_data['worksheetid'] ?? '' );
-	$worksheet_name = wp_unslash( $post_data['worksheetname'] ?? '' );
-	$sheet_name     = wp_unslash( $post_data['sheetname'] ?? '' );
+	$title          = filter_var( wp_unslash( $post_data['datatitle'] ?? '' ), FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	$worksheet_id   = filter_var( wp_unslash( $post_data['worksheetid'] ?? '' ), FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	$worksheet_name = filter_var( wp_unslash( $post_data['worksheetname'] ?? '' ), FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	$sheet_name     = filter_var( wp_unslash( $post_data['sheetname'] ?? '' ), FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 	$has_header_row = filter_var( wp_unslash( $post_data['hasheaderrow'] ?? false ), FILTER_VALIDATE_BOOLEAN );
 	$value          = google_ss2db_get_value_google_spreadsheet( $worksheet_id, $worksheet_name, $sheet_name, $has_header_row );
 	$value          = json_encode( $value, get_option( 'google_ss2db_dataformat' ) === 'json-unescp' ? JSON_UNESCAPED_UNICODE : 0 );
