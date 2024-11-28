@@ -50,7 +50,7 @@ function google_ss2db_options_pagination( int $paged = 1, int $pages = 1, int $r
 			echo '<li class="prevnext"><a href="' . get_pagenum_link( $paged - 1 ) . '">&lsaquo;</a></li>';
 		}
 		for ( $i = 1; $i <= $pages; $i++ ) {
-			if ( 1 !== $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
+			if ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) {
 				echo ( $paged === $i ) ? '<li class="current"><span>' . $i . '</span></li>' : '<li><a href="' . get_pagenum_link( $i ) . '">' . $i . '</a></li>';
 			}
 		}
@@ -196,8 +196,8 @@ function google_ss2db_get_value_google_spreadsheet( string $worksheet_id, string
 /**
  * Saves data from a Google Spreadsheet to the database.
  *
- * @param array<string> $post_data POST data containing spreadsheet information.
- * @return array<string> Contains details of the operation including the database row ID, date, worksheet identifiers, and operation result.
+ * @param array<string, mixed> $post_data POST data containing spreadsheet information.
+ * @return array<string, mixed> Contains details of the operation including the database row ID, date, worksheet identifiers, and operation result.
  */
 function google_ss2db_save_spreadsheet( array $post_data ): array {
 	global $wpdb;
