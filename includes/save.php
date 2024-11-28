@@ -26,17 +26,22 @@
  * @subpackage Google_Spreadsheet_to_DB/includes
  */
 
-require '../../../../wp-load.php';
+require_once dirname( __DIR__, 4 ) . '/wp-load.php';
 
-if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'google_ss2db' ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+// Sanitize and validate POST data using filter_input().
+$nonce        = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+$http_referer = filter_input( INPUT_POST, '_wp_http_referer', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+
+if ( ! $nonce || ! wp_verify_nonce( $nonce, 'google_ss2db' ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
 	wp_die( 'Our Site is protected!!' );
 }
 
-$data = google_ss2db_save_spreadsheet( $_POST );
-$data = apply_filters( 'google_ss2db_after_save', $data );
+$sanitized_post_data = array_map( fn( $value ) => is_string( $value ) ? sanitize_text_field( $value ) : $value, $_POST );
+$data                = google_ss2db_save_spreadsheet( $sanitized_post_data );
+$data                = apply_filters( 'google_ss2db_after_save', $data );
 
 $bool    = (bool) $data['result'];
-$referer = wp_unslash( $_POST['_wp_http_referer'] );
+$referer = wp_unslash( $http_referer );
 $referer = str_replace( '&settings-updated=true', '', $referer );
 $referer = $referer . '&ss2dbupdated=' . $bool;
 wp_redirect( $referer );

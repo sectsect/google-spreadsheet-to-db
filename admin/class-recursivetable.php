@@ -214,7 +214,7 @@
 
 	global $wpdb;
 	$table         = GOOGLE_SS2DB_TABLE_NAME;
-	$paged         = isset( $_GET['paged'] ) ? ( (int) $_GET['paged'] ) : 1;
+	$paged         = filter_input( INPUT_GET, 'paged', FILTER_VALIDATE_INT ) ? filter_input( INPUT_GET, 'paged', FILTER_VALIDATE_INT ) : 1;
 	$limit         = 24;
 	$offset        = ( $paged - 1 ) * $limit;
 	$countsql      = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC';

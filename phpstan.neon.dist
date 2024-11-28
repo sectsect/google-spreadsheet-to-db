@@ -7,3 +7,5 @@ parameters:
     - includes/
   bootstrapFiles:
     - vendor/autoload.php
+includes:
+  - phar://phpstan.phar/conf/bleedingEdge.neon

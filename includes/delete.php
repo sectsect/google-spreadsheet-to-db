@@ -29,15 +29,19 @@
  * @subpackage Google_Spreadsheet_to_DB/includes
  */
 
-require '../../../../wp-load.php';
+require_once dirname( __DIR__, 4 ) . '/wp-load.php';
 
-if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'google_ss2db' ) || 'POST' !== $_SERVER['REQUEST_METHOD'] || ! isset( $_POST['id'] ) ) {
+// Secure input handling with filter_input().
+$nonce          = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+$request_method = filter_input( INPUT_SERVER, 'REQUEST_METHOD', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+$id             = filter_input( INPUT_POST, 'id', FILTER_VALIDATE_INT );
+
+if ( ! $nonce || ! wp_verify_nonce( $nonce, 'google_ss2db' ) || 'POST' !== $request_method || ! $id ) {
 	wp_die( 'Our Site is protected!!' );
 }
 
-$theid = wp_unslash( $_POST['id'] );
 $array = array(
-	'id' => $theid,
+	'id' => $id,
 );
 
 global $wpdb;
@@ -45,7 +49,7 @@ $res = $wpdb->delete( GOOGLE_SS2DB_TABLE_NAME, $array );
 
 $return = array(
 	'res' => $res,
-	'id'  => wp_unslash( $_POST['id'] ),
+	'id'  => $id,
 );
 
 echo json_encode( $return );

@@ -46,7 +46,8 @@ function google_ss2db_menu(): void {
 function google_ss2db_admin_styles(): void {
 	$plugin_data    = google_ss2db_get_plugin_data();
 	$plugin_version = $plugin_data['Version'];
-	wp_enqueue_style( 'admin-options', plugin_dir_url( __DIR__ ) . 'assets/css/admin-options.css?v=' . $plugin_version, array() );
+	$version        = is_string( $plugin_version ) ? $plugin_version : '1.0.0';
+	wp_enqueue_style( 'admin-options', plugin_dir_url( __DIR__ ) . 'assets/css/admin-options.css', array(), $version );
 }
 
 /**
@@ -56,7 +57,8 @@ function google_ss2db_admin_styles(): void {
 function google_ss2db_admin_scripts(): void {
 	$plugin_data    = google_ss2db_get_plugin_data();
 	$plugin_version = $plugin_data['Version'];
-	wp_enqueue_script( 'google-ss2db-script', plugin_dir_url( __DIR__ ) . 'assets/js/admin-options.js?v=' . $plugin_version, array( 'jquery' ), null, true );
+	$version        = is_string( $plugin_version ) ? $plugin_version : '1.0.0';
+	wp_enqueue_script( 'google-ss2db-script', plugin_dir_url( __DIR__ ) . 'assets/js/admin-options.js', array( 'jquery' ), $version, true );
 	wp_localize_script(
 		'google-ss2db-script',
 		'google_ss2db_data',
