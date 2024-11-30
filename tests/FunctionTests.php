@@ -56,20 +56,49 @@ class FunctionsTest extends WP_UnitTestCase {
 		$current_page = 1;
 		$total_pages  = 5;
 		$range        = 2;
+		$nonce        = wp_create_nonce( 'google_ss2db_pagination' );
 
 		// Expected output.
 		$expected_output  = '<ul class="pagination">';
 		$expected_output .= '<li class="current"><span>1</span></li>';
-		$expected_output .= '<li><a href="' . get_pagenum_link( $current_page + 1 ) . '">2</a></li>';
-		$expected_output .= '<li><a href="' . get_pagenum_link( $current_page + 2 ) . '">3</a></li>';
-		$expected_output .= '<li><a href="' . get_pagenum_link( $current_page + 3 ) . '">4</a></li>';
-		$expected_output .= '<li><a href="' . get_pagenum_link( $current_page + 4 ) . '">5</a></li>';
+		$expected_output .= '<li><a href="' . esc_url(
+			add_query_arg(
+				array(
+					'paged' => 2,
+					'nonce' => $nonce,
+				)
+			)
+		) . '">2</a></li>';
+		$expected_output .= '<li><a href="' . esc_url(
+			add_query_arg(
+				array(
+					'paged' => 3,
+					'nonce' => $nonce,
+				)
+			)
+		) . '">3</a></li>';
+		$expected_output .= '<li><a href="' . esc_url(
+			add_query_arg(
+				array(
+					'paged' => 4,
+					'nonce' => $nonce,
+				)
+			)
+		) . '">4</a></li>';
+		$expected_output .= '<li><a href="' . esc_url(
+			add_query_arg(
+				array(
+					'paged' => 5,
+					'nonce' => $nonce,
+				)
+			)
+		) . '">5</a></li>';
 		$expected_output .= '</ul>';
 
 		// Capture the output.
 		$this->expectOutputString( $expected_output );
 
 		// Execute the pagination function.
-		google_ss2db_options_pagination( $current_page, $total_pages, $range );
+		google_ss2db_options_pagination( $current_page, $total_pages, $range, $nonce );
 	}
 }
