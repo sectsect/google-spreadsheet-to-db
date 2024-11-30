@@ -45,12 +45,28 @@ $array = array(
 );
 
 global $wpdb;
-$res = $wpdb->delete( GOOGLE_SS2DB_TABLE_NAME, $array );
+
+// Define cache key.
+$cache_key = 'google_ss2db_delete_' . $id;
+
+// Retrieve data from cache.
+$cached_result = wp_cache_get( $cache_key, 'google_ss2db' );
+
+// Perform database operation only if cache is not available.
+if ( false === $cached_result ) {
+	// Execute deletion from database.
+	$res = $wpdb->delete( GOOGLE_SS2DB_TABLE_NAME, $array, array( '%d' ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+
+	// Save deletion result to cache.
+	wp_cache_set( $cache_key, $res, 'google_ss2db', 300 ); // Cache for 5 minutes.
+} else {
+	// Retrieve result from cache.
+	$res = $cached_result;
+}
 
 $return = array(
 	'res' => $res,
 	'id'  => $id,
 );
 
-echo json_encode( $return );
-exit;
+wp_send_json( $return );

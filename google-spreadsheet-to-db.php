@@ -23,11 +23,15 @@ define( 'GOOGLE_SS2DB_TABLE_NAME', $wpdb->prefix . 'google_ss2db' );
 function google_ss2db_noticephpversionwrong(): void {
 	global $google_ss2db_minimalrequiredphpversion;
 	$required_version = is_null( $google_ss2db_minimalrequiredphpversion ) ? 'unknown' : $google_ss2db_minimalrequiredphpversion;
-	echo '<div class="updated fade">' .
-	__( 'Error: plugin "Google Spreadsheet to DB" requires a newer version of PHP to be running.', 'google_ss2db' ) .
-			'<br/>' . __( 'Minimal version of PHP required: ', 'google_ss2db' ) . '<strong>' . $google_ss2db_minimalrequiredphpversion . '</strong>' .
-			'<br/>' . __( 'Your server\'s PHP version: ', 'google_ss2db' ) . '<strong>' . phpversion() . '</strong>' .
-		'</div>';
+	$message          = sprintf(
+		'<div class="updated fade">%s<br/>%s<strong>%s</strong><br/>%s<strong>%s</strong></div>',
+		esc_html__( 'Error: plugin "Google Spreadsheet to DB" requires a newer version of PHP to be running.', 'google-spreadsheet-to-db' ),
+		esc_html__( 'Minimal version of PHP required: ', 'google-spreadsheet-to-db' ),
+		wp_kses_post( $required_version ),
+		esc_html__( 'Your server\'s PHP version: ', 'google-spreadsheet-to-db' ),
+		wp_kses_post( phpversion() )
+	);
+	echo wp_kses_post( $message );
 }
 
 /**
@@ -61,7 +65,7 @@ register_activation_hook( __FILE__, 'activate_google_ss2db' );
  * @return void
  */
 function google_ss2db_load_textdomain(): void {
-	load_plugin_textdomain( 'google_ss2db', false, plugin_basename( __DIR__ ) . '/languages' );
+	load_plugin_textdomain( 'google-spreadsheet-to-db', false, plugin_basename( __DIR__ ) . '/languages' );
 }
 add_action( 'plugins_loaded', 'google_ss2db_load_textdomain' );
 

@@ -27,11 +27,11 @@
  */
 ?>
 <div class="wrap">
-	<h1>Google Spreadsheet to DB</h1>
+	<h1><?php echo esc_html__( 'Google Spreadsheet to DB', 'google-spreadsheet-to-db' ); ?></h1>
 	<section>
 		<form method="post" action="options.php">
 			<hr />
-			<h3><?php _e( 'General Settings', 'google_ss2db' ); ?></h3>
+			<h3><?php echo esc_html__( 'General Settings', 'google-spreadsheet-to-db' ); ?></h3>
 			<?php
 			settings_fields( 'google_ss2db-settings-group' );
 			do_settings_sections( 'google_ss2db-settings-group' );
@@ -40,7 +40,7 @@
 				<tbody>
 					<tr>
 						<th scope="row">
-							<label for="google_ss2db_json_path"><?php _e( 'The absolute path to <code>client_secret.json</code>', 'google_ss2db' ); ?></label>
+							<label for="google_ss2db_json_path"><?php echo esc_html__( 'The absolute path to <code>client_secret.json</code>', 'google-spreadsheet-to-db' ); ?></label>
 						</th>
 						<td>
 							<?php if ( defined( 'GOOGLE_SS2DB_CLIENT_SECRET_PATH' ) ) : ?>
@@ -49,7 +49,7 @@
 							</code>
 							<?php else : ?>
 							<p>
-								<?php _e( 'Warning: You must define constants for client_secret.json in the <code>wp-config.php</code> file.', 'google_ss2db' ); ?><br>
+								<?php echo esc_html__( 'Warning: You must define constants for client_secret.json in the <code>wp-config.php</code> file.', 'google-spreadsheet-to-db' ); ?><br>
 								e.g. <code>define('GOOGLE_SS2DB_CLIENT_SECRET_PATH', '/path/to/your/client_secret.json');</code>
 							</p>
 							<?php endif; ?>
@@ -57,7 +57,7 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="google_ss2db_dataformat"><?php _e( 'Data format', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
+							<label for="google_ss2db_dataformat"><?php echo esc_html__( 'Data format', 'google-spreadsheet-to-db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
 						</th>
 						<td>
 							<?php
@@ -69,7 +69,7 @@
 							<select id="google_ss2db_dataformat" name="google_ss2db_dataformat" style="font-size: 11px; width: 330px;">
 								<?php foreach ( $types as $key => $type ) : ?>
 									<?php $selected = ( get_option( 'google_ss2db_dataformat' ) === $key ) ? 'selected' : ''; ?>
-									<option value="<?php echo $key; ?>" <?php echo $selected; ?>><?php echo $type; ?></option>
+									<option value="<?php echo esc_attr( $key ); ?>" <?php echo esc_attr( $selected ); ?>><?php echo esc_html( $type ); ?></option>
 								<?php endforeach; ?>
 							</select>
 						</td>
@@ -80,7 +80,7 @@
 				<a href="https://github.com/sectsect/google-spreadsheet-to-db" target="_blank">
 					<dl>
 						<dt>
-							<img src="https://github-sect.s3-ap-northeast-1.amazonaws.com/github.svg" width="22" height="auto">
+							<img src="<?php echo esc_url( plugin_dir_url( __DIR__ ) . 'assets/images/github.svg' ); ?>" width="22" height="auto" alt="GitHub" loading="lazy">
 						</dt>
 						<dd> Document on GitHub</dd>
 					</dl>
@@ -90,25 +90,25 @@
 		</form>
 	</section>
 	<section>
-		<?php if ( isset( $_GET['ss2dbupdated'] ) && true === $_GET['ss2dbupdated'] ) : ?>
+		<?php if ( isset( $_GET['ss2dbupdated'] ) && '1' === $_GET['ss2dbupdated'] ) : ?>
 			<div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible">
-				<p><strong><?php _e( 'Spreadsheet saved', 'google_ss2db' ); ?></strong></p>
+				<p><strong><?php echo esc_html__( 'Spreadsheet saved', 'google-spreadsheet-to-db' ); ?></strong></p>
 				<button type="button" class="notice-dismiss"><span class="screen-reader-text"></span></button>
 			</div>
-		<?php elseif ( isset( $_GET['ss2dbupdated'] ) && false === $_GET['ss2dbupdated'] ) : ?>
+		<?php elseif ( isset( $_GET['ss2dbupdated'] ) && '0' === $_GET['ss2dbupdated'] ) : ?>
 			<div id="setting-error-settings_updated" class="error settings-error notice notice-error is-dismissible">
-				<p><strong><?php _e( 'Saving the spreadsheet failed', 'google_ss2db' ); ?></strong></p>
+				<p><strong><?php echo esc_html__( 'Saving the spreadsheet failed', 'google-spreadsheet-to-db' ); ?></strong></p>
 				<button type="button" class="notice-dismiss"><span class="screen-reader-text"></span></button>
 			</div>
 		<?php endif; ?>
-		<form method="post" action="<?php echo plugin_dir_url( __DIR__ ) . 'includes/save.php'; ?>">
+		<form method="post" action="<?php echo esc_url( plugin_dir_url( __DIR__ ) . 'includes/save.php' ); ?>">
 			<hr />
-			<h3><?php _e( 'Import from Google Spreadsheet', 'google_ss2db' ); ?></h3>
+			<h3><?php echo esc_html__( 'Import from Google Spreadsheet', 'google-spreadsheet-to-db' ); ?></h3>
 			<table class="form-table">
 				<tbody>
 					<tr>
 						<th scope="row">
-							<label for="worksheetid"><?php _e( 'Spreadsheet ID', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
+							<label for="worksheetid"><?php echo esc_html__( 'Spreadsheet ID', 'google-spreadsheet-to-db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
 						</th>
 						<td>
 							<input type="text" id="worksheetid" class="regular-text" name="worksheetid" style="width: 400px;" required>
@@ -116,7 +116,7 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="worksheetname"><?php _e( 'Spreadsheet name', 'google_ss2db' ); ?> <span style="color: #999; font-size: 10px; font-weight: normal;">(Optional)</span></label>
+							<label for="worksheetname"><?php echo esc_html__( 'Spreadsheet name', 'google-spreadsheet-to-db' ); ?> <span style="color: #999; font-size: 10px; font-weight: normal;">(Optional)</span></label>
 						</th>
 						<td>
 							<input type="text" id="worksheetname" class="regular-text" name="worksheetname" style="width: 180px;">
@@ -124,7 +124,7 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="sheetname"><?php _e( 'Single Sheet name', 'google_ss2db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
+							<label for="sheetname"><?php echo esc_html__( 'Single Sheet name', 'google-spreadsheet-to-db' ); ?> <span style="color: #c00; font-size: 10px; font-weight: normal;">(Required)</span></label>
 						</th>
 						<td>
 							<input type="text" id="sheetname" class="regular-text" name="sheetname" style="width: 180px;" required>
@@ -132,16 +132,16 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="hasheaderrow"><?php _e( 'Top Header Row', 'google_ss2db' ); ?></label>
+							<label for="hasheaderrow"><?php echo esc_html__( 'Top Header Row', 'google-spreadsheet-to-db' ); ?></label>
 						</th>
 						<td>
 							<input type="checkbox" id="hasheaderrow" name="hasheaderrow" value="1" checked>
-							<span style="font-size: 11px; color: #888"><?php _e( 'Check this if the sheet has a top header row.', 'google_ss2db' ); ?> </span>
+							<span style="font-size: 11px; color: #888"><?php echo esc_html__( 'Check this if the sheet has a top header row.', 'google-spreadsheet-to-db' ); ?> </span>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="datatitle"><?php _e( 'Title', 'google_ss2db' ); ?> <span style="color: #999; font-size: 10px; font-weight: normal;">(Optional)</span></label>
+							<label for="datatitle"><?php echo esc_html__( 'Title', 'google-spreadsheet-to-db' ); ?> <span style="color: #999; font-size: 10px; font-weight: normal;">(Optional)</span></label>
 						</th>
 						<td>
 							<input type="text" id="datatitle" class="regular-text" name="datatitle" style="width: 330px;">
@@ -149,10 +149,10 @@
 					</tr>
 				</tbody>
 			</table>
-			<p><?php _e( 'This process may takes a few minutes.', 'google_ss2db' ); ?></p>
+			<p><?php echo esc_html__( 'This process may takes a few minutes.', 'google-spreadsheet-to-db' ); ?></p>
 			<?php wp_nonce_field( 'google_ss2db', 'nonce' ); ?>
 			<?php
-			$text = __( 'Import from Google Spreadsheet', 'google_ss2db' );
+			$text = esc_html__( 'Import from Google Spreadsheet', 'google-spreadsheet-to-db' );
 			submit_button( $text, 'primary', 'save-spreadsheet', false );
 			?>
 		</form>
@@ -213,12 +213,18 @@
 	}
 
 	global $wpdb;
-	$table         = GOOGLE_SS2DB_TABLE_NAME;
-	$paged         = filter_input( INPUT_GET, 'paged', FILTER_VALIDATE_INT ) ? filter_input( INPUT_GET, 'paged', FILTER_VALIDATE_INT ) : 1;
+	$table = GOOGLE_SS2DB_TABLE_NAME;
+
+	$paged = filter_input( INPUT_GET, 'paged', FILTER_VALIDATE_INT );
+	$nonce = filter_input( INPUT_GET, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+
+	$paged         = $paged && wp_verify_nonce( $nonce, 'google_ss2db_pagination' )
+		? $paged
+		: 1;
 	$limit         = 24;
 	$offset        = ( $paged - 1 ) * $limit;
 	$countsql      = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC';
-	$allrows       = count( $wpdb->get_results( $countsql ) ); // phpcs:ignore
+	$allrows = count( $wpdb->get_results( $countsql ) ); // phpcs:ignore
 	$max_num_pages = ceil( $allrows / $limit );
 	// $sql           = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC LIMIT ' . $offset . ', ' . $limit;
 	$sql      = 'SELECT * FROM ' . $table . ' ORDER BY date DESC LIMIT %d OFFSET %d';
@@ -235,23 +241,23 @@
 	<section id="list">
 		<hr />
 		<?php foreach ( $myrows as $row ) : ?>
-		<dl class="acorddion" data-id="<?php echo $row->id; ?>">
+		<dl class="acorddion" data-id="<?php echo esc_attr( $row->id ); ?>">
 			<dt>
 				<span class="ss2db_logo"></span>
 				<span class="ss2db_id">
-					<?php echo $row->id; ?>
+					<?php echo esc_html( $row->id ); ?>
 				</span>
 				<span class="ss2db_worksheet_id">
 					<?php
 					$wordsheet_id = ( isset( $row->worksheet_id ) ) ? $row->worksheet_id : '(no ID)';
-					echo google_ss2db_truncate_middle( $wordsheet_id );
+					echo esc_html( google_ss2db_truncate_middle( $wordsheet_id ) );
 					?>
 				</span>
 				<span class="ss2db_worksheet_name">
-					<?php echo $row->worksheet_name; ?>
+					<?php echo esc_html( $row->worksheet_name ); ?>
 				</span>
 				<span class="ss2db_sheet_name">
-					<?php echo $row->sheet_name; ?>
+					<?php echo esc_html( $row->sheet_name ); ?>
 				</span>
 				<span class="ss2db_title
 				<?php
@@ -260,13 +266,13 @@
 				}
 				?>
 				">
-					<?php echo $row->title ? $row->title : ' (no title)'; ?>
+					<?php echo esc_html( $row->title ? $row->title : ' (no title)' ); ?>
 				</span>
 				<span class="ss2db_date">
 					<div class="inner">
 						<?php
 						$date = new DateTime( $row->date );
-						echo $date->format( 'Y.m.d H:i:s' );
+						echo esc_html( $date->format( 'Y.m.d H:i:s' ) );
 						?>
 					</div>
 				</span>
@@ -275,7 +281,7 @@
 			<dd>
 				<?php
 				$json = $row->value;
-				echo RecursiveTable::json_to_debug( $json );
+				echo wp_kses_post( RecursiveTable::json_to_debug( $json ) );
 				?>
 			</dd>
 		</dl>

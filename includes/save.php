@@ -32,7 +32,12 @@ require_once dirname( __DIR__, 4 ) . '/wp-load.php';
 $nonce        = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 $http_referer = filter_input( INPUT_POST, '_wp_http_referer', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
-if ( ! $nonce || ! wp_verify_nonce( $nonce, 'google_ss2db' ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+if (
+	! $nonce ||
+	! wp_verify_nonce( $nonce, 'google_ss2db' ) ||
+	! isset( $_SERVER['REQUEST_METHOD'] ) ||
+	'POST' !== $_SERVER['REQUEST_METHOD']
+) {
 	wp_die( 'Our Site is protected!!' );
 }
 
