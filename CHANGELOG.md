@@ -1,5 +1,30 @@
 # Changelog
 
+## [v6.10.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.10.0) (2024-11-30)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.9.1...v6.10.0)
+
+**Merged pull requests:**
+
+- feat\(debug\): add configurable debug mode for spreadsheet save process [\#60](https://github.com/sectsect/google-spreadsheet-to-db/pull/60) ([sectsect](https://github.com/sectsect))
+
+## [v6.9.1](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.9.1) (2024-11-30)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.9.0...v6.9.1)
+
+**Merged pull requests:**
+
+- test: fix unit test for pagination [\#59](https://github.com/sectsect/google-spreadsheet-to-db/pull/59) ([sectsect](https://github.com/sectsect))
+- fix: fix bug for pagination [\#58](https://github.com/sectsect/google-spreadsheet-to-db/pull/58) ([sectsect](https://github.com/sectsect))
+
+## [v6.9.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.9.0) (2024-11-30)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.8.2...v6.9.0)
+
+**Merged pull requests:**
+
+- ci: add Github Actions workflow for plugin check [\#57](https://github.com/sectsect/google-spreadsheet-to-db/pull/57) ([sectsect](https://github.com/sectsect))
+
 ## [v6.8.2](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.8.2) (2024-11-28)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.8.1...v6.8.2)
