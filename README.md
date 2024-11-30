@@ -261,6 +261,23 @@ $args = array(
 
 * This Plugin does not hosting on the [wordpress.org](https://wordpress.org/) repo in order to prevent a flood of support requests from wide audience.
 
+## Debug Mode
+
+To enable debug mode, add the following constant to your `wp-config.php`:
+
+```php
+define( 'GOOGLE_SS2DB_DEBUG', true );
+```
+
+When debug mode is enabled, importing a spreadsheet will return a detailed JSON response instead of the usual redirect. The response includes the following information:
+
+- `result`: A boolean indicating the success or failure of the process
+- `data`: Details of the saved data
+- `post_data`: Sanitized post data
+- `referer`: The redirect URL
+
+**Note**: Always set `GOOGLE_SS2DB_DEBUG` to `false` or remove the constant in production environments.
+
 ## Troubleshooting
 
 This plugin depends on [Guzzle](https://github.com/guzzle/guzzle) **v7**, which may conflict with other WordPress plugins or Composer packages using Guzzle **v6**.  
