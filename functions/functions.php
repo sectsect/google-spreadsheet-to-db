@@ -30,37 +30,74 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . 'composer/vendor/autoload.php' )
  * This function generates HTML for a simple pagination interface, based on the current page,
  * total number of pages, and the range of pages to display around the current page.
  *
- * @param int $paged Current page number, defaults to 1.
- * @param int $pages Total number of pages, defaults to 1.
- * @param int $range Number of pages to display around the current page, defaults to 2.
+ * @param int    $paged Current page number, defaults to 1.
+ * @param int    $pages Total number of pages, defaults to 1.
+ * @param int    $range Number of pages to display around the current page, defaults to 2.
+ * @param string $nonce Nonce for security verification.
  * @return void
  */
-function google_ss2db_options_pagination( int $paged = 1, int $pages = 1, int $range = 2 ): void {
+function google_ss2db_options_pagination( int $paged = 1, int $pages = 1, int $range = 2, string $nonce = '' ): void {
 	$paged     = intval( $paged );
 	$pages     = intval( $pages );
 	$range     = intval( $range );
 	$showitems = ( $range * 2 ) + 1;
 
+	$base_link = add_query_arg(
+		array(
+			'paged' => 1,
+			'nonce' => $nonce,
+		),
+		remove_query_arg( array( 'paged', 'nonce' ) )
+	);
+
 	if ( 1 !== $pages ) {
 		echo '<ul class="pagination">';
 		if ( 2 < $paged && $paged > $range + 1 && $showitems < $pages ) {
-			echo '<li class="first"><a href="' . esc_url( get_pagenum_link( 1 ) ) . '">&laquo;</a></li>';
+			echo '<li class="first"><a href="' . esc_url( $base_link ) . '">&laquo;</a></li>';
 		}
 		if ( 1 < $paged && $showitems < $pages ) {
-			echo '<li class="prevnext"><a href="' . esc_url( get_pagenum_link( $paged - 1 ) ) . '">&lsaquo;</a></li>';
+			echo '<li class="prevnext"><a href="' . esc_url(
+				add_query_arg(
+					array(
+						'paged' => $paged - 1,
+						'nonce' => $nonce,
+					)
+				)
+			) . '">&lsaquo;</a></li>';
 		}
 		for ( $i = 1; $i <= $pages; $i++ ) {
 			if ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) {
 				echo ( $paged === $i )
 					? '<li class="current"><span>' . esc_html( (string) $i ) . '</span></li>'
-					: '<li><a href="' . esc_url( get_pagenum_link( (int) $i ) ) . '">' . esc_html( (string) $i ) . '</a></li>';
+					: '<li><a href="' . esc_url(
+						add_query_arg(
+							array(
+								'paged' => $i,
+								'nonce' => $nonce,
+							)
+						)
+					) . '">' . esc_html( (string) $i ) . '</a></li>';
 			}
 		}
 		if ( $paged < $pages && $showitems < $pages ) {
-			echo '<li class="prevnext"><a href="' . esc_url( get_pagenum_link( $paged + 1 ) ) . '">&rsaquo;</a></li>';
+			echo '<li class="prevnext"><a href="' . esc_url(
+				add_query_arg(
+					array(
+						'paged' => $paged + 1,
+						'nonce' => $nonce,
+					)
+				)
+			) . '">&rsaquo;</a></li>';
 		}
 		if ( $paged < $pages - 1 && $paged + $range - 1 < $pages && $showitems < $pages ) {
-			echo '<li class="last"><a href="' . esc_url( get_pagenum_link( $pages ) ) . '">&raquo;</a></li>';
+			echo '<li class="last"><a href="' . esc_url(
+				add_query_arg(
+					array(
+						'paged' => $pages,
+						'nonce' => $nonce,
+					)
+				)
+			) . '">&raquo;</a></li>';
 		}
 		echo '</ul>';
 	}

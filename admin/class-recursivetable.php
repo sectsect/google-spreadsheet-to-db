@@ -218,17 +218,18 @@
 	$paged = filter_input( INPUT_GET, 'paged', FILTER_VALIDATE_INT );
 	$nonce = filter_input( INPUT_GET, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
-	$paged         = $paged && wp_verify_nonce( $nonce, 'google_ss2db_pagination' )
-		? $paged
-		: 1;
+	if ( $paged && ! wp_verify_nonce( $nonce, 'google_ss2db_pagination' ) ) {
+		$paged = 1;
+	}
+
+	$paged         = $paged ? $paged : 1;
 	$limit         = 24;
 	$offset        = ( $paged - 1 ) * $limit;
 	$countsql      = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC';
-	$allrows = count( $wpdb->get_results( $countsql ) ); // phpcs:ignore
+	$allrows       = count( $wpdb->get_results( $countsql ) ); // phpcs:ignore
 	$max_num_pages = ceil( $allrows / $limit );
-	// $sql           = 'SELECT * FROM ' . GOOGLE_SS2DB_TABLE_NAME . ' ORDER BY date DESC LIMIT ' . $offset . ', ' . $limit;
-	$sql      = 'SELECT * FROM ' . $table . ' ORDER BY date DESC LIMIT %d OFFSET %d';
-	$prepared = $wpdb->prepare(
+	$sql           = 'SELECT * FROM ' . $table . ' ORDER BY date DESC LIMIT %d OFFSET %d';
+	$prepared      = $wpdb->prepare(
 		$sql, // phpcs:ignore
 		$limit,
 		$offset
@@ -287,8 +288,14 @@
 		</dl>
 		<?php endforeach; ?>
 		<?php
+		$pagination_nonce = wp_create_nonce( 'google_ss2db_pagination' );
 		if ( function_exists( 'google_ss2db_options_pagination' ) ) {
-			google_ss2db_options_pagination( $paged, (int) $max_num_pages, 2 );
+			google_ss2db_options_pagination(
+				$paged,
+				(int) $max_num_pages,
+				2,
+				$pagination_nonce
+			);
 		}
 		?>
 	</section>
