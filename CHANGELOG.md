@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.11.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.11.0) (2024-12-02)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.10.0...v6.11.0)
+
+**Merged pull requests:**
+
+- feat\(admin\): enhance spreadsheet entries list management [\#61](https://github.com/sectsect/google-spreadsheet-to-db/pull/61) ([sectsect](https://github.com/sectsect))
+
 ## [v6.10.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.10.0) (2024-11-30)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.9.1...v6.10.0)
