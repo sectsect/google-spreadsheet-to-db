@@ -81,18 +81,8 @@
 					<dl>
 						<dt>
 							<?php
-							$github_icon_url = plugin_dir_url( __DIR__ ) . 'assets/images/github.svg';
-							echo wp_get_attachment_image(
-								attachment_url_to_postid( $github_icon_url ),
-								'thumbnail',
-								false,
-								array(
-									'src'     => $github_icon_url,
-									'width'   => '22',
-									'alt'     => 'GitHub',
-									'loading' => 'lazy',
-								)
-							);
+							// phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
+							echo '<img src="' . esc_url( plugin_dir_url( __DIR__ ) . 'assets/images/github.svg' ) . '" width="22" height="auto" alt="GitHub" loading="lazy">';
 							?>
 						</dt>
 						<dd>Document on GitHub</dd>
