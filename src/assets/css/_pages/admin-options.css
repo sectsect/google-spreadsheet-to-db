@@ -60,6 +60,27 @@
 
   section#list {
     margin-top: 70px;
+
+    .wp-list-table {
+      font-size: 12px;
+
+      td,
+      th {
+        vertical-align: middle;
+      }
+
+      thead {
+        th {
+          &:first-child {
+            width: 70px;
+          }
+
+          &:last-child {
+            width: 217px;
+          }
+        }
+      }
+    }
   }
 
   .pagination {
@@ -89,210 +110,85 @@
       }
     }
   }
-
-  .acorddion {
-    margin: 10px 0 0;
-    overflow: hidden;
-    transition: all 0.3s linear;
-
-    dt {
-      position: relative;
-      box-sizing: border-box;
-      display: table;
-      width: 100%;
-      padding-right: 46px;
-      cursor: pointer;
-      table-layout: fixed;
-      background: #fff;
-      box-shadow: 0 1px 1px 0 rgb(0 0 0 / 0.1);
-
-      &::after {
-        position: absolute;
-        top: 50%;
-        right: 18px;
-        display: block;
-        width: 10px;
-        height: 10px;
-        margin-top: -7px;
-        content: '';
-        border-top: 1px solid #999;
-        border-right: 1px solid #999;
-        transition: all 0.3s linear;
-        transform: rotate(135deg);
-      }
-
-      span {
-        display: table-cell;
-        padding: 10px;
-        vertical-align: top;
-
-        &.ss2db_logo {
-          width: 25px;
-          background: url('../images/ss_logo.svg') no-repeat center center;
-          background-size: 15px auto;
-          border-right: 1px solid #eee;
-        }
-
-        &.ss2db_id {
-          width: 30px;
-          color: #999;
-          text-align: center;
-          border-right: 1px solid #eee;
-        }
-
-        &.ss2db_worksheet_id {
-          width: 130px;
-          overflow: hidden;
-          font-size: 10px;
-          font-weight: bold;
-          border-right: 1px solid #eee;
-        }
-
-        &.ss2db_worksheet_name,
-        &.ss2db_sheet_name {
-          width: 20%;
-          border-right: 1px solid #eee;
-        }
-
-        &.ss2db_title {
-          width: 20%;
-          border-right: 1px solid #eee;
-
-          &.no_value {
-            color: #bbb;
-          }
-        }
-
-        &.ss2db_date {
-          width: 145px;
-          padding: 0;
-          border-right: 1px solid #eee;
-
-          .inner {
-            padding: 10px 10px 10px 20px;
-            font-size: 10px;
-            color: #999;
-
-            @media only screen and (width <= 782px) {
-              padding-left: 10px;
-            }
-          }
-        }
-
-        &.ss2db_delete {
-          width: 30px;
-          text-align: center;
-          border-right: 1px solid #eee;
-
-          &::after {
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            vertical-align: middle;
-            content: '';
-            background: url('../images/trash.svg') no-repeat center center;
-            background-size: 15px;
-          }
-
-          &.disable {
-            &::after {
-              opacity: 0.3;
-            }
-          }
-        }
-      }
-    }
-
-    dd {
-      display: none;
-      padding: 1em 0;
-      margin: 0;
-      font-size: 10px;
-
-      table {
-        width: 100%;
-        table-layout: fixed;
-        border-spacing: 0;
-        border-collapse: collapse;
-        background: #fff;
-
-        th,
-        tr,
-        td {
-          padding: 0;
-          margin: 0;
-          vertical-align: middle;
-          border-spacing: 0;
-          border-collapse: collapse;
-          border: 1px solid #eee;
-        }
-
-        th,
-        td {
-          span {
-            display: table-cell;
-            padding: 5px 10px;
-          }
-        }
-
-        th {
-          width: 8.5%;
-          text-align: center;
-
-          span {
-            display: inline;
-          }
-        }
-
-        table {
-          border: none;
-
-          th,
-          tr,
-          td {
-            border-top: none;
-            border-left: none;
-          }
-
-          tr {
-            height: 28px;
-            border-right: none;
-
-            td {
-              &:last-child {
-                border-right: none;
-                border-bottom: none;
-              }
-            }
-
-            &:last-child {
-              border-bottom: none;
-
-              th {
-                border-bottom: none;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    &.opened {
-      dt {
-        &::after {
-          top: 65%;
-          transform: rotate(-45deg);
-        }
-      }
-    }
-
-    &.hidden {
-      height: 0;
-      margin: 0;
-    }
-  }
 }
 
-.select2 {
-  font-size: 11px;
+.swal2-container {
+  z-index: 99999 !important;
+
+  pre {
+    padding: 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: left;
+    white-space: pre-wrap;
+    background: #f8f8f8;
+    border-radius: 4px;
+  }
+
+  .entry-details-table {
+    width: 100%;
+    font-size: 10px;
+    table-layout: fixed;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    th,
+    tr,
+    td {
+      padding: 0;
+      margin: 0;
+      vertical-align: middle;
+      border-spacing: 0;
+      border-collapse: collapse;
+      border: 1px solid #eee;
+    }
+
+    th,
+    td {
+      span {
+        display: table-cell;
+        padding: 5px 10px;
+      }
+    }
+
+    th {
+      width: 8.5%;
+      text-align: center;
+
+      span {
+        display: inline;
+      }
+    }
+
+    table {
+      border: none;
+
+      th,
+      tr,
+      td {
+        border-top: none;
+        border-left: none;
+      }
+
+      tr {
+        height: 28px;
+        border-right: none;
+
+        td {
+          &:last-child {
+            border-right: none;
+            border-bottom: none;
+          }
+        }
+
+        &:last-child {
+          border-bottom: none;
+
+          th {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
 }
