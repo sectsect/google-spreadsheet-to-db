@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.11.1](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.11.1) (2024-12-02)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.11.0...v6.11.1)
+
+**Merged pull requests:**
+
+- fix\(admin\): add missing GitHub logo image [\#62](https://github.com/sectsect/google-spreadsheet-to-db/pull/62) ([sectsect](https://github.com/sectsect))
+
 ## [v6.11.0](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.11.0) (2024-12-02)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.10.0...v6.11.0)
