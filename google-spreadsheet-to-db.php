@@ -8,6 +8,8 @@
  * Text Domain:     google-spreadsheet-to-db
  * Domain Path:     /languages
  * Version:         6.10.0
+ * License:         GPL-3.0-or-later
+ * License URI:     http://www.gnu.org/licenses/gpl-3.0.html
  *
  * @package         Google_Spreadsheet_to_DB
  */
