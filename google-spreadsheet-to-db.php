@@ -14,6 +14,8 @@
  * @package         Google_Spreadsheet_to_DB
  */
 
+declare(strict_types=1);
+
 $google_ss2db_minimalrequiredphpversion = '8.0';
 
 global $wpdb;

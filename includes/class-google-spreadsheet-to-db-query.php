@@ -1,14 +1,16 @@
 <?php
-	/**
-	 * This file contains the Google_Spreadsheet_To_DB_Query class which handles SQL queries for the Google Spreadsheet to DB plugin.
-	 *
-	 * The class is designed to construct and execute SQL queries with support for filtering, sorting, and pagination.
-	 * It is initialized with customizable parameters to tailor the query operations.
-	 *
-	 * @package    Google_Spreadsheet_to_DB
-	 * @subpackage Google_Spreadsheet_to_DB/includes
-	 * @since      1.0.2
-	 */
+/**
+ * This file contains the Google_Spreadsheet_To_DB_Query class which handles SQL queries for the Google Spreadsheet to DB plugin.
+ *
+ * The class is designed to construct and execute SQL queries with support for filtering, sorting, and pagination.
+ * It is initialized with customizable parameters to tailor the query operations.
+ *
+ * @package    Google_Spreadsheet_to_DB
+ * @subpackage Google_Spreadsheet_to_DB/includes
+ * @since      1.0.2
+ */
+
+declare(strict_types=1);
 
 /**
  * Handles database queries for the Google Spreadsheet to DB plugin.

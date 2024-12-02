@@ -9,6 +9,8 @@
  * @subpackage Google_Spreadsheet_to_DB/functions
  */
 
+declare(strict_types=1);
+
 /**
  * Fired during plugin activation.
  *
