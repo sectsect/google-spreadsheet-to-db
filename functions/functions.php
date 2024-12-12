@@ -20,6 +20,8 @@
  * @subpackage Google_Spreadsheet_to_DB/functions
  */
 
+declare(strict_types=1);
+
 if ( file_exists( plugin_dir_path( __FILE__ ) . 'composer/vendor/autoload.php' ) ) {
 	require_once plugin_dir_path( __FILE__ ) . 'composer/vendor/autoload.php';
 }

@@ -12,6 +12,8 @@
  * @subpackage Google_Spreadsheet_to_DB/includes
  */
 
+declare(strict_types=1);
+
 /**
  * The core plugin class.
  *
