@@ -185,6 +185,7 @@ declare(strict_types=1);
 	);
 
 	// Sort column validation.
+	$order   = $order ?? $default_order;
 	$orderby = isset( $allowed_orderby[ $orderby ] ) ? $orderby : $default_orderby;
 	$order   = in_array( strtoupper( $order ), array( 'ASC', 'DESC' ), true ) ? strtoupper( $order ) : $default_order;
 
