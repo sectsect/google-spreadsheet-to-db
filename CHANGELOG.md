@@ -1,5 +1,14 @@
 # Changelog
 
+## [v6.11.2](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.11.2) (2024-12-13)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.11.1...v6.11.2)
+
+**Merged pull requests:**
+
+- chore\(deps\): bump nanoid from 3.3.7 to 3.3.8 [\#64](https://github.com/sectsect/google-spreadsheet-to-db/pull/64) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore: add missing declare\(strict\_types=1\) [\#63](https://github.com/sectsect/google-spreadsheet-to-db/pull/63) ([sectsect](https://github.com/sectsect))
+
 ## [v6.11.1](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.11.1) (2024-12-02)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.11.0...v6.11.1)
