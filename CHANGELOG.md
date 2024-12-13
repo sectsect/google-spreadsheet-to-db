@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.11.4](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.11.4) (2024-12-13)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.11.3...v6.11.4)
+
+**Merged pull requests:**
+
+- chore\(deps\): update composer dependencies [\#66](https://github.com/sectsect/google-spreadsheet-to-db/pull/66) ([sectsect](https://github.com/sectsect))
+
 ## [v6.11.3](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.11.3) (2024-12-13)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.11.2...v6.11.3)
