@@ -14,6 +14,13 @@
 
 declare(strict_types=1);
 
+// Add a constant for the register_setting arguments at the top of the file.
+const GOOGLE_SS2DB_SETTING_ARGS = array(
+	'type'              => 'string',
+	'sanitize_callback' => 'google_ss2db_sanitize_dataformat',
+	'default'           => 'json',
+);
+
 /**
  * The core plugin class.
  *
@@ -85,12 +92,34 @@ function google_ss2db_admin_scripts(): void {
 }
 
 /**
+ * Sanitizes the data format option for the Google Spreadsheet to DB plugin.
+ *
+ * This callback ensures that only allowed values ('json' or 'json-unescp') are saved.
+ * If the input is empty or does not match one of the allowed values, an empty string is returned.
+ *
+ * @param mixed $value The value to sanitize.
+ * @return string Sanitized value; returns an empty string if the value is not allowed.
+ */
+function google_ss2db_sanitize_dataformat( mixed $value ): string {
+	$value   = sanitize_text_field( google_ss2db_cast_mixed_to_string( $value ) );
+	$allowed = array( 'json', 'json-unescp' );
+	if ( in_array( $value, $allowed, true ) ) {
+		return $value;
+	}
+	return '';
+}
+
+/**
  * Registers settings for the Google Spreadsheet to DB plugin within the WordPress settings API.
  *
  * @return void
  */
 function register_google_ss2db_settings(): void {
-	register_setting( 'google_ss2db-settings-group', 'google_ss2db_dataformat' );
+	register_setting(
+		'google_ss2db-settings-group',
+		'google_ss2db_dataformat',
+		GOOGLE_SS2DB_SETTING_ARGS
+	);
 }
 
 /**

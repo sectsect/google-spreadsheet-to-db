@@ -310,3 +310,22 @@ function google_ss2db_save_spreadsheet( array $post_data ): array {
 		throw $e;
 	}
 }
+
+/**
+ * Cast mixed value to string.
+ *
+ * @param mixed $value Value to cast.
+ * @return string
+ * @throws InvalidArgumentException If the value cannot be cast to a string.
+ */
+function google_ss2db_cast_mixed_to_string( mixed $value ): string {
+	if ( is_null( $value ) ) {
+		throw new InvalidArgumentException( 'Value cannot be null' );
+	}
+
+	if ( is_scalar( $value ) ) {
+		return (string) $value;
+	}
+
+	throw new InvalidArgumentException( 'Value must be a scalar type' );
+}
