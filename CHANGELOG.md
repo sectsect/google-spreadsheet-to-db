@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.11.5](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.11.5) (2025-02-09)
+
+[Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.11.4...v6.11.5)
+
+**Merged pull requests:**
+
+- ci: resolve Plugin Check warning [\#67](https://github.com/sectsect/google-spreadsheet-to-db/pull/67) ([sectsect](https://github.com/sectsect))
+
 ## [v6.11.4](https://github.com/sectsect/google-spreadsheet-to-db/tree/v6.11.4) (2024-12-13)
 
 [Full Changelog](https://github.com/sectsect/google-spreadsheet-to-db/compare/v6.11.3...v6.11.4)
