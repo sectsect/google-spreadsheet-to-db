@@ -45,6 +45,8 @@ const getJSPlugins = () => {
       fix: true,
       emitError: true,
       lintDirtyModulesOnly: true,
+      configType: 'flat',
+      eslintPath: require.resolve('eslint/use-at-your-own-risk'),
     }),
   );
   // plugins.push(
