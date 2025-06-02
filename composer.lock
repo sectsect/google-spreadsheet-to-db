@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d452c69b9a8d1ca486af78cd6c6107f9",
+    "content-hash": "33f061accc3f03cc57555e373fb88dbe",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -3488,16 +3488,16 @@
         },
         {
             "name": "szepeviktor/phpstan-wordpress",
-            "version": "2.x-dev",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/szepeviktor/phpstan-wordpress.git",
-                "reference": "6686dc2412cdf544556d428e67aa8f0b645164ca"
+                "reference": "963887b04c21fe7ac78e61c1351f8b00fff9f8f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/szepeviktor/phpstan-wordpress/zipball/6686dc2412cdf544556d428e67aa8f0b645164ca",
-                "reference": "6686dc2412cdf544556d428e67aa8f0b645164ca",
+                "url": "https://api.github.com/repos/szepeviktor/phpstan-wordpress/zipball/963887b04c21fe7ac78e61c1351f8b00fff9f8f8",
+                "reference": "963887b04c21fe7ac78e61c1351f8b00fff9f8f8",
                 "shasum": ""
             },
             "require": {
@@ -3517,7 +3517,6 @@
             "suggest": {
                 "swissspidy/phpstan-no-private": "Detect usage of internal core functions, classes and methods"
             },
-            "default-branch": true,
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -3545,9 +3544,9 @@
             ],
             "support": {
                 "issues": "https://github.com/szepeviktor/phpstan-wordpress/issues",
-                "source": "https://github.com/szepeviktor/phpstan-wordpress/tree/2.x"
+                "source": "https://github.com/szepeviktor/phpstan-wordpress/tree/v2.0.2"
             },
-            "time": "2024-12-02T21:31:37+00:00"
+            "time": "2025-02-12T18:43:37+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -3731,9 +3730,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "szepeviktor/phpstan-wordpress": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
