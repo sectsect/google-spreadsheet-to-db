@@ -88,7 +88,7 @@
     "jquery.easing": "^1.4.1",
     "node-notifier": "^10.0.1",
     "sanitize.css": "^13.0.0",
-    "sweetalert2": "^11.21.0",
+    "sweetalert2": "^11.22.4",
     "tom-select": "^2.3.1"
   }
 }
