@@ -64,16 +64,6 @@ function activate_google_ss2db(): void {
 register_activation_hook( __FILE__, 'activate_google_ss2db' );
 
 /**
- * Loads the plugin's text domain for internationalization.
- *
- * @return void
- */
-function google_ss2db_load_textdomain(): void {
-	load_plugin_textdomain( 'google-spreadsheet-to-db', false, plugin_basename( __DIR__ ) . '/languages' );
-}
-add_action( 'plugins_loaded', 'google_ss2db_load_textdomain' );
-
-/**
  * Adds a link to the plugin's GitHub page in the plugin meta row.
  *
  * @param string[] $plugin_meta An array of the plugin's metadata.
