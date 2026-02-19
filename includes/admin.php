@@ -14,6 +14,10 @@
 
 declare(strict_types=1);
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 // Add a constant for the register_setting arguments at the top of the file.
 const GOOGLE_SS2DB_SETTING_ARGS = array(
 	'type'              => 'string',

@@ -16,6 +16,10 @@
 
 declare(strict_types=1);
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $google_ss2db_minimalrequiredphpversion = '8.0';
 
 global $wpdb;

@@ -12,6 +12,10 @@
 
 declare(strict_types=1);
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Handles database queries for the Google Spreadsheet to DB plugin.
  *
