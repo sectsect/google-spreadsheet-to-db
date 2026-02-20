@@ -19,12 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Sanitize and validate POST data using filter_input().
-$nonce        = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-$http_referer = filter_input( INPUT_POST, '_wp_http_referer', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+$google_ss2db_nonce        = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+$google_ss2db_http_referer = filter_input( INPUT_POST, '_wp_http_referer', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 if (
-	! $nonce ||
-	! wp_verify_nonce( $nonce, 'google_ss2db' ) ||
+	! $google_ss2db_nonce ||
+	! wp_verify_nonce( $google_ss2db_nonce, 'google_ss2db' ) ||
 	! isset( $_SERVER['REQUEST_METHOD'] ) ||
 	'POST' !== $_SERVER['REQUEST_METHOD']
 ) {
@@ -32,16 +32,16 @@ if (
 }
 
 // Sanitize all POST data.
-$sanitized_post_data = array_map( fn( $value ) => is_string( $value ) ? sanitize_text_field( $value ) : $value, $_POST );
+$google_ss2db_sanitized_post_data = array_map( fn( $value ) => is_string( $value ) ? sanitize_text_field( $value ) : $value, $_POST );
 
 // Process and save spreadsheet data.
-$data = google_ss2db_save_spreadsheet( $sanitized_post_data );
-$data = apply_filters( 'google_ss2db_after_save', $data );
+$google_ss2db_data = google_ss2db_save_spreadsheet( $google_ss2db_sanitized_post_data );
+$google_ss2db_data = apply_filters( 'google_ss2db_after_save', $google_ss2db_data );
 
-$bool    = (bool) $data['result'];
-$referer = wp_unslash( $http_referer );
-$referer = str_replace( '&settings-updated=true', '', $referer );
-$referer = $referer . '&ss2dbupdated=' . $bool;
+$google_ss2db_bool    = (bool) $google_ss2db_data['result'];
+$google_ss2db_referer = wp_unslash( $google_ss2db_http_referer );
+$google_ss2db_referer = str_replace( '&settings-updated=true', '', $google_ss2db_referer );
+$google_ss2db_referer = $google_ss2db_referer . '&ss2dbupdated=' . $google_ss2db_bool;
 
 // Check if debug mode is enabled.
 if ( defined( 'GOOGLE_SS2DB_DEBUG' ) && true === GOOGLE_SS2DB_DEBUG ) {
@@ -49,10 +49,10 @@ if ( defined( 'GOOGLE_SS2DB_DEBUG' ) && true === GOOGLE_SS2DB_DEBUG ) {
 	header( 'Content-Type: application/json' );
 	echo wp_json_encode(
 		array(
-			'result'    => $bool,
-			'data'      => $data,
-			'post_data' => $sanitized_post_data,
-			'referer'   => $referer,
+			'result'    => $google_ss2db_bool,
+			'data'      => $google_ss2db_data,
+			'post_data' => $google_ss2db_sanitized_post_data,
+			'referer'   => $google_ss2db_referer,
 		),
 		JSON_PRETTY_PRINT
 	);
@@ -60,5 +60,5 @@ if ( defined( 'GOOGLE_SS2DB_DEBUG' ) && true === GOOGLE_SS2DB_DEBUG ) {
 }
 
 // Default redirect for non-debug mode.
-wp_redirect( $referer );
+wp_safe_redirect( $google_ss2db_referer );
 exit;
