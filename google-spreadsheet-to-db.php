@@ -7,7 +7,7 @@
  * Author URI:      https://github.com/sectsect/google-spreadsheet-to-db
  * Text Domain:     google-spreadsheet-to-db
  * Domain Path:     /languages
- * Version:         6.11.6
+ * Version:         6.12.0
  * License:         GPL-3.0-or-later
  * License URI:     http://www.gnu.org/licenses/gpl-3.0.html
  *
