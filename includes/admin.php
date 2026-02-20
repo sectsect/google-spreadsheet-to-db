@@ -14,6 +14,10 @@
 
 declare(strict_types=1);
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 // Add a constant for the register_setting arguments at the top of the file.
 const GOOGLE_SS2DB_SETTING_ARGS = array(
 	'type'              => 'string',
@@ -53,7 +57,7 @@ function google_ss2db_menu(): void {
 	);
 	add_action( 'admin_print_styles-' . $page_hook_suffix, 'google_ss2db_admin_styles' );
 	add_action( 'admin_print_scripts-' . $page_hook_suffix, 'google_ss2db_admin_scripts' );
-	add_action( 'admin_init', 'register_google_ss2db_settings' );
+	add_action( 'admin_init', 'google_ss2db_register_settings' );
 }
 
 /**
@@ -114,7 +118,7 @@ function google_ss2db_sanitize_dataformat( mixed $value ): string {
  *
  * @return void
  */
-function register_google_ss2db_settings(): void {
+function google_ss2db_register_settings(): void {
 	register_setting(
 		'google_ss2db-settings-group',
 		'google_ss2db_dataformat',

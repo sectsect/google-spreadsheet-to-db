@@ -11,6 +11,10 @@
 
 declare(strict_types=1);
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Fired during plugin activation.
  *
@@ -46,7 +50,6 @@ class Google_Spreadsheet_To_DB_Activator {
 				value LONGTEXT NOT NULL,
 				PRIMARY KEY  (id)
 			) $charset_collate;";
-			// @phpstan-ignore-next-line
 			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 			dbDelta( $sql );
 			update_option( 'google_ss2db_version', $google_ss2db_db_version );

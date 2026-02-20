@@ -22,6 +22,10 @@
 
 declare(strict_types=1);
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( file_exists( plugin_dir_path( __FILE__ ) . 'composer/vendor/autoload.php' ) ) {
 	require_once plugin_dir_path( __FILE__ ) . 'composer/vendor/autoload.php';
 }

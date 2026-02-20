@@ -16,6 +16,10 @@
 
 declare(strict_types=1);
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $google_ss2db_minimalrequiredphpversion = '8.0';
 
 global $wpdb;
@@ -57,11 +61,11 @@ function google_ss2db_phpversioncheck(): bool {
  *
  * @return void
  */
-function activate_google_ss2db(): void {
+function google_ss2db_activate(): void {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-google-spreadsheet-to-db-activator.php';
 	Google_Spreadsheet_To_DB_Activator::activate();
 }
-register_activation_hook( __FILE__, 'activate_google_ss2db' );
+register_activation_hook( __FILE__, 'google_ss2db_activate' );
 
 /**
  * Adds a link to the plugin's GitHub page in the plugin meta row.

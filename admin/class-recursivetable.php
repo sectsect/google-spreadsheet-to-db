@@ -14,6 +14,10 @@
 
 declare(strict_types=1);
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * The core plugin class.
  *
@@ -63,15 +67,15 @@ declare(strict_types=1);
 						</th>
 						<td>
 							<?php
-							$types = array(
+							$google_ss2db_types = array(
 								'json'        => 'json_encode',
 								'json-unescp' => 'json_encode (JSON_UNESCAPED_UNICODE)',
 							);
 							?>
 							<select id="google_ss2db_dataformat" name="google_ss2db_dataformat" style="font-size: 11px; width: 330px;">
-								<?php foreach ( $types as $key => $type ) : ?>
-									<?php $selected = ( get_option( 'google_ss2db_dataformat' ) === $key ) ? 'selected' : ''; ?>
-									<option value="<?php echo esc_attr( $key ); ?>" <?php echo esc_attr( $selected ); ?>><?php echo esc_html( $type ); ?></option>
+								<?php foreach ( $google_ss2db_types as $google_ss2db_key => $type ) : ?>
+									<?php $google_ss2db_selected = ( get_option( 'google_ss2db_dataformat' ) === $google_ss2db_key ) ? 'selected' : ''; ?>
+									<option value="<?php echo esc_attr( $google_ss2db_key ); ?>" <?php echo esc_attr( $google_ss2db_selected ); ?>><?php echo esc_html( $type ); ?></option>
 								<?php endforeach; ?>
 							</select>
 						</td>
@@ -157,25 +161,25 @@ declare(strict_types=1);
 			<p><?php echo esc_html__( 'This process may takes a few minutes.', 'google-spreadsheet-to-db' ); ?></p>
 			<?php wp_nonce_field( 'google_ss2db', 'nonce' ); ?>
 			<?php
-			$text = esc_html__( 'Import from Google Spreadsheet', 'google-spreadsheet-to-db' );
-			submit_button( $text, 'primary', 'save-spreadsheet', false );
+			$google_ss2db_text = esc_html__( 'Import from Google Spreadsheet', 'google-spreadsheet-to-db' );
+			submit_button( $google_ss2db_text, 'primary', 'save-spreadsheet', false );
 			?>
 		</form>
 	</section>
 	<?php
 	global $wpdb;
-	$table = GOOGLE_SS2DB_TABLE_NAME;
+	$google_ss2db_table = GOOGLE_SS2DB_TABLE_NAME;
 
 	// Get sort parameters.
-	$orderby = filter_input( INPUT_GET, 'orderby', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-	$order   = filter_input( INPUT_GET, 'order', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	$google_ss2db_orderby = filter_input( INPUT_GET, 'orderby', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	$google_ss2db_order   = filter_input( INPUT_GET, 'order', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 	// Default sort settings.
-	$default_orderby = 'date';
-	$default_order   = 'DESC';
+	$google_ss2db_default_orderby = 'date';
+	$google_ss2db_default_order   = 'DESC';
 
 	// Allowed sort columns.
-	$allowed_orderby = array(
+	$google_ss2db_allowed_orderby = array(
 		'id'             => 'id',
 		'worksheet_id'   => 'worksheet_id',
 		'worksheet_name' => 'worksheet_name',
@@ -185,36 +189,36 @@ declare(strict_types=1);
 	);
 
 	// Sort column validation.
-	$order   = $order ?? $default_order;
-	$orderby = isset( $allowed_orderby[ $orderby ] ) ? $orderby : $default_orderby;
-	$order   = in_array( strtoupper( $order ), array( 'ASC', 'DESC' ), true ) ? strtoupper( $order ) : $default_order;
+	$google_ss2db_order   = $google_ss2db_order ?? $google_ss2db_default_order;
+	$google_ss2db_orderby = isset( $google_ss2db_allowed_orderby[ $google_ss2db_orderby ] ) ? $google_ss2db_orderby : $google_ss2db_default_orderby;
+	$google_ss2db_order   = in_array( strtoupper( $google_ss2db_order ), array( 'ASC', 'DESC' ), true ) ? strtoupper( $google_ss2db_order ) : $google_ss2db_default_order;
 
-	$paged = filter_input( INPUT_GET, 'paged', FILTER_VALIDATE_INT );
-	$nonce = filter_input( INPUT_GET, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+	$google_ss2db_paged = filter_input( INPUT_GET, 'paged', FILTER_VALIDATE_INT );
+	$google_ss2db_nonce = filter_input( INPUT_GET, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 	// Verify pagination nonce.
-	if ( $paged && ! wp_verify_nonce( $nonce, 'google_ss2db_pagination' ) ) {
-		$paged = 1;
+	if ( $google_ss2db_paged && ! wp_verify_nonce( $google_ss2db_nonce, 'google_ss2db_pagination' ) ) {
+		$google_ss2db_paged = 1;
 	}
 
-	$paged  = $paged ? $paged : 1;
-	$limit  = 24;
-	$offset = ( $paged - 1 ) * $limit;
+	$google_ss2db_paged  = $google_ss2db_paged ? $google_ss2db_paged : 1;
+	$google_ss2db_limit  = 24;
+	$google_ss2db_offset = ( $google_ss2db_paged - 1 ) * $google_ss2db_limit;
 
 	// SQL with sorting.
-	$countsql      = "SELECT * FROM {$table} ORDER BY {$orderby} {$order}";
-	$allrows       = count( $wpdb->get_results( $countsql ) ); // phpcs:ignore
-	$max_num_pages = ceil( $allrows / $limit );
+	$google_ss2db_countsql      = "SELECT * FROM {$google_ss2db_table} ORDER BY {$google_ss2db_orderby} {$google_ss2db_order}";
+	$google_ss2db_allrows       = count( $wpdb->get_results( $google_ss2db_countsql ) ); // phpcs:ignore
+	$google_ss2db_max_num_pages = ceil( $google_ss2db_allrows / $google_ss2db_limit );
 
-	$sql      = "SELECT * FROM {$table} ORDER BY {$orderby} {$order} LIMIT %d OFFSET %d";
-	$prepared = $wpdb->prepare(
-		$sql, // phpcs:ignore
-		$limit,
-		$offset
+	$google_ss2db_sql      = "SELECT * FROM {$google_ss2db_table} ORDER BY {$google_ss2db_orderby} {$google_ss2db_order} LIMIT %d OFFSET %d";
+	$google_ss2db_prepared = $wpdb->prepare(
+		$google_ss2db_sql, // phpcs:ignore
+		$google_ss2db_limit,
+		$google_ss2db_offset
 	);
 
-	$myrows = $wpdb->get_results( $prepared ); // phpcs:ignore
-	$count  = count( $myrows );
+	$google_ss2db_myrows = $wpdb->get_results( $google_ss2db_prepared ); // phpcs:ignore
+	$google_ss2db_count  = count( $google_ss2db_myrows );
 
 	/**
 	 * Generate sort URLs for table columns.
@@ -222,7 +226,7 @@ declare(strict_types=1);
 	 * @param string $column The column to generate sort URL for.
 	 * @return string The generated sort URL.
 	 */
-	function get_sort_url( string $column ): string {
+	function google_ss2db_get_sort_url( string $column ): string {
 		$current_page    = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		$current_orderby = filter_input( INPUT_GET, 'orderby', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		$current_orderby = $current_orderby ? $current_orderby : 'date';
@@ -241,45 +245,45 @@ declare(strict_types=1);
 		return esc_url( add_query_arg( $url_params ) );
 	}
 
-	if ( 0 < $count ) :
+	if ( 0 < $google_ss2db_count ) :
 		?>
 	<section id="list">
 		<hr />
 		<table class="wp-list-table widefat fixed striped">
 			<thead>
 				<tr>
-					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'id' === $orderby ? 'sorted ' . strtolower( $order ) : '' ); ?>">
-						<a href="<?php echo esc_url( get_sort_url( 'id' ) ); ?>">
+					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'id' === $google_ss2db_orderby ? 'sorted ' . strtolower( $google_ss2db_order ) : '' ); ?>">
+						<a href="<?php echo esc_url( google_ss2db_get_sort_url( 'id' ) ); ?>">
 							<span>ID</span>
 							<span class="sorting-indicator"></span>
 						</a>
 					</th>
-					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'worksheet_id' === $orderby ? 'sorted ' . strtolower( $order ) : '' ); ?>">
-						<a href="<?php echo esc_url( get_sort_url( 'worksheet_id' ) ); ?>">
+					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'worksheet_id' === $google_ss2db_orderby ? 'sorted ' . strtolower( $google_ss2db_order ) : '' ); ?>">
+						<a href="<?php echo esc_url( google_ss2db_get_sort_url( 'worksheet_id' ) ); ?>">
 							<span>Worksheet ID</span>
 							<span class="sorting-indicator"></span>
 						</a>
 					</th>
-					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'worksheet_name' === $orderby ? 'sorted ' . strtolower( $order ) : '' ); ?>">
-						<a href="<?php echo esc_url( get_sort_url( 'worksheet_name' ) ); ?>">
+					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'worksheet_name' === $google_ss2db_orderby ? 'sorted ' . strtolower( $google_ss2db_order ) : '' ); ?>">
+						<a href="<?php echo esc_url( google_ss2db_get_sort_url( 'worksheet_name' ) ); ?>">
 							<span>Worksheet Name</span>
 							<span class="sorting-indicator"></span>
 						</a>
 					</th>
-					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'sheet_name' === $orderby ? 'sorted ' . strtolower( $order ) : '' ); ?>">
-						<a href="<?php echo esc_url( get_sort_url( 'sheet_name' ) ); ?>">
+					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'sheet_name' === $google_ss2db_orderby ? 'sorted ' . strtolower( $google_ss2db_order ) : '' ); ?>">
+						<a href="<?php echo esc_url( google_ss2db_get_sort_url( 'sheet_name' ) ); ?>">
 							<span>Sheet Name</span>
 							<span class="sorting-indicator"></span>
 						</a>
 					</th>
-					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'title' === $orderby ? 'sorted ' . strtolower( $order ) : '' ); ?>">
-						<a href="<?php echo esc_url( get_sort_url( 'title' ) ); ?>">
+					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'title' === $google_ss2db_orderby ? 'sorted ' . strtolower( $google_ss2db_order ) : '' ); ?>">
+						<a href="<?php echo esc_url( google_ss2db_get_sort_url( 'title' ) ); ?>">
 							<span>Title</span>
 							<span class="sorting-indicator"></span>
 						</a>
 					</th>
-					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'date' === $orderby ? 'sorted ' . strtolower( $order ) : '' ); ?>">
-						<a href="<?php echo esc_url( get_sort_url( 'date' ) ); ?>">
+					<th scope="col" class="manage-column sortable <?php echo esc_attr( 'date' === $google_ss2db_orderby ? 'sorted ' . strtolower( $google_ss2db_order ) : '' ); ?>">
+						<a href="<?php echo esc_url( google_ss2db_get_sort_url( 'date' ) ); ?>">
 							<span>Date</span>
 							<span class="sorting-indicator"></span>
 						</a>
@@ -288,31 +292,31 @@ declare(strict_types=1);
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach ( $myrows as $row ) : ?>
-				<tr data-id="<?php echo esc_attr( $row->id ); ?>">
-					<td><?php echo esc_html( $row->id ); ?></td>
-					<td><?php echo esc_html( google_ss2db_truncate_middle( $row->worksheet_id ?? '(no ID)' ) ); ?></td>
-					<td><?php echo esc_html( $row->worksheet_name ); ?></td>
-					<td><?php echo esc_html( $row->sheet_name ); ?></td>
-					<td style="color: <?php echo $row->title ? 'inherit' : '#aaa'; ?>">
-						<?php echo esc_html( $row->title ? $row->title : '(no title)' ); ?>
+				<?php foreach ( $google_ss2db_myrows as $google_ss2db_row ) : ?>
+				<tr data-id="<?php echo esc_attr( $google_ss2db_row->id ); ?>">
+					<td><?php echo esc_html( $google_ss2db_row->id ); ?></td>
+					<td><?php echo esc_html( google_ss2db_truncate_middle( $google_ss2db_row->worksheet_id ?? '(no ID)' ) ); ?></td>
+					<td><?php echo esc_html( $google_ss2db_row->worksheet_name ); ?></td>
+					<td><?php echo esc_html( $google_ss2db_row->sheet_name ); ?></td>
+					<td style="color: <?php echo $google_ss2db_row->title ? 'inherit' : '#aaa'; ?>">
+						<?php echo esc_html( $google_ss2db_row->title ? $google_ss2db_row->title : '(no title)' ); ?>
 					</td>
 					<td>
 						<?php
-						$date        = new DateTime( $row->date );
-						$date_format = is_string( get_option( 'date_format' ) ) ? get_option( 'date_format' ) : 'Y-m-d';
-						$time_format = is_string( get_option( 'time_format' ) ) ? get_option( 'time_format' ) : 'H:i:s';
-						echo esc_html( date_i18n( $date_format . ' ' . $time_format, $date->getTimestamp() ) );
+						$google_ss2db_date        = new DateTime( $google_ss2db_row->date );
+						$google_ss2db_date_format = is_string( get_option( 'date_format' ) ) ? get_option( 'date_format' ) : 'Y-m-d';
+						$google_ss2db_time_format = is_string( get_option( 'time_format' ) ) ? get_option( 'time_format' ) : 'H:i:s';
+						echo esc_html( date_i18n( $google_ss2db_date_format . ' ' . $google_ss2db_time_format, $google_ss2db_date->getTimestamp() ) );
 						?>
 					</td>
 					<td>
-						<button class="button view-details" data-id="<?php echo esc_attr( $row->id ); ?>">
+						<button class="button view-details" data-id="<?php echo esc_attr( $google_ss2db_row->id ); ?>">
 							<?php echo esc_html__( 'Details', 'google-spreadsheet-to-db' ); ?>
 						</button>
-						<button class="button view-raw-data" data-id="<?php echo esc_attr( $row->id ); ?>">
+						<button class="button view-raw-data" data-id="<?php echo esc_attr( $google_ss2db_row->id ); ?>">
 							<?php echo esc_html__( 'Raw Data', 'google-spreadsheet-to-db' ); ?>
 						</button>
-						<button class="button delete-entry" data-id="<?php echo esc_attr( $row->id ); ?>">
+						<button class="button delete-entry" data-id="<?php echo esc_attr( $google_ss2db_row->id ); ?>">
 							<?php echo esc_html__( 'Delete', 'google-spreadsheet-to-db' ); ?>
 						</button>
 					</td>
@@ -322,13 +326,13 @@ declare(strict_types=1);
 		</table>
 
 		<?php
-		$pagination_nonce = esc_attr( wp_create_nonce( 'google_ss2db_pagination' ) );
+		$google_ss2db_pagination_nonce = esc_attr( wp_create_nonce( 'google_ss2db_pagination' ) );
 		if ( function_exists( 'google_ss2db_options_pagination' ) ) {
 			google_ss2db_options_pagination(
-				$paged,
-				(int) $max_num_pages,
+				$google_ss2db_paged,
+				(int) $google_ss2db_max_num_pages,
 				2,
-				$pagination_nonce
+				$google_ss2db_pagination_nonce
 			);
 		}
 		?>
