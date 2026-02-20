@@ -15,24 +15,8 @@
 declare(strict_types=1);
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	require_once dirname( __DIR__, 4 ) . '/wp-load.php'; // phpcs:ignore PluginCheck.CodeAnalysis.DirectFileAccess.WPLoad -- This file is a direct form handler that self-loads WordPress.
 }
-
-/**
- * The core plugin class.
- *
- * This is used to define internationalization, admin-specific hooks, and
- * public-facing site hooks.
- *
- * Also maintains the unique identifier of this plugin as well as the current
- * version of the plugin.
- *
- * @since      1.0.0
- * @package    Google_Spreadsheet_to_DB
- * @subpackage Google_Spreadsheet_to_DB/includes
- */
-
-require_once dirname( __DIR__, 4 ) . '/wp-load.php';
 
 // Sanitize and validate POST data using filter_input().
 $nonce        = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
